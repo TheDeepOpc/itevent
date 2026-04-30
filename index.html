@@ -317,6 +317,54 @@ tr:hover td{background:rgba(255,255,255,.015);}
 .empty-row td{text-align:center;padding:32px;color:var(--muted);
   font-family:'Space Mono',monospace;font-size:12px;}
 
+/* LIVE MONITOR */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.tab{padding:10px 22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;
+  transition:all 160ms;margin-bottom:-1px;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.live-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+.live-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:dotPulse 1.2s ease infinite;}
+.live-count{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
+
+.live-grid{display:grid;gap:10px;}
+.live-card{background:var(--s1);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;transition:border-color 300ms;}
+.live-card.active-quiz{border-color:rgba(0,245,160,.4);background:rgba(0,245,160,.03);}
+.live-card.finished-pass{border-color:rgba(0,245,160,.25);}
+.live-card.finished-fail{border-color:rgba(255,69,69,.25);}
+.lc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;flex-wrap:wrap;}
+.lc-name{font-size:14px;font-weight:700;}
+.lc-meta{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
+.lc-status{font-family:'Space Mono',monospace;font-size:10px;padding:3px 10px;border-radius:100px;}
+.lc-status.live{background:rgba(0,245,160,.12);color:var(--accent);}
+.lc-status.done-pass{background:rgba(0,245,160,.12);color:var(--accent);}
+.lc-status.done-fail{background:rgba(255,69,69,.12);color:var(--danger);}
+.lc-status.waiting{background:rgba(255,107,53,.1);color:var(--orange);}
+
+.progress-row{display:flex;align-items:center;gap:10px;}
+.progress-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);min-width:100px;}
+.mini-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.mini-bar{height:100%;border-radius:3px;transition:width 400ms ease;}
+.mini-bar.cor{background:var(--accent);}
+.mini-bar.wrg{background:var(--danger);}
+.mini-bar.total{background:var(--blue);}
+.lc-score-row{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;}
+.lc-score-item{font-family:'Space Mono',monospace;font-size:11px;}
+.lc-score-item span{font-size:13px;font-weight:700;}
+.lc-q-dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;}
+.q-dot{width:14px;height:14px;border-radius:3px;background:var(--border);}
+.q-dot.cor{background:var(--accent);}
+.q-dot.wrg{background:var(--danger);}
+.q-dot.cur{background:var(--blue);animation:dotPulse 1s ease infinite;}
+.live-empty{text-align:center;padding:40px;color:var(--muted);
+  font-family:'Space Mono',monospace;font-size:12px;}
+
 @keyframes fadeDown{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
 @keyframes slideUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
@@ -339,7 +387,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <div class="admin-bar" id="admin-bar">
   <div class="admin-bar-logo"><div class="dot"></div>ADMIN PANEL</div>
   <div class="admin-bar-right">
-    <button class="btn btn-sm-blue" onclick="refreshTable()">↻ Yangilash</button>
+    <button class="btn btn-sm-blue" onclick="refreshAdmin()">↻ Yangilash</button>
     <button class="btn btn-sm-red" onclick="adminLogout()">Chiqish</button>
   </div>
 </div>
@@ -545,7 +593,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 
 <!-- ===== ADMIN ===== -->
 <div id="pg-admin" class="page">
-  <div style="width:100%;max-width:1100px;">
+  <div style="width:100%;max-width:1200px;">
     <div class="start-section" id="start-section">
       <div class="start-info">
         <h3>2-Bosqich Boshqaruvi</h3>
@@ -555,42 +603,66 @@ tr:hover td{background:rgba(255,255,255,.015);}
         <button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>
       </div>
     </div>
-    <div class="filter-bar">
-      <input class="filter-input" id="srch" placeholder="Ism, familiya yoki telefon bo'yicha qidiring..." oninput="renderTable()"/>
-      <select class="filter-sel" id="flt-status" onchange="renderTable()">
-        <option value="">Barchasi</option>
-        <option value="passed">O'tganlar (1-bosqich)</option>
-        <option value="failed">O'tmaganlar</option>
-        <option value="pending">Kutilmoqda</option>
-      </select>
+
+    <!-- Tabs -->
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchTab('tab-participants')" id="t-participants">Ishtirokchilar</div>
+      <div class="tab" onclick="switchTab('tab-live')" id="t-live">⬤ Live Monitor</div>
     </div>
-    <div class="a-stats">
-      <div class="a-stat">
-        <div class="a-stat-n accent" id="st-total">0</div>
-        <div class="a-stat-l">Jami</div>
+
+    <!-- TAB: Participants -->
+    <div class="tab-panel active" id="tab-participants">
+      <div class="filter-bar">
+        <input class="filter-input" id="srch" placeholder="Ism, familiya yoki telefon bo'yicha qidiring..." oninput="renderTable()"/>
+        <select class="filter-sel" id="flt-status" onchange="renderTable()">
+          <option value="">Barchasi</option>
+          <option value="passed">O'tganlar (1-bosqich)</option>
+          <option value="failed">O'tmaganlar</option>
+          <option value="pending">Kutilmoqda</option>
+        </select>
       </div>
-      <div class="a-stat">
-        <div class="a-stat-n" id="st-pass" style="color:var(--accent)">0</div>
-        <div class="a-stat-l">1-bosqich o'tganlar</div>
+      <div class="a-stats">
+        <div class="a-stat">
+          <div class="a-stat-n accent" id="st-total">0</div>
+          <div class="a-stat-l">Jami</div>
+        </div>
+        <div class="a-stat">
+          <div class="a-stat-n" id="st-pass" style="color:var(--accent)">0</div>
+          <div class="a-stat-l">1-bosqich o'tganlar</div>
+        </div>
+        <div class="a-stat">
+          <div class="a-stat-n" id="st-fail" style="color:var(--danger)">0</div>
+          <div class="a-stat-l">O'tmaganlar</div>
+        </div>
+        <div class="a-stat">
+          <div class="a-stat-n" id="st-pend" style="color:var(--orange)">0</div>
+          <div class="a-stat-l">Kutilmoqda</div>
+        </div>
       </div>
-      <div class="a-stat">
-        <div class="a-stat-n" id="st-fail" style="color:var(--danger)">0</div>
-        <div class="a-stat-l">O'tmaganlar</div>
-      </div>
-      <div class="a-stat">
-        <div class="a-stat-n" id="st-pend" style="color:var(--orange)">0</div>
-        <div class="a-stat-l">Kutilmoqda</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Sinf</th>
+            <th>Telefon</th><th>Jinsi</th><th>Ball</th><th>Holat</th>
+            <th>Vaqt</th><th>O'chirish</th>
+          </tr></thead>
+          <tbody id="admin-tbody"></tbody>
+        </table>
       </div>
     </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Sinf</th>
-          <th>Telefon</th><th>Jinsi</th><th>Ball</th><th>Holat</th>
-          <th>Vaqt</th><th>O'chirish</th>
-        </tr></thead>
-        <tbody id="admin-tbody"></tbody>
-      </table>
+
+    <!-- TAB: Live Monitor -->
+    <div class="tab-panel" id="tab-live">
+      <div class="live-header">
+        <div class="live-title">
+          <div class="live-dot"></div>
+          2-Bosqich Live Monitor
+        </div>
+        <div class="live-count" id="live-count">Yuklanmoqda...</div>
+      </div>
+      <div class="live-grid" id="live-grid">
+        <div class="live-empty">2-bosqich boshlanmagan yoki hozircha ishtirokchi yo'q</div>
+      </div>
     </div>
   </div>
 </div>
@@ -738,7 +810,21 @@ let questionAnswered = false;
 let selectedOpt = null;
 let allDocs = [];
 let pollInterval = null;
-let quizMode = '1'; // '1' = registration quiz, '2' = phase2 quiz
+let liveInterval = null;
+let quizMode = '1';
+let activeTab = 'tab-participants';
+let liveCache = {}; // phone -> card data for smooth updates
+
+// ================================================================
+// ADMIN SESSION (localStorage)
+// ================================================================
+function isAdminLoggedIn() {
+  return localStorage.getItem('itevent_admin') === 'true';
+}
+function setAdminSession(v) {
+  if (v) localStorage.setItem('itevent_admin', 'true');
+  else localStorage.removeItem('itevent_admin');
+}
 
 // ================================================================
 // PAGE NAVIGATION
@@ -750,11 +836,22 @@ function showPage(id) {
   const bar = document.getElementById('admin-bar');
   if (id === 'pg-admin') bar.classList.add('visible');
   else bar.classList.remove('visible');
-  // Stop polling if leaving wait page
-  if (id !== 'pg-wait' && pollInterval) {
-    clearInterval(pollInterval);
-    pollInterval = null;
-  }
+  if (id !== 'pg-wait' && pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+  if (id !== 'pg-admin' && liveInterval) { clearInterval(liveInterval); liveInterval = null; }
+  if (id === 'pg-admin') startLiveMonitor();
+}
+
+function switchTab(tabId) {
+  activeTab = tabId;
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.getElementById(tabId === 'tab-participants' ? 't-participants' : 't-live').classList.add('active');
+}
+
+function refreshAdmin() {
+  refreshTable();
+  renderLiveMonitor();
 }
 
 // ================================================================
@@ -1016,6 +1113,14 @@ function selectOpt(i, btn) {
   clearInterval(timerInterval);
   revealAnswer(btn);
   document.getElementById('btn-next').style.display = 'block';
+  // Push live progress for phase2
+  if (quizMode === '2') {
+    const cor = quizQuestions[currentQIdx].cor;
+    const dots = quizAnswers.slice(0, currentQIdx + 1).map((a, idx) => a === quizQuestions[idx].cor);
+    const correct = dots.filter(Boolean).length;
+    const wrong = dots.filter(d => d === false).length;
+    pushQuizProgress(true, 0, quizQuestions.length, correct, wrong, dots, false);
+  }
 }
 
 function revealAnswer() {
@@ -1170,6 +1275,7 @@ function checkAdminPass() {
   const v = document.getElementById('a-pass').value;
   const msg = document.getElementById('admin-msg');
   if (v === ADMIN_PASS) {
+    setAdminSession(true);
     closeAdminModal();
     showPage('pg-admin');
     refreshTable();
@@ -1182,6 +1288,8 @@ function checkAdminPass() {
 }
 
 function adminLogout() {
+  setAdminSession(false);
+  if (liveInterval) { clearInterval(liveInterval); liveInterval = null; }
   showPage('pg-welcome');
 }
 
@@ -1346,6 +1454,147 @@ function normalizePhone(ph) {
 
 function isValidPhone(ph) {
   return /^\+?[0-9]{9,13}$/.test(ph);
+}
+
+// ================================================================
+// LIVE MONITOR
+// ================================================================
+function startLiveMonitor() {
+  renderLiveMonitor();
+  if (liveInterval) clearInterval(liveInterval);
+  liveInterval = setInterval(renderLiveMonitor, 4000);
+}
+
+async function renderLiveMonitor() {
+  try {
+    const docs = await fbQuery('participants');
+    // Only those who started phase2 (have p2_started flag or status = p2_*)
+    const phase2ers = docs.filter(d => fv(d.fields?.p2_started) === true || fv(d.fields?.p2_status));
+
+    const grid = document.getElementById('live-grid');
+    const countEl = document.getElementById('live-count');
+
+    if (!phase2ers.length) {
+      grid.innerHTML = '<div class="live-empty">2-bosqich boshlanmagan yoki hozircha ishtirokchi yo\'q</div>';
+      countEl.textContent = '0 ishtirokchi';
+      return;
+    }
+
+    const active = phase2ers.filter(d => fv(d.fields?.p2_status) === 'active').length;
+    const done   = phase2ers.filter(d => fv(d.fields?.p2_status) === 'done').length;
+    countEl.textContent = `${phase2ers.length} ishtirokchi — ${active} aktiv, ${done} tugadi`;
+
+    // Sort: active first, then done, then by score desc
+    phase2ers.sort((a, b) => {
+      const as = fv(a.fields?.p2_status); const bs = fv(b.fields?.p2_status);
+      if (as === 'active' && bs !== 'active') return -1;
+      if (bs === 'active' && as !== 'active') return 1;
+      return (Number(fv(b.fields?.p2_correct)) || 0) - (Number(fv(a.fields?.p2_correct)) || 0);
+    });
+
+    grid.innerHTML = '';
+    phase2ers.forEach(doc => {
+      const f = doc.fields || {};
+      const name     = `${fv(f.firstName)} ${fv(f.lastName)}`;
+      const phone    = fv(f.phone);
+      const grade    = fv(f.grade);
+      const p2status = fv(f.p2_status) || 'waiting';
+      const curQ     = Number(fv(f.p2_current)) || 0;
+      const total    = Number(fv(f.p2_total))   || 50;
+      const correct  = Number(fv(f.p2_correct)) || 0;
+      const wrong    = Number(fv(f.p2_wrong))   || 0;
+      const answered = correct + wrong;
+      const dotsJson = fv(f.p2_dots) || '';
+      let dots = [];
+      try { dots = JSON.parse(dotsJson); } catch(e) { dots = []; }
+
+      const isActive = p2status === 'active';
+      const isDone   = p2status === 'done';
+      const p2score  = Number(fv(f.p2_score)) || 0;
+      const p2pass   = fv(f.p2_pass) === 'true' || fv(f.p2_pass) === true;
+
+      let cardClass = 'live-card';
+      if (isActive) cardClass += ' active-quiz';
+      else if (isDone && p2pass) cardClass += ' finished-pass';
+      else if (isDone && !p2pass) cardClass += ' finished-fail';
+
+      let statusHtml = '';
+      if (isActive)     statusHtml = `<span class="lc-status live">● AKTIV — ${curQ}/${total}</span>`;
+      else if (isDone)  statusHtml = `<span class="lc-status ${p2pass?'done-pass':'done-fail'}">${p2pass?'✓ O\'tdi':'✗ O\'tmadi'} — ${p2score}/${total}</span>`;
+      else              statusHtml = `<span class="lc-status waiting">⏳ Kutmoqda</span>`;
+
+      const pctTotal   = total > 0 ? (answered / total * 100) : 0;
+      const pctCorrect = answered > 0 ? (correct / answered * 100) : 0;
+      const pctWrong   = answered > 0 ? (wrong / answered * 100) : 0;
+
+      // Q-dots (max 50 small squares)
+      let dotsHtml = '';
+      for (let i = 0; i < total; i++) {
+        let cls = 'q-dot';
+        if (i < dots.length) cls += dots[i] ? ' cor' : ' wrg';
+        else if (i === curQ - 1 && isActive) cls += ' cur';
+        dotsHtml += `<div class="${cls}" title="Savol ${i+1}"></div>`;
+      }
+
+      const card = document.createElement('div');
+      card.className = cardClass;
+      card.innerHTML = `
+        <div class="lc-top">
+          <div>
+            <div class="lc-name">${name}</div>
+            <div class="lc-meta">${phone} · ${grade}</div>
+          </div>
+          ${statusHtml}
+        </div>
+        ${isActive || isDone ? `
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px;">
+          <div class="progress-row">
+            <div class="progress-label">Jami javob: ${answered}/${total}</div>
+            <div class="mini-bar-wrap"><div class="mini-bar total" style="width:${pctTotal.toFixed(0)}%"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label" style="color:var(--accent)">✓ To'g'ri: ${correct}</div>
+            <div class="mini-bar-wrap"><div class="mini-bar cor" style="width:${(correct/total*100).toFixed(0)}%"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label" style="color:var(--danger)">✗ Noto'g'ri: ${wrong}</div>
+            <div class="mini-bar-wrap"><div class="mini-bar wrg" style="width:${(wrong/total*100).toFixed(0)}%"></div></div>
+          </div>
+        </div>
+        <div class="lc-q-dots">${dotsHtml}</div>
+        ` : ''}
+      `;
+      grid.appendChild(card);
+    });
+  } catch(e) {
+    document.getElementById('live-grid').innerHTML = `<div class="live-empty" style="color:var(--danger);">Xato: ${e.message}</div>`;
+  }
+}
+
+// ================================================================
+// QUIZ PROGRESS → FIREBASE (for live monitor)
+// ================================================================
+async function pushQuizProgress(isActive, score, total, correct, wrong, dots, pass) {
+  if (quizMode !== '2' || !regData.phone) return;
+  try {
+    const docs = await fbQuery('participants');
+    const doc = docs.find(d => fv(d.fields?.phone) === regData.phone);
+    if (!doc) return;
+    const nameParts = doc.name.split('/');
+    const docId = nameParts[nameParts.length - 1];
+    const data = {
+      p2_started: true,
+      p2_status: isActive ? 'active' : 'done',
+      p2_current: currentQIdx + 1,
+      p2_total: total,
+      p2_correct: correct,
+      p2_wrong: wrong,
+      p2_dots: JSON.stringify(dots),
+      p2_score: score,
+      p2_pass: pass ? 'true' : 'false'
+    };
+    await fbSet('participants', docId, data);
+  } catch(e) { /* silent */ }
 }
 
 // ================================================================
