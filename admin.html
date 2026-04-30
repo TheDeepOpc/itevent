@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT TANLOV 2025 | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .admin-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .phase2-control {
+            background: var(--s1);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 30px;
+        }
+        .phase2-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+        }
+        .status-badge.active {
+            background: rgba(0, 245, 160, 0.12);
+            border: 1px solid rgba(0, 245, 160, 0.3);
+            color: var(--accent);
+        }
+        .status-badge.inactive {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.25);
+            color: var(--orange);
+        }
+        .phase2-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        .stat-card {
+            background: var(--s2);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        .leaderboard-table {
+            width: 100%;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            text-align: left;
+            padding: 12px;
+            background: var(--s2);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(26, 37, 64, 0.45);
+        }
+        .rank-1 { color: gold; font-weight: bold; }
+        .rank-2 { color: silver; font-weight: bold; }
+        .rank-3 { color: #cd7f32; font-weight: bold; }
+        .score-high {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        .refresh-btn {
+            background: var(--s2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+        }
+        .refresh-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-blob a"></div>
+<div class="bg-blob b"></div>
+
+<div id="app"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDQ5QZsG04X9Pvs15iN5VMqLZ4XhW5bi1k",
+        authDomain: "itevent-6cf7f.firebaseapp.com",
+        projectId: "itevent-6cf7f",
+        storageBucket: "itevent-6cf7f.firebasestorage.app",
+        messagingSenderId: "123456789012",
+        appId: "1:123456789012:web:abc123def456"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    
+    const ADMIN_PASSWORD = "itevent27";
+    let isAdminLoggedIn = localStorage.getItem('itevent_admin') === 'true';
+    let participantsData = [];
+    let autoRefreshInterval = null;
+    
+    // ============================================================
+    // LOGIN PAGE
+    // ============================================================
+    function renderLoginPage() {
+        return `
+            <div class="login-form">
+                <div class="card">
+                    <div style="margin-bottom:24px;">
+                        <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>ADMIN KIRISH</div>
+                        <div style="font-size:20px;font-weight:800;margin-bottom:4px;">IT TANLOV 2025</div>
+                        <div class="muted mono" style="font-size:12px;">Admin panelga kirish</div>
+                    </div>
+                    <div class="form-grid" style="gap:14px;">
+                        <div class="field">
+                            <label>MAXFIY PAROL</label>
+                            <input type="password" id="admin-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkLogin()"/>
+                        </div>
+                        <button class="btn btn-green" style="width:100%;" onclick="checkLogin()">Kirish →</button>
+                        <div class="msg err" id="login-msg" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    window.checkLogin = function() {
+        const pass = document.getElementById('admin-pass').value;
+        const msgDiv = document.getElementById('login-msg');
+        
+        if (pass === ADMIN_PASSWORD) {
+            localStorage.setItem('itevent_admin', 'true');
+            isAdminLoggedIn = true;
+            renderAdminPanel();
+        } else {
+            msgDiv.style.display = 'block';
+            msgDiv.textContent = "Parol noto'g'ri!";
+        }
+    };
+    
+    // ============================================================
+    // ADMIN PANEL
+    // ============================================================
+    async function renderAdminPanel() {
+        await loadParticipants();
+        
+        const phase2Doc = await db.collection('config').doc('phase2').get();
+        const phase2Started = phase2Doc.exists ? phase2Doc.data().started : false;
+        
+        const phase1Passed = participantsData.filter(p => p.status === 'passed').length;
+        const phase1Total = participantsData.length;
+        const phase2StartedCount = participantsData.filter(p => p.phase2Started === true).length;
+        const phase2CompletedCount = participantsData.filter(p => p.phase2Completed === true).length;
+        const phase2PassedCount = participantsData.filter(p => p.phase2Passed === true).length;
+        
+        // Leaderboard: sort by phase2 score
+        const leaderboard = [...participantsData]
+            .filter(p => p.phase2Completed === true && p.phase2Score !== undefined)
+            .sort((a, b) => (b.phase2Score || 0) - (a.phase2Score || 0));
+        
+        let leaderboardHtml = '';
+        if (leaderboard.length === 0) {
+            leaderboardHtml = '<tr class="empty-row"><td colspan="6">Hali hech kim 2-bosqichni tugatmagan</td></tr>';
+        } else {
+            leaderboard.forEach((p, idx) => {
+                let rankClass = '';
+                if (idx === 0) rankClass = 'rank-1';
+                else if (idx === 1) rankClass = 'rank-2';
+                else if (idx === 2) rankClass = 'rank-3';
+                
+                leaderboardHtml += `
+                    <tr>
+                        <td class="${rankClass}">${idx + 1}</td>
+                        <td><strong>${p.firstName} ${p.lastName}</strong></td>
+                        <td>${p.grade || '-'}</td>
+                        <td><span class="score-high">${p.phase2Score || 0}</span> / 50</td>
+                        <td>${p.phase2TimeOut ? '⏱ Vaqt tugadi' : (p.phase2Passed ? '✅ O\'tdi' : '❌ O\'tmadi')}</td>
+                        <td class="mono muted" style="font-size:11px;">${p.phase2CompletedAt ? new Date(p.phase2CompletedAt.toDate()).toLocaleString('uz-UZ') : '-'}</td>
+                    </tr>
+                `;
+            });
+        }
+        
+        document.getElementById('app').innerHTML = `
+            <div class="admin-container">
+                <div class="admin-header">
+                    <div class="admin-title">
+                        <span class="accent">IT TANLOV</span> 2025
+                        <div class="muted mono" style="font-size:11px; margin-top:5px;">Admin Dashboard</div>
+                    </div>
+                    <button class="refresh-btn" onclick="refreshData()">⟳ Yangilash</button>
+                </div>
+                
+                <div class="phase2-control">
+                    <div class="phase2-status">
+                        <div>
+                            <div class="status-badge ${phase2Started ? 'active' : 'inactive'}">
+                                <div class="dot" style="width:8px;height:8px;background:${phase2Started ? 'var(--accent)' : 'var(--orange)'}"></div>
+                                2-BOSQICH: ${phase2Started ? 'FAOL' : 'KUTISH REJIMI'}
+                            </div>
+                        </div>
+                        ${!phase2Started ? 
+                            `<button class="btn btn-green" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>` :
+                            `<button class="btn btn-sm-red" onclick="resetPhase2()">↺ 2-Bosqichni Qayta Boshlash</button>`
+                        }
+                    </div>
+                    <div class="phase2-stats">
+                        <div class="stat-card">
+                            <div class="stat-value">${phase1Passed}</div>
+                            <div class="stat-label">1-bosqich o'tganlar</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${phase2StartedCount}</div>
+                            <div class="stat-label">2-bosqich boshlaganlar</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${phase2CompletedCount}</div>
+                            <div class="stat-label">2-bosqich tugatganlar</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" style="color:var(--accent)">${phase2PassedCount}</div>
+                            <div class="stat-label">2-bosqich o'tganlar</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="margin-bottom:20px;">🏆 LEADERBOARD (2-bosqich natijalari)</h3>
+                <div class="leaderboard-table">
+                    <table>
+                        <thead>
+                            <tr><th>#</th><th>Ism Familiya</th><th>Sinf</th><th>Ball</th><th>Holat</th><th>Tugatgan vaqt</th></tr>
+                        </thead>
+                        <tbody id="leaderboard-tbody">
+                            ${leaderboardHtml}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top:30px;">
+                    <button class="btn btn-outline" onclick="logout()" style="margin-top:20px;">🚪 Chiqish</button>
+                </div>
+            </div>
+        `;
+        
+        // Start auto-refresh every 10 seconds
+        if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+        autoRefreshInterval = setInterval(() => {
+            if (isAdminLoggedIn) refreshData();
+        }, 10000);
+    }
+    
+    async function loadParticipants() {
+        const snapshot = await db.collection('participants').get();
+        participantsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    }
+    
+    window.refreshData = async function() {
+        await loadParticipants();
+        await renderAdminPanel();
+    };
+    
+    window.startPhase2 = async function() {
+        await db.collection('config').doc('phase2').set({ started: true, startedAt: new Date() });
+        await renderAdminPanel();
+        alert("2-bosqich boshlandi!\nBarcha 1-bosqichdan o'tgan foydalanuvchilar endi kirishlari mumkin.");
+    };
+    
+    window.resetPhase2 = async function() {
+        if (!confirm("2-bosqichni qayta boshlashni xohlaysizmi?\n\nBu barcha 2-bosqich ma'lumotlarini o'chirib yuboradi!")) return;
+        
+        // Reset all participants' phase2 data
+        const batch = db.batch();
+        participantsData.forEach(p => {
+            const ref = db.collection('participants').doc(p.id);
+            batch.update(ref, {
+                phase2Started: false,
+                phase2Completed: false,
+                phase2Score: null,
+                phase2Passed: false,
+                phase2Answers: null,
+                phase2TimeLeft: null,
+                phase2CurrentIndex: null,
+                phase2CompletedAt: null,
+                phase2TimeOut: false
+            });
+        });
+        await batch.commit();
+        
+        // Reset phase2 config
+        await db.collection('config').doc('phase2').set({ started: false });
+        
+        await renderAdminPanel();
+        alert("2-bosqich qayta o'rnatildi!");
+    };
+    
+    window.logout = function() {
+        localStorage.removeItem('itevent_admin');
+        isAdminLoggedIn = false;
+        if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+        renderApp();
+    };
+    
+    // ============================================================
+    // MAIN RENDER
+    // ============================================================
+    function renderApp() {
+        if (isAdminLoggedIn) {
+            renderAdminPanel();
+        } else {
+            document.getElementById('app').innerHTML = renderLoginPage();
+        }
+    }
+    
+    renderApp();
+</script>
+</body>
+</html>
