@@ -28,8 +28,6 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 }
-
-/* ---- BG ---- */
 .bg-grid{position:fixed;inset:0;z-index:0;
   background-image:linear-gradient(rgba(0,245,160,.025) 1px,transparent 1px),
   linear-gradient(90deg,rgba(0,245,160,.025) 1px,transparent 1px);
@@ -44,12 +42,10 @@ body{
 @keyframes blobA{to{transform:translate(100px,60px);}}
 @keyframes blobB{to{transform:translate(-70px,-50px);}}
 
-/* ---- PAGES ---- */
 .page{position:relative;z-index:1;display:none;min-height:100vh;
   align-items:center;justify-content:center;padding:28px 20px;flex-direction:column;}
 .page.active{display:flex;}
 
-/* ---- CHIPS / LABELS ---- */
 .chip{display:inline-flex;align-items:center;gap:7px;
   background:rgba(0,245,160,.08);border:1px solid rgba(0,245,160,.22);
   border-radius:100px;padding:5px 14px;font-family:'Space Mono',monospace;
@@ -57,13 +53,11 @@ body{
 .chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
   animation:dotPulse 1.4s ease infinite;}
 @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
-
 .mono{font-family:'Space Mono',monospace;}
 .muted{color:var(--muted);}
 .accent{color:var(--accent);}
 .danger{color:var(--danger);}
 
-/* ---- BUTTONS ---- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
   border:none;border-radius:var(--radius);cursor:pointer;
   font-family:'Syne',sans-serif;font-weight:700;transition:all 180ms;}
@@ -74,6 +68,9 @@ body{
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);
   padding:10px 22px;font-size:13px;}
 .btn-outline:hover{border-color:var(--muted);color:var(--text);}
+.btn-outline-accent{background:transparent;border:1px solid rgba(0,245,160,.3);color:var(--accent);
+  padding:12px 28px;font-size:14px;}
+.btn-outline-accent:hover{background:rgba(0,245,160,.07);border-color:rgba(0,245,160,.6);}
 .btn-sm-red{background:rgba(255,69,69,.12);border:1px solid rgba(255,69,69,.3);
   color:var(--danger);padding:5px 12px;font-size:11px;border-radius:4px;font-family:'Space Mono',monospace;}
 .btn-sm-red:hover{background:rgba(255,69,69,.22);}
@@ -84,7 +81,6 @@ body{
   color:var(--muted);padding:7px 16px;font-size:12px;border-radius:4px;}
 .btn-sm-gray:hover{color:var(--text);}
 
-/* ---- FORM FIELDS ---- */
 .field{display:flex;flex-direction:column;gap:5px;}
 .field label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;}
 .field input,.field select{
@@ -96,23 +92,18 @@ body{
 .field input::placeholder{color:var(--muted);}
 .field select option{background:#0c1525;}
 
-/* ---- MSG BOX ---- */
 .msg{padding:11px 14px;border-radius:var(--radius);font-size:13px;display:none;font-family:'Space Mono',monospace;}
 .msg.err{background:rgba(255,69,69,.1);border:1px solid rgba(255,69,69,.28);color:#ff8080;}
 .msg.ok{background:rgba(0,245,160,.08);border:1px solid rgba(0,245,160,.25);color:var(--accent);}
 
-/* ---- CARD ---- */
 .card{background:rgba(8,14,26,.97);border:1px solid var(--border);border-radius:12px;
   padding:36px 32px;backdrop-filter:blur(8px);}
 
-/* ---- SPINNER ---- */
 .spin{width:15px;height:15px;border:2px solid rgba(4,8,15,.35);
   border-top-color:#04080f;border-radius:50%;animation:rot .6s linear infinite;display:none;}
 @keyframes rot{to{transform:rotate(360deg);}}
 
-/* ============================================================
-   WELCOME PAGE
-   ============================================================ */
+/* WELCOME */
 #pg-welcome{gap:0;text-align:center;}
 .welcome-chip{margin-bottom:28px;animation:fadeDown .6s ease;}
 .hero{font-size:clamp(44px,9vw,90px);font-weight:800;line-height:.95;
@@ -128,10 +119,12 @@ body{
 .stat{text-align:center;}
 .stat-n{font-size:34px;font-weight:800;color:var(--accent);font-family:'Space Mono',monospace;line-height:1;}
 .stat-l{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+.welcome-btns{display:flex;flex-direction:column;align-items:center;gap:12px;animation:fadeDown .7s .32s both ease;}
+.divider-line{display:flex;align-items:center;gap:12px;width:260px;margin:4px 0;}
+.divider-line::before,.divider-line::after{content:'';flex:1;height:1px;background:var(--border);}
+.divider-line span{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
 
-/* ============================================================
-   REGISTER PAGE
-   ============================================================ */
+/* REGISTER */
 #pg-reg{gap:0;}
 .reg-wrap{width:100%;max-width:500px;animation:slideUp .45s ease;}
 .reg-hdr{margin-bottom:32px;}
@@ -144,15 +137,11 @@ body{
 .form-grid{display:grid;gap:14px;}
 .form-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
-/* ============================================================
-   LOGIN PAGE
-   ============================================================ */
+/* LOGIN */
 #pg-login{gap:0;}
-.login-wrap{width:100%;max-width:400px;animation:slideUp .45s ease;}
+.login-wrap{width:100%;max-width:420px;animation:slideUp .45s ease;}
 
-/* ============================================================
-   WAITING PAGE
-   ============================================================ */
+/* WAIT */
 #pg-wait{gap:24px;text-align:center;}
 .wait-icon{font-size:64px;animation:waitBounce 2s ease-in-out infinite;}
 @keyframes waitBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
@@ -163,10 +152,15 @@ body{
   background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);
   border-radius:100px;padding:8px 18px;
   font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);}
+.wait-user-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;
+  padding:16px 24px;display:flex;flex-direction:column;gap:4px;min-width:280px;}
+.wait-user-name{font-size:18px;font-weight:800;}
+.wait-user-info{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
+.poll-indicator{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;
+  font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px;}
+.poll-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:dotPulse 1.4s ease infinite;}
 
-/* ============================================================
-   QUIZ PAGE
-   ============================================================ */
+/* QUIZ */
 #pg-quiz{gap:0;padding:28px 20px;}
 .quiz-wrap{width:100%;max-width:680px;}
 .quiz-top{display:flex;justify-content:space-between;align-items:center;
@@ -210,9 +204,7 @@ body{
   font-size:14px;font-weight:700;cursor:pointer;transition:all 180ms;display:none;}
 .btn-next:hover{background:#00e090;transform:translateY(-1px);}
 
-/* ============================================================
-   RESULT PAGE
-   ============================================================ */
+/* RESULT */
 #pg-result{gap:20px;text-align:center;}
 .result-ring{position:relative;width:160px;height:160px;margin:0 auto;}
 .result-ring svg{transform:rotate(-90deg);}
@@ -226,7 +218,7 @@ body{
 .result-verdict{font-size:clamp(22px,5vw,34px);font-weight:800;letter-spacing:-1px;}
 .result-verdict.pass{color:var(--accent);}
 .result-verdict.fail{color:var(--danger);}
-.result-desc{color:var(--muted);font-size:14px;line-height:1.65;max-width:380px;margin:0 auto;}
+.result-desc{color:var(--muted);font-size:14px;line-height:1.65;max-width:420px;margin:0 auto;}
 .rbadges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 .rb{padding:7px 16px;border-radius:4px;font-size:11px;font-family:'Space Mono',monospace;}
 .rb.pass{background:rgba(0,245,160,.1);border:1px solid rgba(0,245,160,.28);color:var(--accent);}
@@ -234,15 +226,18 @@ body{
 .rb.neu{background:var(--s2);border:1px solid var(--border);color:var(--muted);}
 .save-st{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
 
-/* ============================================================
-   ADMIN PAGE
-   ============================================================ */
+/* Pass result hint */
+.pass-hint{background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);
+  border-radius:10px;padding:16px 20px;max-width:400px;text-align:left;}
+.pass-hint-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:6px;}
+.pass-hint-body{font-size:12px;color:var(--muted);line-height:1.6;font-family:'Space Mono',monospace;}
+
+/* ADMIN */
 #pg-admin{display:none;flex-direction:column;
   padding:28px 20px;align-items:flex-start;justify-content:flex-start;
   min-height:100vh;padding-top:60px;}
 #pg-admin.active{display:flex;}
 
-/* Admin header bar */
 .admin-bar{
   position:fixed;top:0;left:0;right:0;z-index:100;
   background:rgba(4,8,15,.96);border-bottom:1px solid var(--border);
@@ -255,14 +250,12 @@ body{
 .admin-bar-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
 .admin-bar-right{display:flex;align-items:center;gap:10px;}
 
-/* Admin pass modal */
 .modal-overlay{position:fixed;inset:0;z-index:200;
   background:rgba(4,8,15,.85);backdrop-filter:blur(8px);
   display:none;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{display:flex;}
 .modal-card{width:100%;max-width:380px;animation:slideUp .35s ease;}
 
-/* Admin pass hidden show */
 .pass-wrap{position:relative;}
 .pass-wrap input{padding-right:42px;}
 .pass-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);
@@ -270,7 +263,6 @@ body{
   font-size:16px;transition:color 150ms;}
 .pass-toggle:hover{color:var(--text);}
 
-/* Filter bar */
 .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
 .filter-input{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
   padding:9px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;
@@ -282,13 +274,11 @@ body{
 .filter-sel:focus{outline:none;border-color:rgba(0,245,160,.4);}
 .filter-sel option{background:#0c1525;}
 
-/* Admin stats */
 .a-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
 .a-stat{padding:14px 20px;background:var(--s1);border:1px solid var(--border);border-radius:8px;}
 .a-stat-n{font-size:28px;font-weight:800;font-family:'Space Mono',monospace;}
 .a-stat-l{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 
-/* Start button */
 .start-section{
   background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);
   border-radius:10px;padding:20px 24px;margin-bottom:24px;
@@ -301,12 +291,16 @@ body{
   cursor:pointer;transition:all 180ms;}
 .btn-start:hover{background:#00e090;box-shadow:0 8px 28px rgba(0,245,160,.3);}
 .btn-start:disabled{background:#1a3028;color:#2a5040;cursor:not-allowed;box-shadow:none;}
+.btn-reset{background:rgba(255,69,69,.12);border:1px solid rgba(255,69,69,.3);color:var(--danger);
+  border-radius:var(--radius);padding:12px 22px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;transition:all 180ms;}
+.btn-reset:hover{background:rgba(255,69,69,.22);border-color:rgba(255,69,69,.5);}
+.btn-reset:disabled{opacity:.4;cursor:not-allowed;}
 .started-badge{display:inline-flex;align-items:center;gap:6px;
   background:rgba(0,245,160,.12);border:1px solid rgba(0,245,160,.3);
   border-radius:100px;padding:8px 16px;font-family:'Space Mono',monospace;
   font-size:11px;color:var(--accent);}
 
-/* Table */
 .tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px;}
 th{padding:11px 13px;background:var(--s2);font-family:'Space Mono',monospace;
@@ -319,14 +313,13 @@ tr:hover td{background:rgba(255,255,255,.015);}
   border-radius:100px;font-size:10px;font-family:'Space Mono',monospace;font-weight:700;}
 .score-b.pass{background:rgba(0,245,160,.12);color:var(--accent);}
 .score-b.fail{background:rgba(255,69,69,.12);color:var(--danger);}
+.score-b.pend{background:rgba(255,107,53,.12);color:var(--orange);}
 .empty-row td{text-align:center;padding:32px;color:var(--muted);
   font-family:'Space Mono',monospace;font-size:12px;}
 
-/* Animations */
 @keyframes fadeDown{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
 @keyframes slideUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
-/* Responsive */
 @media(max-width:520px){
   .form-row2{grid-template-columns:1fr;}
   .card{padding:26px 18px;}
@@ -342,7 +335,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <div class="bg-blob a"></div>
 <div class="bg-blob b"></div>
 
-<!-- ===== ADMIN TOP BAR ===== -->
+<!-- ADMIN TOP BAR -->
 <div class="admin-bar" id="admin-bar">
   <div class="admin-bar-logo"><div class="dot"></div>ADMIN PANEL</div>
   <div class="admin-bar-right">
@@ -351,7 +344,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
   </div>
 </div>
 
-<!-- ===== ADMIN PASS MODAL ===== -->
+<!-- ADMIN PASS MODAL -->
 <div class="modal-overlay" id="admin-modal">
   <div class="modal-card">
     <div class="card">
@@ -388,14 +381,19 @@ tr:hover td{background:rgba(255,255,255,.015);}
     <div class="stat"><div class="stat-n">13</div><div class="stat-l">Minimal ball</div></div>
     <div class="stat"><div class="stat-n">60s</div><div class="stat-l">Har bir savol</div></div>
   </div>
-  <button class="btn btn-green" onclick="showPage('pg-reg')">
-    Boshlash →
-  </button>
-  <!-- Hidden admin trigger top-right -->
+  <div class="welcome-btns">
+    <button class="btn btn-green" onclick="showPage('pg-reg')" style="width:260px;">
+      Ro'yxatdan O'tish →
+    </button>
+    <div class="divider-line"><span>yoki</span></div>
+    <button class="btn btn-outline-accent" onclick="showPage('pg-login')" style="width:260px;">
+      Login — 2-Bosqichga Kirish
+    </button>
+  </div>
   <div onclick="openAdminModal()" style="position:fixed;top:16px;right:20px;z-index:50;
     font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);
     cursor:pointer;text-transform:uppercase;padding:6px 10px;
-    border:1px solid transparent;border-radius:4px;transition:all 180px;"
+    border:1px solid transparent;border-radius:4px;transition:all 180ms;"
     onmouseenter="this.style.borderColor='rgba(0,245,160,.3)';this.style.color='var(--accent)'"
     onmouseleave="this.style.borderColor='transparent';this.style.color='var(--muted)'">
     ADMIN
@@ -406,9 +404,9 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <div id="pg-reg" class="page">
   <div class="reg-wrap">
     <div class="reg-hdr">
-      <div class="step-tag">Qadam 1 / 2 — Ma'lumotlar</div>
+      <div class="step-tag">1-Bosqich — Ro'yxat va Test</div>
       <h2 class="reg-title">Ro'yxatdan O'tish</h2>
-      <p class="reg-desc">Ma'lumotlaringizni to'g'ri kiriting. Test muvaffaqiyatli topshirilgach saqlanadi.</p>
+      <p class="reg-desc">Ma'lumotlaringizni to'g'ri kiriting. 20 ta savoldan 13 tasiga to'g'ri javob bersangiz, 2-bosqichga o'tish huquqiga ega bo'lasiz.</p>
     </div>
     <div class="form-grid">
       <div class="form-row2">
@@ -455,27 +453,17 @@ tr:hover td{background:rgba(255,255,255,.015);}
   </div>
 </div>
 
-<!-- ===== WAITING ===== -->
-<div id="pg-wait" class="page">
-  <div class="wait-icon">⏳</div>
-  <h2 class="wait-title">Test Kutilmoqda</h2>
-  <p class="wait-sub">Siz muvaffaqiyatli ro'yxatdan o'tdingiz. Admin test bosqichini boshlaguncha kutib turing.</p>
-  <div class="wait-badge">
-    <div class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--orange);animation:dotPulse 1.4s ease infinite;"></div>
-    2-bosqich boshlanishi kutilmoqda
-  </div>
-  <div class="muted mono" style="font-size:11px;margin-top:8px;" id="wait-name"></div>
-  <button class="btn btn-outline" onclick="showPage('pg-welcome')" style="margin-top:16px;">← Bosh sahifa</button>
-</div>
-
 <!-- ===== LOGIN ===== -->
 <div id="pg-login" class="page">
   <div class="login-wrap">
     <div class="card">
       <div style="margin-bottom:28px;">
-        <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>QADAM 2 / 2</div>
-        <h2 style="font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:6px;">Test Bosqichiga Kirish</h2>
-        <p class="muted" style="font-size:13px;line-height:1.6;">Ro'yxatdan o'tganda ishlatgan telefon raqamingizni kiriting.</p>
+        <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>2-BOSQICH</div>
+        <h2 style="font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;">2-Bosqichga Kirish</h2>
+        <p class="muted" style="font-size:13px;line-height:1.6;">
+          1-bosqichda kamida <strong style="color:var(--accent);">13/20</strong> ball to'plagan ishtirokchilar uchun.<br/>
+          Telefon raqamingizni kiriting.
+        </p>
       </div>
       <div class="form-grid" style="gap:14px;">
         <div class="field">
@@ -487,10 +475,32 @@ tr:hover td{background:rgba(255,255,255,.015);}
           <span id="login-btn-txt">Kirish →</span>
         </button>
         <div class="msg err" id="login-msg"></div>
+        <div class="msg ok" id="login-ok"></div>
         <button class="btn btn-outline" onclick="showPage('pg-welcome')" style="width:100%;">← Orqaga</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- ===== WAITING ===== -->
+<div id="pg-wait" class="page">
+  <div class="wait-icon">⏳</div>
+  <h2 class="wait-title">Kutish Rejimi</h2>
+  <p class="wait-sub">Siz 1-bosqichni muvaffaqiyatli o'tdingiz! Admin 2-bosqichni boshlaguncha biroz kuting.</p>
+  <div class="wait-badge">
+    <div class="poll-dot"></div>
+    Tanlov hali boshlanmadi
+  </div>
+  <div class="wait-user-card" id="wait-user-card">
+    <div class="wait-user-name" id="wait-name">—</div>
+    <div class="wait-user-info" id="wait-phone">—</div>
+    <div class="wait-user-info" id="wait-score-info">—</div>
+  </div>
+  <div class="poll-indicator">
+    <div class="poll-dot" style="background:var(--muted);"></div>
+    <span id="poll-status">Holat tekshirilmoqda...</span>
+  </div>
+  <button class="btn btn-outline" onclick="showPage('pg-welcome')" style="margin-top:8px;">← Bosh sahifa</button>
 </div>
 
 <!-- ===== QUIZ ===== -->
@@ -528,6 +538,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
   <div class="result-verdict" id="result-verdict"></div>
   <p class="result-desc" id="result-desc"></p>
   <div class="rbadges" id="rbadges"></div>
+  <div id="result-next-hint"></div>
   <div class="save-st" id="save-st"></div>
   <button class="btn btn-outline" onclick="goHome()">↩ Bosh sahifa</button>
 </div>
@@ -535,28 +546,24 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <!-- ===== ADMIN ===== -->
 <div id="pg-admin" class="page">
   <div style="width:100%;max-width:1100px;">
-    <!-- Start section -->
     <div class="start-section" id="start-section">
       <div class="start-info">
         <h3>2-Bosqich Boshqaruvi</h3>
-        <p id="start-info-txt">50 ta savol bilan 2-bosqich hali boshlanmagan</p>
+        <p id="start-info-txt">2-bosqich hali boshlanmagan</p>
       </div>
-      <div id="start-btn-wrap">
-        <button class="btn-start" id="start-btn" onclick="startPhase2()">▶ Bosqichni Boshlash</button>
+      <div id="start-btn-wrap" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>
       </div>
     </div>
-
-    <!-- Filter -->
     <div class="filter-bar">
       <input class="filter-input" id="srch" placeholder="Ism, familiya yoki telefon bo'yicha qidiring..." oninput="renderTable()"/>
       <select class="filter-sel" id="flt-status" onchange="renderTable()">
         <option value="">Barchasi</option>
-        <option value="passed">O'tganlar</option>
+        <option value="passed">O'tganlar (1-bosqich)</option>
         <option value="failed">O'tmaganlar</option>
+        <option value="pending">Kutilmoqda</option>
       </select>
     </div>
-
-    <!-- Stats -->
     <div class="a-stats">
       <div class="a-stat">
         <div class="a-stat-n accent" id="st-total">0</div>
@@ -564,15 +571,17 @@ tr:hover td{background:rgba(255,255,255,.015);}
       </div>
       <div class="a-stat">
         <div class="a-stat-n" id="st-pass" style="color:var(--accent)">0</div>
-        <div class="a-stat-l">O'tganlar</div>
+        <div class="a-stat-l">1-bosqich o'tganlar</div>
       </div>
       <div class="a-stat">
         <div class="a-stat-n" id="st-fail" style="color:var(--danger)">0</div>
         <div class="a-stat-l">O'tmaganlar</div>
       </div>
+      <div class="a-stat">
+        <div class="a-stat-n" id="st-pend" style="color:var(--orange)">0</div>
+        <div class="a-stat-l">Kutilmoqda</div>
+      </div>
     </div>
-
-    <!-- Table -->
     <div class="tbl-wrap">
       <table>
         <thead><tr>
@@ -600,6 +609,7 @@ async function fbAdd(col, data) {
   for (const [k, v] of Object.entries(data)) {
     if (typeof v === 'string')  fields[k] = { stringValue: v };
     if (typeof v === 'number')  fields[k] = { integerValue: String(v) };
+    if (typeof v === 'boolean') fields[k] = { booleanValue: v };
   }
   fields.createdAt = { timestampValue: new Date().toISOString() };
   const r = await fetch(`${FB_BASE}/${col}?key=${FB_KEY}`, {
@@ -659,7 +669,7 @@ function fv(f) {
 }
 
 // ================================================================
-// QUESTIONS — loaded from embedded JSON (50 savol)
+// QUESTIONS
 // ================================================================
 const ALL_QUESTIONS = [
   {q:"Kompyuterda ma'lumotlarni vaqtinchalik saqlash uchun qaysi xotira ishlatiladi?",opts:["ROM","RAM","SSD","USB"],cor:1},
@@ -726,7 +736,9 @@ let timerInterval = null;
 let timeLeft = 60;
 let questionAnswered = false;
 let selectedOpt = null;
-let allDocs = []; // admin cache
+let allDocs = [];
+let pollInterval = null;
+let quizMode = '1'; // '1' = registration quiz, '2' = phase2 quiz
 
 // ================================================================
 // PAGE NAVIGATION
@@ -735,16 +747,20 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   currentPage = id;
-  // Admin bar visibility
   const bar = document.getElementById('admin-bar');
   if (id === 'pg-admin') bar.classList.add('visible');
   else bar.classList.remove('visible');
+  // Stop polling if leaving wait page
+  if (id !== 'pg-wait' && pollInterval) {
+    clearInterval(pollInterval);
+    pollInterval = null;
+  }
 }
 
 // ================================================================
 // REGISTER
 // ================================================================
-function submitReg() {
+async function submitReg() {
   const fn  = document.getElementById('reg-fn').value.trim();
   const ln  = document.getElementById('reg-ln').value.trim();
   const gr  = document.getElementById('reg-gr').value.trim();
@@ -768,29 +784,25 @@ function submitReg() {
   setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', true, 'Tekshirilmoqda...');
   msg.style.display = 'none';
 
-  // Check if phone already registered
-  checkPhoneExists(ph).then(exists => {
+  try {
+    const exists = await checkPhoneExists(ph);
     if (exists) {
       setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
       showMsg(msg, "Bu telefon raqam allaqachon ro'yxatdan o'tgan!", 'err');
       return;
     }
-    // Save to Firebase immediately (status pending)
-    fbAdd('participants', {
+    // Save with pending status and score=0
+    await fbAdd('participants', {
       firstName: fn, lastName: ln, grade: gr, age: Number(age),
-      phone: ph, gender: gn, score: 0, status: 'pending'
-    }).then(() => {
-      setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
-      // Show quiz immediately (1-bosqich)
-      startQuiz();
-    }).catch(e => {
-      setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
-      showMsg(msg, "Xatolik: " + e.message, 'err');
+      phone: ph, gender: gn, score: 0, total: 20, status: 'pending'
     });
-  }).catch(e => {
     setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
-    showMsg(msg, "Internet xatosi: " + e.message, 'err');
-  });
+    quizMode = '1';
+    startQuiz();
+  } catch(e) {
+    setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
+    showMsg(msg, "Xatolik: " + e.message, 'err');
+  }
 }
 
 async function checkPhoneExists(phone) {
@@ -799,32 +811,51 @@ async function checkPhoneExists(phone) {
 }
 
 // ================================================================
-// LOGIN (2-bosqich)
+// LOGIN — 2-bosqich
 // ================================================================
 async function submitLogin() {
   const ph = normalizePhone(document.getElementById('login-ph').value.trim());
   const msg = document.getElementById('login-msg');
+  const ok  = document.getElementById('login-ok');
+  ok.style.display = 'none';
+
   if (!ph || !isValidPhone(ph)) {
     showMsg(msg, "Telefon raqamni to'g'ri kiriting!", 'err'); return;
   }
+
   setLoading('login-btn', 'login-spin', 'login-btn-txt', true, 'Tekshirilmoqda...');
   msg.style.display = 'none';
+
   try {
-    // Check phase2 started
+    // 1. Check if phase2 started
     const cfg = await fbGet('config', 'phase2');
-    if (!cfg || !fv(cfg.fields?.started)) {
-      setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
-      showMsg(msg, "2-bosqich hali boshlanmagan. Admin boshlashini kuting.", 'err');
-      return;
-    }
-    // Find participant
+    const phase2started = cfg && fv(cfg.fields?.started) === true;
+
+    // 2. Find participant by phone
     const docs = await fbQuery('participants');
     const found = docs.find(d => fv(d.fields?.phone) === ph);
+
     if (!found) {
       setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
-      showMsg(msg, "Bu telefon raqam ro'yxatda yo'q. Avval ro'yxatdan o'ting.", 'err');
+      showMsg(msg, "Bu telefon raqam ro'yxatda yo'q. Avval 1-bosqichdan o'ting.", 'err');
       return;
     }
+
+    const status = fv(found.fields?.status);
+    const score  = Number(fv(found.fields?.score)) || 0;
+
+    // 3. Check if passed phase1 (status=passed means score>=13)
+    if (status !== 'passed') {
+      setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+      if (status === 'pending') {
+        showMsg(msg, "Siz hali testni topshirmadingiz. Avval 1-bosqich testini bajaring.", 'err');
+      } else {
+        showMsg(msg, `Kechirasiz, siz ${score}/20 ball to'pladingiz. 2-bosqichga kirish uchun kamida 13 ball kerak.`, 'err');
+      }
+      return;
+    }
+
+    // 4. Passed phase1 — set regData
     regData = {
       firstName: fv(found.fields?.firstName),
       lastName:  fv(found.fields?.lastName),
@@ -832,10 +863,22 @@ async function submitLogin() {
       age:       fv(found.fields?.age),
       phone:     fv(found.fields?.phone),
       gender:    fv(found.fields?.gender),
-      docName:   found.name
+      docName:   found.name,
+      phase1Score: score
     };
+
     setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+
+    // 5. If phase2 not started yet → waiting page
+    if (!phase2started) {
+      showWaitPage();
+      return;
+    }
+
+    // 6. Phase2 started → start phase2 quiz
+    quizMode = '2';
     startPhase2Quiz();
+
   } catch(e) {
     setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
     showMsg(msg, "Xatolik: " + e.message, 'err');
@@ -843,19 +886,53 @@ async function submitLogin() {
 }
 
 // ================================================================
-// QUIZ (1-bosqich — 20 savol, registration bilan birga)
+// WAITING PAGE
+// ================================================================
+function showWaitPage() {
+  document.getElementById('wait-name').textContent = `${regData.firstName} ${regData.lastName}`;
+  document.getElementById('wait-phone').textContent = regData.phone;
+  document.getElementById('wait-score-info').textContent = `1-bosqich: ${regData.phase1Score}/20 ✓`;
+  showPage('pg-wait');
+  startPolling();
+}
+
+function startPolling() {
+  if (pollInterval) clearInterval(pollInterval);
+  let count = 0;
+  async function poll() {
+    count++;
+    const st = document.getElementById('poll-status');
+    if (st) st.textContent = `Holat tekshirilmoqda... (${count})`;
+    try {
+      const cfg = await fbGet('config', 'phase2');
+      const started = cfg && fv(cfg.fields?.started) === true;
+      if (started) {
+        clearInterval(pollInterval);
+        pollInterval = null;
+        // Redirect to phase2 quiz
+        quizMode = '2';
+        startPhase2Quiz();
+      }
+    } catch(e) { /* silent */ }
+  }
+  poll(); // immediate check
+  pollInterval = setInterval(poll, 5000); // check every 5s
+}
+
+// ================================================================
+// QUIZ (1-bosqich — 20 savol)
 // ================================================================
 function startQuiz() {
-  // Pick first 20 questions
   quizQuestions = ALL_QUESTIONS.slice(0, 20);
   quizAnswers = new Array(20).fill(null);
   currentQIdx = 0;
+  document.getElementById('q-tot').textContent = 20;
   showPage('pg-quiz');
   loadQuestion();
 }
 
 // ================================================================
-// QUIZ (2-bosqich — 50 savol)
+// QUIZ (2-bosqich — 50 savol, shuffled)
 // ================================================================
 function startPhase2Quiz() {
   quizQuestions = shuffleArr([...ALL_QUESTIONS]).slice(0, 50);
@@ -963,21 +1040,19 @@ function finishQuiz() {
   clearInterval(timerInterval);
   document.getElementById('prog-bar').style.width = '100%';
 
-  const score = quizAnswers.filter((a, i) => a === quizQuestions[i].cor).length;
-  const total = quizQuestions.length;
-  const minPass = total === 20 ? 13 : Math.ceil(total * 0.6); // 20 uchun 13, 50 uchun 60%=30
-  const pass = score >= minPass;
+  const score   = quizAnswers.filter((a, i) => a === quizQuestions[i].cor).length;
+  const total   = quizQuestions.length;
+  const minPass = total === 20 ? 13 : Math.ceil(total * 0.6);
+  const pass    = score >= minPass;
 
   showPage('pg-result');
 
-  // Animate ring
   const C = 2 * Math.PI * 70;
   const ring = document.getElementById('ring-fill');
   ring.style.stroke = pass ? 'var(--accent)' : 'var(--danger)';
   ring.style.strokeDasharray = C;
   setTimeout(() => { ring.style.strokeDashoffset = C - (score / total) * C; }, 100);
 
-  // Count up
   let n = 0;
   const step = () => { if (n < score) { n++; document.getElementById('ring-n').textContent = n; setTimeout(step, 50); } };
   setTimeout(step, 200);
@@ -985,14 +1060,45 @@ function finishQuiz() {
 
   document.getElementById('result-verdict').textContent = pass ? "🎉 Tabriklaymiz!" : "❌ Muvaffaqiyatsiz";
   document.getElementById('result-verdict').className = 'result-verdict ' + (pass ? 'pass' : 'fail');
-  document.getElementById('result-desc').textContent = pass
-    ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Natijangiz saqlandi!`
-    : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Ro'yxatdan o'tish uchun kamida ${minPass} ta to'g'ri javob kerak edi.`;
 
-  document.getElementById('rbadges').innerHTML = `
-    <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
-    <div class="rb neu">${pass ? '✓ Muvaffaqiyatli' : '✗ Yetarli emas'}</div>
-  `;
+  if (quizMode === '1') {
+    // Phase 1 result
+    document.getElementById('result-desc').textContent = pass
+      ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. 2-bosqichga kirish huquqiga egasiz!`
+      : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. 2-bosqichga kirish uchun kamida ${minPass} ta to'g'ri javob kerak edi.`;
+
+    document.getElementById('rbadges').innerHTML = `
+      <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
+      <div class="rb neu">${pass ? '✓ 1-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
+    `;
+
+    // Show hint about login if passed
+    const hint = document.getElementById('result-next-hint');
+    if (pass) {
+      hint.innerHTML = `
+        <div class="pass-hint">
+          <div class="pass-hint-title">Keyingi qadam →</div>
+          <div class="pass-hint-body">
+            Admin 2-bosqichni boshlagach, "Login" tugmasi orqali<br/>
+            telefon raqamingiz bilan kiring va testni davom ettiring.
+          </div>
+        </div>
+      `;
+    } else {
+      hint.innerHTML = '';
+    }
+  } else {
+    // Phase 2 result
+    document.getElementById('result-desc').textContent = pass
+      ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Natijangiz saqlandi!`
+      : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Kamida ${minPass} ta to'g'ri javob kerak edi.`;
+
+    document.getElementById('rbadges').innerHTML = `
+      <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
+      <div class="rb neu">${pass ? '✓ 2-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
+    `;
+    document.getElementById('result-next-hint').innerHTML = '';
+  }
 
   saveResult(score, total, pass);
 }
@@ -1001,25 +1107,24 @@ async function saveResult(score, total, pass) {
   const el = document.getElementById('save-st');
   el.textContent = '⟳ Saqlanmoqda...';
   try {
-    // Find doc by phone and update score
     const docs = await fbQuery('participants');
     const doc = docs.find(d => fv(d.fields?.phone) === regData.phone);
     if (doc) {
       const nameParts = doc.name.split('/');
       const docId = nameParts[nameParts.length - 1];
+      const statusVal = pass ? 'passed' : 'failed';
       await fbSet('participants', docId, {
         firstName: regData.firstName,
         lastName:  regData.lastName,
         grade:     regData.grade,
-        age:       regData.age,
+        age:       Number(regData.age) || 0,
         phone:     regData.phone,
         gender:    regData.gender,
-        score:     score,
-        total:     total,
-        status:    pass ? 'passed' : 'failed'
+        score,
+        total,
+        status:    statusVal
       });
     } else {
-      // Fallback: add new
       await fbAdd('participants', {
         ...regData, score, total, status: pass ? 'passed' : 'failed'
       });
@@ -1034,6 +1139,7 @@ async function saveResult(score, total, pass) {
 
 function goHome() {
   regData = {};
+  quizMode = '1';
   showPage('pg-welcome');
 }
 
@@ -1085,7 +1191,7 @@ function adminLogout() {
 async function checkPhase2Status() {
   try {
     const cfg = await fbGet('config', 'phase2');
-    const started = cfg && fv(cfg.fields?.started);
+    const started = cfg && fv(cfg.fields?.started) === true;
     updateStartUI(started);
   } catch(e) {
     updateStartUI(false);
@@ -1096,11 +1202,14 @@ function updateStartUI(started) {
   const infoTxt = document.getElementById('start-info-txt');
   const btnWrap = document.getElementById('start-btn-wrap');
   if (started) {
-    infoTxt.textContent = '2-bosqich FAOL — foydalanuvchilar login qilishi mumkin';
-    btnWrap.innerHTML = '<div class="started-badge"><div class="dot" style="background:var(--accent);"></div>Bosqich boshlanган</div>';
+    infoTxt.textContent = '2-bosqich FAOL — 1-bosqichdan o\'tgan foydalanuvchilar kirishi mumkin';
+    btnWrap.innerHTML = `
+      <div class="started-badge"><div style="width:8px;height:8px;border-radius:50%;background:var(--accent);animation:dotPulse 1.4s ease infinite;"></div>2-bosqich boshlandi</div>
+      <button class="btn-reset" onclick="resetPhase2()">↺ Qayta Boshlash</button>
+    `;
   } else {
-    infoTxt.textContent = '50 ta savol bilan 2-bosqich hali boshlanmagan';
-    btnWrap.innerHTML = '<button class="btn-start" id="start-btn" onclick="startPhase2()">▶ Bosqichni Boshlash</button>';
+    infoTxt.textContent = '2-bosqich hali boshlanmagan — faqat 1-bosqichdan o\'tganlar ko\'rinadi';
+    btnWrap.innerHTML = '<button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>';
   }
 }
 
@@ -1110,11 +1219,24 @@ async function startPhase2() {
   try {
     await fbSet('config', 'phase2', { started: true });
     updateStartUI(true);
-    // Show login page link note
-    alert("2-bosqich muvaffaqiyatli boshlandi!\nFoydalanuvchilar endi telefon raqamlari bilan login qilishi mumkin.");
+    alert("2-bosqich muvaffaqiyatli boshlandi!\nKutish sahifasidagi foydalanuvchilar avtomatik o'tkaziladi.");
   } catch(e) {
     alert("Xato: " + e.message);
-    if (btn) { btn.disabled = false; btn.textContent = '▶ Bosqichni Boshlash'; }
+    if (btn) { btn.disabled = false; btn.textContent = '▶ 2-Bosqichni Boshlash'; }
+  }
+}
+
+async function resetPhase2() {
+  if (!confirm("2-bosqichni qayta boshlashni xohlaysizmi?\n\nBu amal 'started' holatini o'chiradi — foydalanuvchilar yana kutish rejimiga tushadi.")) return;
+  const btns = document.querySelectorAll('.btn-reset');
+  btns.forEach(b => { b.disabled = true; b.textContent = 'Qayta o\'rnatilmoqda...'; });
+  try {
+    await fbSet('config', 'phase2', { started: false });
+    updateStartUI(false);
+    alert("2-bosqich qayta o'rnatildi. Endi 'Boshlash' tugmasi bilan qayta ishga tushirishingiz mumkin.");
+  } catch(e) {
+    alert("Xato: " + e.message);
+    btns.forEach(b => { b.disabled = false; b.textContent = '↺ Qayta Boshlash'; });
   }
 }
 
@@ -1149,9 +1271,11 @@ function renderTable() {
   const total = allDocs.length;
   const passN = allDocs.filter(d => fv(d.fields?.status) === 'passed').length;
   const failN = allDocs.filter(d => fv(d.fields?.status) === 'failed').length;
+  const pendN = allDocs.filter(d => fv(d.fields?.status) === 'pending').length;
   document.getElementById('st-total').textContent = total;
   document.getElementById('st-pass').textContent  = passN;
   document.getElementById('st-fail').textContent  = failN;
+  document.getElementById('st-pend').textContent  = pendN;
 
   const tbody = document.getElementById('admin-tbody');
   tbody.innerHTML = '';
@@ -1167,6 +1291,7 @@ function renderTable() {
     const total2 = Number(fv(f.total)) || 20;
     const st     = fv(f.status);
     const pass   = st === 'passed';
+    const pending = st === 'pending';
     const time   = fv(f.createdAt) ? new Date(fv(f.createdAt)).toLocaleString('uz-UZ') : '—';
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -1176,8 +1301,8 @@ function renderTable() {
       <td>${fv(f.grade)}</td>
       <td class="mono" style="font-size:12px;">${fv(f.phone)}</td>
       <td>${fv(f.gender)}</td>
-      <td><span class="score-b ${pass?'pass':'fail'}">${score}/${total2}</span></td>
-      <td><span class="score-b ${pass?'pass':'fail'}">${pass?'✓ O\'tgan': st==='pending'?'⏳ Kutish':'✗ O\'tmagan'}</span></td>
+      <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pending?'—':score+'/' + total2}</span></td>
+      <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pass?"✓ O'tgan":pending?"⏳ Test kutilmoqda":"✗ O'tmagan"}</span></td>
       <td class="mono muted" style="font-size:11px;white-space:nowrap;">${time}</td>
       <td><button class="btn btn-sm-red" onclick="handleDel('${doc.name}',this)">O'chirish</button></td>`;
     tbody.appendChild(tr);
@@ -1234,28 +1359,7 @@ document.addEventListener('keydown', e => {
       adminLogout();
     }
   }
-  if (e.key === 'Enter' && document.getElementById('admin-modal').classList.contains('open')) {
-    checkAdminPass();
-  }
 });
-
-// ================================================================
-// INIT — Check if phase2 started, show login link
-// ================================================================
-(async function init() {
-  try {
-    const cfg = await fbGet('config', 'phase2');
-    if (cfg && fv(cfg.fields?.started)) {
-      // Phase2 active — add "Login" button to welcome
-      const btn = document.createElement('button');
-      btn.className = 'btn btn-outline';
-      btn.textContent = '2-bosqichga kirish →';
-      btn.style.marginTop = '12px';
-      btn.onclick = () => showPage('pg-login');
-      document.getElementById('pg-welcome').appendChild(btn);
-    }
-  } catch(e) { /* silent */ }
-})();
 </script>
 </body>
 </html>
