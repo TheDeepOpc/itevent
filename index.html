@@ -31,7 +31,6 @@ body{
   overflow-x:hidden;
 }
 
-/* ANIMATED GRID BACKGROUND */
 .bg-grid{
   position:fixed;inset:0;z-index:0;
   background-image:
@@ -63,7 +62,6 @@ body{
 @keyframes driftGlow{0%{transform:translate(0,0)}100%{transform:translate(120px,80px)}}
 @keyframes driftGlow2{0%{transform:translate(0,0)}100%{transform:translate(-80px,-60px)}}
 
-/* PAGES */
 .page{
   position:relative;z-index:1;
   display:none;
@@ -368,20 +366,61 @@ body{
 }
 .btn-retry:hover{border-color:var(--muted);color:var(--text);}
 
-/* ==================== ADMIN ==================== */
-#page-admin{display:none;flex-direction:column;padding:32px 24px;gap:0;align-items:flex-start;}
+/* ==================== ADMIN MODAL ==================== */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(4,8,15,0.85);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.modal-overlay.active{display:flex;}
+
+.admin-modal{
+  width:100%;max-width:380px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:36px;
+  animation:slideUp 0.3s ease;
+  position:relative;
+}
+
+.admin-modal-close{
+  position:absolute;top:16px;right:16px;
+  background:none;border:none;color:var(--muted);
+  font-size:20px;cursor:pointer;padding:4px 8px;border-radius:4px;
+  transition:color 150ms;
+}
+.admin-modal-close:hover{color:var(--text);}
+
+.admin-who{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;
+  background:rgba(0,245,160,0.06);
+  border:1px solid rgba(0,245,160,0.15);
+  border-radius:6px;
+  margin-bottom:20px;
+}
+.admin-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:15px;color:#04080f;flex-shrink:0;
+}
+.admin-who-name{font-weight:700;font-size:14px;}
+.admin-who-role{font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:1px;}
+
+.modal-title{font-size:22px;font-weight:800;margin-bottom:4px;}
+.modal-desc{color:var(--muted);font-size:13px;margin-bottom:24px;}
+
+/* ==================== ADMIN PAGE ==================== */
+#page-admin{display:none;flex-direction:column;padding:32px 24px;gap:0;align-items:flex-start;min-height:100vh;}
 #page-admin.active{display:flex;}
 
-.admin-login-card{
-  max-width:360px;width:100%;margin:auto;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:8px;padding:36px;
-  animation:slideUp 0.4s ease;
-}
-.admin-login-card h2{font-size:22px;font-weight:800;margin-bottom:4px;}
-.admin-login-card p{color:var(--muted);font-size:13px;margin-bottom:28px;}
-
-.admin-panel{width:100%;display:none;}
+.admin-panel{width:100%;}
 .admin-panel-header{
   display:flex;justify-content:space-between;align-items:center;
   margin-bottom:24px;flex-wrap:wrap;gap:12px;
@@ -442,9 +481,18 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .admin-btn-sm.red{background:rgba(255,69,69,0.15);color:var(--danger);border:1px solid rgba(255,69,69,0.3);}
 .admin-btn-sm.red:hover{background:rgba(255,69,69,0.25);}
 
-/* spinner */
+.rank-medal{font-size:18px;}
+
 .spin{width:16px;height:16px;border:2px solid rgba(4,8,15,0.3);border-top-color:#04080f;border-radius:50%;animation:spinIt 0.6s linear infinite;display:none;}
 @keyframes spinIt{to{transform:rotate(360deg)}}
+
+/* Admin trigger - hidden corner */
+.admin-trigger{
+  position:fixed;bottom:16px;right:16px;z-index:50;
+  width:32px;height:32px;
+  background:transparent;border:none;cursor:pointer;
+  opacity:0;
+}
 
 @media(max-width:540px){
   .form-row{grid-template-columns:1fr;}
@@ -471,7 +519,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     <div class="stat-item"><div class="stat-num">60s</div><div class="stat-label">Har bir savol</div></div>
   </div>
   <button class="btn-primary" onclick="goToForm()">
-    Boshlash
+    Ro'yxatdan O'tish
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
   </button>
 </div>
@@ -561,24 +609,9 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   <button class="btn-retry" onclick="restartAll()">↩ Qaytadan urinish</button>
 </div>
 
-<!-- ==================== ADMIN ==================== -->
+<!-- ==================== ADMIN PAGE ==================== -->
 <div id="page-admin" class="page">
-  <div class="admin-login-card" id="admin-login">
-    <h2>Admin Panel</h2>
-    <p>Kirish ma'lumotlarini kiriting</p>
-    <div class="field" style="margin-bottom:12px;">
-      <label>Login</label>
-      <input type="text" id="a-user" placeholder="admin"/>
-    </div>
-    <div class="field" style="margin-bottom:16px;">
-      <label>Parol</label>
-      <input type="password" id="a-pass" placeholder="••••••••"/>
-    </div>
-    <button class="form-submit" onclick="adminLogin()">Kirish</button>
-    <div class="msg-box err" id="admin-msg" style="margin-top:12px;"></div>
-  </div>
-
-  <div class="admin-panel" id="admin-panel">
+  <div class="admin-panel">
     <div class="admin-panel-header">
       <div>
         <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;">ADMIN PANEL</div>
@@ -604,6 +637,34 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     </div>
   </div>
 </div>
+
+<!-- ==================== ADMIN PASSWORD MODAL ==================== -->
+<div class="modal-overlay" id="admin-modal-overlay">
+  <div class="admin-modal">
+    <button class="admin-modal-close" onclick="closeAdminModal()">✕</button>
+
+    <div class="admin-who">
+      <div class="admin-avatar">RF</div>
+      <div>
+        <div class="admin-who-name">Roziboyev Fazliddin</div>
+        <div class="admin-who-role">Administrator</div>
+      </div>
+    </div>
+
+    <div class="modal-title">Admin Kirish</div>
+    <div class="modal-desc">Parolingizni kiriting</div>
+
+    <div class="field" style="margin-bottom:16px;">
+      <label>Parol</label>
+      <input type="password" id="admin-pass-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"/>
+    </div>
+    <button class="form-submit" onclick="doAdminLogin()">Kirish</button>
+    <div class="msg-box err" id="admin-modal-msg" style="margin-top:12px;"></div>
+  </div>
+</div>
+
+<!-- Hidden admin trigger (bottom-right corner, 5 clicks) -->
+<button class="admin-trigger" id="admin-trigger" onclick="adminTriggerClick()"></button>
 
 <script>
 // ======================================================
@@ -654,66 +715,47 @@ function fv(f){
 }
 
 // ======================================================
-// QUESTIONS — 20 ta informatika savollari
+// QUESTIONS
 // ======================================================
 const QUESTIONS=[
   {q:"CPU (Markaziy protsessor) qanday asosiy funksiyani bajaradi?",
    opts:["Ma'lumotlarni saqlash","Ko'rsatmalarni bajarish va hisoblash","Internetga ulanish","Grafikani chiqarish"],cor:1},
-
   {q:"RAM (Tasodifiy kirish xotirasi) nima?",
    opts:["Doimiy saqlash qurilmasi","Protsessorning tarkibiy qismi","Vaqtinchalik tezkor xotira","Tarmoq kartasi"],cor:2},
-
   {q:"1 Gigabayt (GB) necha Megabaytga (MB) teng?",
    opts:["100 MB","512 MB","1000 MB","1024 MB"],cor:3},
-
   {q:"Quyidagilardan qaysi biri operatsion tizim hisoblanadi?",
    opts:["Microsoft Word","Google Chrome","Linux","Photoshop"],cor:2},
-
   {q:"WWW (World Wide Web) nima?",
    opts:["Internetning o'zi","Internetdagi gipermatn hujjatlar tizimi","Elektron pochta protokoli","Tarmoq kabeli turi"],cor:1},
-
   {q:"IP manzil nima uchun ishlatiladi?",
    opts:["Fayllarni siqish uchun","Tarmoqdagi qurilmalarni identifikatsiya qilish uchun","Parollarni saqlash uchun","Ekran yorqinligini boshqarish uchun"],cor:1},
-
   {q:"Quyidagilardan qaysi biri dasturlash tili emas?",
    opts:["Python","Java","HTML","Photoshop"],cor:3},
-
   {q:"Binary (ikkilik) sanoq sistemasida faqat qaysi raqamlar ishlatiladi?",
    opts:["0 va 1","1 va 2","0, 1 va 2","0 dan 9 gacha"],cor:0},
-
   {q:"Firewall (xavfsizlik devori) nima?",
    opts:["Kompyuterni sovutish tizimi","Ruxsatsiz kirish va chiqishni nazorat qiluvchi tizim","Grafik karta turi","Zaxira quvvat manbai"],cor:1},
-
   {q:"SSD va HDD o'rtasidagi asosiy farq nima?",
    opts:["SSD kattaroq hajmga ega","HDD tezroq ishlaydi","SSD harakatlanuvchi qismlarisiz, HDD mexanik diskka ega","HDD kam elektr sarflaydi"],cor:2},
-
   {q:"HTTP protokoli nima uchun ishlatiladi?",
    opts:["Fayllarni siqish","Veb-sahifalarni uzatish","Elektron pochta yuborish","Tarmoqni skanerlash"],cor:1},
-
   {q:"Quyidagilardan qaysi biri ma'lumotlar bazasi boshqaruv tizimi (DBMS)?",
    opts:["Apache","MySQL","Nginx","React"],cor:1},
-
   {q:"'Algorithm' so'zi nima ma'noni anglatadi?",
    opts:["Kompyuter virusi turi","Muammoni hal qilish uchun ketma-ket ko'rsatmalar to'plami","Xotira turi","Tarmoq protokoli"],cor:1},
-
   {q:"DNS (Domain Name System) qanday funksiya bajaradi?",
    opts:["Fayllarni shifrlaydi","Domen nomlarini IP manzillarga aylantiradi","Tarmoqni kuchaytiradi","Parollarni saqlaydi"],cor:1},
-
   {q:"'Bug' atamasi dasturlashda nimani anglatadi?",
    opts:["Yangi funksiya","Dasturlash tilining turi","Koddagi xato yoki nosozlik","Tezlashtirilgan algoritm"],cor:2},
-
   {q:"USB (Universal Serial Bus) nima?",
    opts:["Tarmoq protokoli","Qurilmalarni ulash uchun standart interfeys","Dasturlash tili","Operatsion tizim"],cor:1},
-
   {q:"Quyidagilardan qaysi biri ochiq manbali (open source) dasturiy ta'minot?",
    opts:["Microsoft Windows","macOS","Linux (Ubuntu)","Adobe Photoshop"],cor:2},
-
   {q:"'Phishing' hujumi nima?",
    opts:["Tarmoqni jismoniy buzish","Foydalanuvchilarni aldash orqali shaxsiy ma'lumotlarni o'g'irlash","Fayl tizimini o'chirish","Qurilmani qayta ishga tushirish"],cor:1},
-
   {q:"OOP (Object-Oriented Programming) asosiy prinsipi qaysi?",
    opts:["Faqat funksiyalardan foydalanish","Ob'ektlar va klasslar orqali dasturlash","Faqat ikkilik kodda yozish","Faqat veb-uchun dasturlash"],cor:1},
-
   {q:"Qaysi avlod tili eng quyi darajada mashina tiliga yaqin?",
    opts:["Python","Java","Assembly tili","JavaScript"],cor:2},
 ];
@@ -728,6 +770,52 @@ let selected=null;
 let timerInterval=null;
 let timeLeft=60;
 let answered=false;
+
+// ======================================================
+// ADMIN TRIGGER (hidden corner, 5 clicks)
+// ======================================================
+let adminClickCount=0;
+let adminClickTimer=null;
+
+function adminTriggerClick(){
+  adminClickCount++;
+  clearTimeout(adminClickTimer);
+  adminClickTimer=setTimeout(()=>{adminClickCount=0;},2000);
+  if(adminClickCount>=5){
+    adminClickCount=0;
+    openAdminModal();
+  }
+}
+
+function openAdminModal(){
+  document.getElementById('admin-modal-overlay').classList.add('active');
+  document.getElementById('admin-pass-input').value='';
+  document.getElementById('admin-modal-msg').style.display='none';
+  setTimeout(()=>document.getElementById('admin-pass-input').focus(),100);
+}
+
+function closeAdminModal(){
+  document.getElementById('admin-modal-overlay').classList.remove('active');
+}
+
+function doAdminLogin(){
+  const pass=document.getElementById('admin-pass-input').value;
+  const msg=document.getElementById('admin-modal-msg');
+  if(pass==='itevent27'){
+    closeAdminModal();
+    showPage('page-admin');
+    fetchAdminTable();
+  } else {
+    msg.textContent="Parol noto'g'ri!";
+    msg.style.display='block';
+    document.getElementById('admin-pass-input').value='';
+    document.getElementById('admin-pass-input').focus();
+  }
+}
+
+function adminLogout(){
+  showPage('page-welcome');
+}
 
 // ======================================================
 // NAV
@@ -822,7 +910,7 @@ function selectOption(i,btn){
   document.getElementById('btn-next').style.display='block';
 }
 
-function showCorrect(selectedBtn){
+function showCorrect(){
   const cor=QUESTIONS[currentQ].cor;
   const btns=document.querySelectorAll('.option-btn');
   btns.forEach((b,i)=>{
@@ -848,15 +936,13 @@ function showResult(){
 
   showPage('page-result');
 
-  // Animate ring
-  const circumf=2*Math.PI*70; // ~440
+  const circumf=2*Math.PI*70;
   const offset=circumf-(score/20)*circumf;
   const ring=document.getElementById('ring-fill');
   ring.style.stroke=pass?'var(--accent)':'var(--danger)';
   ring.style.strokeDasharray=circumf;
   setTimeout(()=>{ring.style.strokeDashoffset=offset;},100);
 
-  // Animate number
   let n=0;
   const tgt=score;
   const step=()=>{if(n<tgt){n++;document.getElementById('ring-num').textContent=n;setTimeout(step,60);}};
@@ -903,33 +989,8 @@ function restartAll(){
 }
 
 // ======================================================
-// ADMIN
+// ADMIN TABLE
 // ======================================================
-const ADMIN_U="admin", ADMIN_P="fazik123";
-
-function adminLogin(){
-  const u=document.getElementById('a-user').value;
-  const p=document.getElementById('a-pass').value;
-  const msg=document.getElementById('admin-msg');
-  if(u===ADMIN_U&&p===ADMIN_P){
-    document.getElementById('admin-login').style.display='none';
-    document.getElementById('admin-panel').style.display='block';
-    fetchAdminTable();
-  } else {
-    msg.textContent="Login yoki parol noto'g'ri!";
-    msg.style.display='block';
-  }
-}
-
-function adminLogout(){
-  document.getElementById('admin-login').style.display='block';
-  document.getElementById('admin-panel').style.display='none';
-  document.getElementById('a-user').value='';
-  document.getElementById('a-pass').value='';
-  document.getElementById('admin-msg').style.display='none';
-  showPage('page-welcome');
-}
-
 async function fetchAdminTable(){
   const tbody=document.getElementById('admin-tbody');
   tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:24px;font-family:'Space Mono',monospace;font-size:12px;">Yuklanmoqda...</td></tr>`;
@@ -981,14 +1042,15 @@ async function handleDel(name,btn){
   }
 }
 
-// F2 = Admin | Escape = Back
+// F2 = Admin modal | Escape = close modal
 document.addEventListener('keydown',e=>{
-  if(e.key==='F2'){showPage('page-admin');}
-  if(e.key==='Escape'){
-    if(document.getElementById('page-admin').classList.contains('active')){
-      adminLogout();
-    }
-  }
+  if(e.key==='F2'){openAdminModal();}
+  if(e.key==='Escape'){closeAdminModal();}
+});
+
+// Close modal on overlay click
+document.getElementById('admin-modal-overlay').addEventListener('click',function(e){
+  if(e.target===this)closeAdminModal();
 });
 </script>
 </body>
