@@ -1,11 +1,339 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>IT TANLOV 2025 | Bilimingizni Sinab Ko'ring</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IT TANLOV 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#04080f;
+  --s1:#080e1a;
+  --s2:#0c1525;
+  --border:#1a2540;
+  --accent:#00f5a0;
+  --blue:#00d4ff;
+  --orange:#ff6b35;
+  --text:#e8f0fe;
+  --muted:#4a6080;
+  --danger:#ff4545;
+  --radius:6px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Syne',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.bg-grid{position:fixed;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(0,245,160,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,245,160,.025) 1px,transparent 1px);
+  background-size:44px 44px;pointer-events:none;}
+.bg-blob{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.bg-blob.a{width:700px;height:700px;top:-250px;left:-250px;
+  background:radial-gradient(circle,rgba(0,245,160,.055) 0%,transparent 70%);
+  animation:blobA 14s ease-in-out infinite alternate;}
+.bg-blob.b{width:500px;height:500px;bottom:-150px;right:-150px;
+  background:radial-gradient(circle,rgba(0,212,255,.045) 0%,transparent 70%);
+  animation:blobB 10s ease-in-out infinite alternate;}
+@keyframes blobA{to{transform:translate(100px,60px);}}
+@keyframes blobB{to{transform:translate(-70px,-50px);}}
+
+.page{position:relative;z-index:1;display:none;min-height:100vh;
+  align-items:center;justify-content:center;padding:28px 20px;flex-direction:column;}
+.page.active{display:flex;}
+
+.chip{display:inline-flex;align-items:center;gap:7px;
+  background:rgba(0,245,160,.08);border:1px solid rgba(0,245,160,.22);
+  border-radius:100px;padding:5px 14px;font-family:'Space Mono',monospace;
+  font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:dotPulse 1.4s ease infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
+.mono{font-family:'Space Mono',monospace;}
+.muted{color:var(--muted);}
+.accent{color:var(--accent);}
+.danger{color:var(--danger);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:none;border-radius:var(--radius);cursor:pointer;
+  font-family:'Syne',sans-serif;font-weight:700;transition:all 180ms;}
+.btn-green{background:var(--accent);color:#04080f;padding:14px 32px;font-size:15px;}
+.btn-green:hover{background:#00e090;transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,245,160,.3);}
+.btn-green:active{transform:translateY(0);}
+.btn-green:disabled{background:#1a3028;color:#2a5040;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);
+  padding:10px 22px;font-size:13px;}
+.btn-outline:hover{border-color:var(--muted);color:var(--text);}
+.btn-outline-accent{background:transparent;border:1px solid rgba(0,245,160,.3);color:var(--accent);
+  padding:12px 28px;font-size:14px;}
+.btn-outline-accent:hover{background:rgba(0,245,160,.07);border-color:rgba(0,245,160,.6);}
+.btn-sm-red{background:rgba(255,69,69,.12);border:1px solid rgba(255,69,69,.3);
+  color:var(--danger);padding:5px 12px;font-size:11px;border-radius:4px;font-family:'Space Mono',monospace;}
+.btn-sm-red:hover{background:rgba(255,69,69,.22);}
+.btn-sm-blue{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
+  color:var(--blue);padding:7px 16px;font-size:12px;border-radius:4px;}
+.btn-sm-blue:hover{background:rgba(0,212,255,.2);}
+.btn-sm-gray{background:var(--s2);border:1px solid var(--border);
+  color:var(--muted);padding:7px 16px;font-size:12px;border-radius:4px;}
+.btn-sm-gray:hover{color:var(--text);}
+
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;}
+.field input,.field select{
+  background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;
+  transition:border-color 140ms,box-shadow 140ms;width:100%;}
+.field input:focus,.field select:focus{
+  outline:none;border-color:rgba(0,245,160,.5);box-shadow:0 0 0 3px rgba(0,245,160,.07);}
+.field input::placeholder{color:var(--muted);}
+.field select option{background:#0c1525;}
+
+.msg{padding:11px 14px;border-radius:var(--radius);font-size:13px;display:none;font-family:'Space Mono',monospace;}
+.msg.err{background:rgba(255,69,69,.1);border:1px solid rgba(255,69,69,.28);color:#ff8080;}
+.msg.ok{background:rgba(0,245,160,.08);border:1px solid rgba(0,245,160,.25);color:var(--accent);}
+
+.card{background:rgba(8,14,26,.97);border:1px solid var(--border);border-radius:12px;
+  padding:36px 32px;backdrop-filter:blur(8px);}
+
+.spin{width:15px;height:15px;border:2px solid rgba(4,8,15,.35);
+  border-top-color:#04080f;border-radius:50%;animation:rot .6s linear infinite;display:none;}
+@keyframes rot{to{transform:rotate(360deg);}}
+
+/* WELCOME */
+#pg-welcome{gap:0;text-align:center;}
+.welcome-chip{margin-bottom:28px;animation:fadeDown .6s ease;}
+.hero{font-size:clamp(44px,9vw,90px);font-weight:800;line-height:.95;
+  letter-spacing:-3px;animation:fadeDown .7s .08s both ease;}
+.hero .w1{display:block;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,.55) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero .w2{display:block;background:linear-gradient(135deg,var(--accent),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{margin:18px auto 0;color:var(--muted);font-size:14px;line-height:1.7;
+  max-width:420px;animation:fadeDown .7s .16s both ease;}
+.stats-row{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;
+  margin:36px 0 40px;animation:fadeDown .7s .24s both ease;}
+.stat{text-align:center;}
+.stat-n{font-size:34px;font-weight:800;color:var(--accent);font-family:'Space Mono',monospace;line-height:1;}
+.stat-l{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+.welcome-btns{display:flex;flex-direction:column;align-items:center;gap:12px;animation:fadeDown .7s .32s both ease;}
+.divider-line{display:flex;align-items:center;gap:12px;width:260px;margin:4px 0;}
+.divider-line::before,.divider-line::after{content:'';flex:1;height:1px;background:var(--border);}
+.divider-line span{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+/* REGISTER */
+#pg-reg{gap:0;}
+.reg-wrap{width:100%;max-width:500px;animation:slideUp .45s ease;}
+.reg-hdr{margin-bottom:32px;}
+.step-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;}
+.step-tag::before{content:'';width:20px;height:1px;background:var(--accent);}
+.reg-title{font-size:26px;font-weight:800;letter-spacing:-1px;}
+.reg-desc{color:var(--muted);font-size:13px;margin-top:5px;line-height:1.6;}
+.form-grid{display:grid;gap:14px;}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* LOGIN */
+#pg-login{gap:0;}
+.login-wrap{width:100%;max-width:420px;animation:slideUp .45s ease;}
+
+/* WAIT */
+#pg-wait{gap:24px;text-align:center;}
+.wait-icon{font-size:64px;animation:waitBounce 2s ease-in-out infinite;}
+@keyframes waitBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.wait-title{font-size:28px;font-weight:800;}
+.wait-sub{color:var(--muted);font-size:14px;max-width:380px;line-height:1.65;}
+.wait-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);
+  border-radius:100px;padding:8px 18px;
+  font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);}
+.wait-user-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;
+  padding:16px 24px;display:flex;flex-direction:column;gap:4px;min-width:280px;}
+.wait-user-name{font-size:18px;font-weight:800;}
+.wait-user-info{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
+.poll-indicator{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;
+  font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px;}
+.poll-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:dotPulse 1.4s ease infinite;}
+
+/* QUIZ */
+#pg-quiz{gap:0;padding:28px 20px;}
+.quiz-wrap{width:100%;max-width:680px;}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:22px;flex-wrap:wrap;gap:10px;}
+.quiz-meta{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);}
+.quiz-meta span{color:var(--accent);}
+.prog-bar-wrap{height:3px;background:var(--border);border-radius:2px;margin-bottom:32px;overflow:hidden;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));
+  transition:width 350ms ease;border-radius:2px;}
+.timer-badge{display:flex;align-items:center;gap:5px;
+  background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);
+  border-radius:var(--radius);padding:6px 12px;font-family:'Space Mono',monospace;
+  font-size:13px;color:var(--orange);}
+.timer-badge.hot{background:rgba(255,69,69,.15);border-color:rgba(255,69,69,.4);
+  color:var(--danger);animation:hotFlash .5s ease infinite alternate;}
+@keyframes hotFlash{from{opacity:1;}to{opacity:.4;}}
+.q-num{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.q-text{font-size:clamp(16px,2.8vw,21px);font-weight:700;line-height:1.45;
+  margin-bottom:26px;letter-spacing:-.2px;}
+.opts{display:grid;gap:9px;}
+.opt{display:flex;align-items:flex-start;gap:13px;
+  background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:13px 16px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;
+  cursor:pointer;width:100%;text-align:left;transition:all 130ms;line-height:1.4;}
+.opt:hover:not(:disabled){border-color:rgba(0,245,160,.38);background:rgba(0,245,160,.04);}
+.opt-l{flex-shrink:0;width:25px;height:25px;border-radius:4px;background:var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+  color:var(--muted);transition:all 130ms;margin-top:1px;}
+.opt.sel{border-color:var(--accent);background:rgba(0,245,160,.07);}
+.opt.sel .opt-l{background:var(--accent);color:#04080f;}
+.opt.cor{border-color:var(--accent);background:rgba(0,245,160,.1);}
+.opt.cor .opt-l{background:var(--accent);color:#04080f;}
+.opt.wrg{border-color:var(--danger);background:rgba(255,69,69,.08);}
+.opt.wrg .opt-l{background:var(--danger);color:#fff;}
+.opt:disabled{cursor:default;}
+.quiz-nav{display:flex;justify-content:flex-end;margin-top:20px;}
+.btn-next{padding:11px 26px;background:var(--accent);color:#04080f;
+  border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;transition:all 180ms;display:none;}
+.btn-next:hover{background:#00e090;transform:translateY(-1px);}
+
+/* RESULT */
+#pg-result{gap:20px;text-align:center;}
+.result-ring{position:relative;width:160px;height:160px;margin:0 auto;}
+.result-ring svg{transform:rotate(-90deg);}
+.ring-bg{stroke:var(--border);}
+.ring-fill{stroke-dasharray:440;stroke-dashoffset:440;
+  transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1);}
+.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;}
+.ring-n{font-size:40px;font-weight:800;font-family:'Space Mono',monospace;line-height:1;}
+.ring-d{font-size:12px;color:var(--muted);margin-top:2px;}
+.result-verdict{font-size:clamp(22px,5vw,34px);font-weight:800;letter-spacing:-1px;}
+.result-verdict.pass{color:var(--accent);}
+.result-verdict.fail{color:var(--danger);}
+.result-desc{color:var(--muted);font-size:14px;line-height:1.65;max-width:420px;margin:0 auto;}
+.rbadges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.rb{padding:7px 16px;border-radius:4px;font-size:11px;font-family:'Space Mono',monospace;}
+.rb.pass{background:rgba(0,245,160,.1);border:1px solid rgba(0,245,160,.28);color:var(--accent);}
+.rb.fail{background:rgba(255,69,69,.1);border:1px solid rgba(255,69,69,.28);color:var(--danger);}
+.rb.neu{background:var(--s2);border:1px solid var(--border);color:var(--muted);}
+.save-st{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
+
+/* Pass result hint */
+.pass-hint{background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);
+  border-radius:10px;padding:16px 20px;max-width:400px;text-align:left;}
+.pass-hint-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:6px;}
+.pass-hint-body{font-size:12px;color:var(--muted);line-height:1.6;font-family:'Space Mono',monospace;}
+
+/* ADMIN */
+#pg-admin{display:none;flex-direction:column;
+  padding:28px 20px;align-items:flex-start;justify-content:flex-start;
+  min-height:100vh;padding-top:60px;}
+#pg-admin.active{display:flex;}
+
+.admin-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(4,8,15,.96);border-bottom:1px solid var(--border);
+  display:none;align-items:center;justify-content:space-between;
+  padding:12px 24px;backdrop-filter:blur(10px);}
+.admin-bar.visible{display:flex;}
+.admin-bar-logo{font-family:'Space Mono',monospace;font-size:12px;
+  color:var(--accent);letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;}
+.admin-bar-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+.admin-bar-right{display:flex;align-items:center;gap:10px;}
+
+.modal-overlay{position:fixed;inset:0;z-index:200;
+  background:rgba(4,8,15,.85);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal-card{width:100%;max-width:380px;animation:slideUp .35s ease;}
+
+.pass-wrap{position:relative;}
+.pass-wrap input{padding-right:42px;}
+.pass-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:16px;transition:color 150ms;}
+.pass-toggle:hover{color:var(--text);}
+
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
+.filter-input{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:9px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;
+  flex:1;min-width:180px;}
+.filter-input:focus{outline:none;border-color:rgba(0,245,160,.4);}
+.filter-input::placeholder{color:var(--muted);}
+.filter-sel{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:9px 12px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;}
+.filter-sel:focus{outline:none;border-color:rgba(0,245,160,.4);}
+.filter-sel option{background:#0c1525;}
+
+.a-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
+.a-stat{padding:14px 20px;background:var(--s1);border:1px solid var(--border);border-radius:8px;}
+.a-stat-n{font-size:28px;font-weight:800;font-family:'Space Mono',monospace;}
+.a-stat-l{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+
+.start-section{
+  background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);
+  border-radius:10px;padding:20px 24px;margin-bottom:24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;}
+.start-info h3{font-size:16px;font-weight:700;margin-bottom:4px;}
+.start-info p{font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;}
+.btn-start{background:var(--accent);color:#04080f;border:none;border-radius:var(--radius);
+  padding:12px 28px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:all 180ms;}
+.btn-start:hover{background:#00e090;box-shadow:0 8px 28px rgba(0,245,160,.3);}
+.btn-start:disabled{background:#1a3028;color:#2a5040;cursor:not-allowed;box-shadow:none;}
+.started-badge{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,245,160,.12);border:1px solid rgba(0,245,160,.3);
+  border-radius:100px;padding:8px 16px;font-family:'Space Mono',monospace;
+  font-size:11px;color:var(--accent);}
+
+.tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px;}
+th{padding:11px 13px;background:var(--s2);font-family:'Space Mono',monospace;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
+td{padding:10px 13px;border-bottom:1px solid rgba(26,37,64,.45);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.score-b{display:inline-flex;align-items:center;padding:3px 10px;
+  border-radius:100px;font-size:10px;font-family:'Space Mono',monospace;font-weight:700;}
+.score-b.pass{background:rgba(0,245,160,.12);color:var(--accent);}
+.score-b.fail{background:rgba(255,69,69,.12);color:var(--danger);}
+.score-b.pend{background:rgba(255,107,53,.12);color:var(--orange);}
+.empty-row td{text-align:center;padding:32px;color:var(--muted);
+  font-family:'Space Mono',monospace;font-size:12px;}
+
+.detail-btn{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
+  color:var(--blue);padding:4px 10px;font-size:10px;border-radius:4px;
+  cursor:pointer;font-family:'Space Mono',monospace;}
+.detail-btn:hover{background:rgba(0,212,255,.2);}
+
+.modal-detail{position:fixed;inset:0;z-index:300;
+  background:rgba(4,8,15,.95);backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-detail.open{display:flex;}
+.detail-card{width:100%;max-width:500px;max-height:80vh;overflow-y:auto;}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:520px){
+  .form-row2{grid-template-columns:1fr;}
+  .card{padding:26px 18px;}
+  .stats-row{gap:22px;}
+  .a-stats{gap:10px;}
+  .start-section{flex-direction:column;align-items:flex-start;}
+}
+</style>
 </head>
 <body>
 
@@ -13,657 +341,1167 @@
 <div class="bg-blob a"></div>
 <div class="bg-blob b"></div>
 
-<!-- MAIN CONTENT -->
-<div id="app"></div>
+<!-- ADMIN TOP BAR -->
+<div class="admin-bar" id="admin-bar">
+  <div class="admin-bar-logo"><div class="dot"></div>ADMIN PANEL</div>
+  <div class="admin-bar-right">
+    <button class="btn btn-sm-blue" onclick="refreshTable()">↻ Yangilash</button>
+    <button class="btn btn-sm-red" onclick="adminLogout()">Chiqish</button>
+  </div>
+</div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<!-- ADMIN PASS MODAL -->
+<div class="modal-overlay" id="admin-modal">
+  <div class="modal-card">
+    <div class="card">
+      <div style="margin-bottom:24px;">
+        <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>ADMIN KIRISH</div>
+        <div style="font-size:20px;font-weight:800;margin-bottom:4px;">Admin Panel</div>
+        <div class="muted mono" style="font-size:12px;">Parolingizni kiriting</div>
+      </div>
+      <div class="form-grid" style="gap:14px;">
+        <div class="field">
+          <label>Maxfiy parol</label>
+          <div class="pass-wrap">
+            <input type="password" id="a-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkAdminPass()"/>
+            <button class="pass-toggle" onclick="togglePassVis()" id="pass-eye">👁</button>
+          </div>
+        </div>
+        <button class="btn btn-green" style="width:100%;" onclick="checkAdminPass()">Kirish</button>
+        <div class="msg err" id="admin-msg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BATAfsil KO'RISH MODAL -->
+<div class="modal-detail" id="detail-modal" onclick="if(event.target===this)closeDetailModal()">
+  <div class="detail-card card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div class="chip"><div class="dot"></div>JAVOBLAR TARIXI</div>
+      <button onclick="closeDetailModal()" style="background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;">&times;</button>
+    </div>
+    <div id="detail-content"></div>
+  </div>
+</div>
+
+<!-- ===== WELCOME ===== -->
+<div id="pg-welcome" class="page active">
+  <div class="chip welcome-chip"><div class="dot"></div>IT TANLOV 2025</div>
+  <h1 class="hero">
+    <span class="w1">Bilimingizni</span>
+    <span class="w2">Sinab Ko'ring</span>
+  </h1>
+  <p class="hero-sub">Informatika bo'yicha test topshiring va IT Tanlovga rasmiy ro'yxatdan o'ting.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">20</div><div class="stat-l">Savol (1-bosqich)</div></div>
+    <div class="stat"><div class="stat-n">13</div><div class="stat-l">Minimal ball</div></div>
+    <div class="stat"><div class="stat-n">60s</div><div class="stat-l">Har bir savol</div></div>
+  </div>
+  <div class="welcome-btns">
+    <button class="btn btn-green" onclick="showPage('pg-reg')" style="width:260px;">
+      Ro'yxatdan O'tish →
+    </button>
+    <div class="divider-line"><span>yoki</span></div>
+    <button class="btn btn-outline-accent" onclick="showPage('pg-login')" style="width:260px;">
+      Login — 2-Bosqichga Kirish
+    </button>
+  </div>
+  <div onclick="openAdminModal()" style="position:fixed;top:16px;right:20px;z-index:50;
+    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);
+    cursor:pointer;text-transform:uppercase;padding:6px 10px;
+    border:1px solid transparent;border-radius:4px;transition:all 180ms;"
+    onmouseenter="this.style.borderColor='rgba(0,245,160,.3)';this.style.color='var(--accent)'"
+    onmouseleave="this.style.borderColor='transparent';this.style.color='var(--muted)'">
+    ADMIN
+  </div>
+</div>
+
+<!-- ===== REGISTER ===== -->
+<div id="pg-reg" class="page">
+  <div class="reg-wrap">
+    <div class="reg-hdr">
+      <div class="step-tag">1-Bosqich — Ro'yxat va Test</div>
+      <h2 class="reg-title">Ro'yxatdan O'tish</h2>
+      <p class="reg-desc">Ma'lumotlaringizni to'g'ri kiriting. 20 ta savoldan 13 tasiga to'g'ri javob bersangiz, 2-bosqichga o'tish huquqiga ega bo'lasiz.</p>
+    </div>
+    <div class="form-grid">
+      <div class="form-row2">
+        <div class="field">
+          <label>Ism</label>
+          <input type="text" id="reg-fn" placeholder="Ismingiz"/>
+        </div>
+        <div class="field">
+          <label>Familiya</label>
+          <input type="text" id="reg-ln" placeholder="Familiyangiz"/>
+        </div>
+      </div>
+      <div class="form-row2">
+        <div class="field">
+          <label>Sinf</label>
+          <input type="text" id="reg-gr" placeholder="10-A"/>
+        </div>
+        <div class="field">
+          <label>Yosh</label>
+          <input type="number" id="reg-age" placeholder="16" min="5" max="99"/>
+        </div>
+      </div>
+      <div class="form-row2">
+        <div class="field">
+          <label>Telefon raqami</label>
+          <input type="tel" id="reg-ph" placeholder="+998901234567"/>
+        </div>
+        <div class="field">
+          <label>Jinsi</label>
+          <select id="reg-gn">
+            <option value="">Tanlang</option>
+            <option value="Erkak">Erkak</option>
+            <option value="Ayol">Ayol</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-green" style="width:100%;" id="reg-btn" onclick="submitReg()">
+        <div class="spin" id="reg-spin"></div>
+        <span id="reg-btn-txt">Testni Boshlash →</span>
+      </button>
+      <div class="msg err" id="reg-msg"></div>
+      <button class="btn btn-outline" onclick="showPage('pg-welcome')" style="width:100%;">← Orqaga</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOGIN ===== -->
+<div id="pg-login" class="page">
+  <div class="login-wrap">
+    <div class="card">
+      <div style="margin-bottom:28px;">
+        <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>2-BOSQICH</div>
+        <h2 style="font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;">2-Bosqichga Kirish</h2>
+        <p class="muted" style="font-size:13px;line-height:1.6;">
+          1-bosqichda kamida <strong style="color:var(--accent);">13/20</strong> ball to'plagan ishtirokchilar uchun.<br/>
+          Telefon raqamingizni kiriting.
+        </p>
+      </div>
+      <div class="form-grid" style="gap:14px;">
+        <div class="field">
+          <label>Telefon raqami</label>
+          <input type="tel" id="login-ph" placeholder="+998901234567" onkeydown="if(event.key==='Enter')submitLogin()"/>
+        </div>
+        <button class="btn btn-green" style="width:100%;" id="login-btn" onclick="submitLogin()">
+          <div class="spin" id="login-spin"></div>
+          <span id="login-btn-txt">Kirish →</span>
+        </button>
+        <div class="msg err" id="login-msg"></div>
+        <div class="msg ok" id="login-ok"></div>
+        <button class="btn btn-outline" onclick="showPage('pg-welcome')" style="width:100%;">← Orqaga</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WAITING ===== -->
+<div id="pg-wait" class="page">
+  <div class="wait-icon">⏳</div>
+  <h2 class="wait-title">Kutish Rejimi</h2>
+  <p class="wait-sub">Siz 1-bosqichni muvaffaqiyatli o'tdingiz! Admin 2-bosqichni boshlaguncha biroz kuting.</p>
+  <div class="wait-badge">
+    <div class="poll-dot"></div>
+    Tanlov hali boshlanmadi
+  </div>
+  <div class="wait-user-card" id="wait-user-card">
+    <div class="wait-user-name" id="wait-name">—</div>
+    <div class="wait-user-info" id="wait-phone">—</div>
+    <div class="wait-user-info" id="wait-score-info">—</div>
+  </div>
+  <div class="poll-indicator">
+    <div class="poll-dot" style="background:var(--muted);"></div>
+    <span id="poll-status">Holat tekshirilmoqda...</span>
+  </div>
+  <button class="btn btn-outline" onclick="showPage('pg-welcome')" style="margin-top:8px;">← Bosh sahifa</button>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="pg-quiz" class="page">
+  <div class="quiz-wrap">
+    <div class="quiz-top">
+      <div class="quiz-meta">Savol <span id="q-cur">1</span> / <span id="q-tot">20</span></div>
+      <div class="timer-badge" id="timer-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="timer-txt">60</span>s
+      </div>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
+    <div class="q-num" id="q-label">SAVOL 01</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="opts" id="q-opts"></div>
+    <div class="quiz-nav">
+      <button class="btn-next" id="btn-next" onclick="nextQ()">Keyingisi →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESULT ===== -->
+<div id="pg-result" class="page">
+  <div class="result-ring">
+    <svg width="160" height="160" viewBox="0 0 160 160">
+      <circle class="ring-bg" cx="80" cy="80" r="70" fill="none" stroke-width="8"/>
+      <circle class="ring-fill" id="ring-fill" cx="80" cy="80" r="70" fill="none" stroke-width="8" stroke-linecap="round"/>
+    </svg>
+    <div class="ring-inner">
+      <div class="ring-n" id="ring-n">0</div>
+      <div class="ring-d">/ 20</div>
+    </div>
+  </div>
+  <div class="result-verdict" id="result-verdict"></div>
+  <p class="result-desc" id="result-desc"></p>
+  <div class="rbadges" id="rbadges"></div>
+  <div id="result-next-hint"></div>
+  <div class="save-st" id="save-st"></div>
+  <button class="btn btn-outline" onclick="goHome()">↩ Bosh sahifa</button>
+</div>
+
+<!-- ===== ADMIN ===== -->
+<div id="pg-admin" class="page">
+  <div style="width:100%;max-width:1100px;">
+    <div class="start-section" id="start-section">
+      <div class="start-info">
+        <h3>2-Bosqich Boshqaruvi</h3>
+        <p id="start-info-txt">2-bosqich hali boshlanmagan</p>
+      </div>
+      <div id="start-btn-wrap">
+        <button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <input class="filter-input" id="srch" placeholder="Ism, familiya yoki telefon bo'yicha qidiring..." oninput="renderTable()"/>
+      <select class="filter-sel" id="flt-status" onchange="renderTable()">
+        <option value="">Barchasi</option>
+        <option value="passed">O'tganlar (1-bosqich)</option>
+        <option value="failed">O'tmaganlar</option>
+        <option value="pending">Kutilmoqda</option>
+      </select>
+    </div>
+    <div class="a-stats">
+      <div class="a-stat">
+        <div class="a-stat-n accent" id="st-total">0</div>
+        <div class="a-stat-l">Jami</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-stat-n" id="st-pass" style="color:var(--accent)">0</div>
+        <div class="a-stat-l">1-bosqich o'tganlar</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-stat-n" id="st-fail" style="color:var(--danger)">0</div>
+        <div class="a-stat-l">O'tmaganlar</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-stat-n" id="st-pend" style="color:var(--orange)">0</div>
+        <div class="a-stat-l">Kutilmoqda</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Sinf</th>
+          <th>Telefon</th><th>Jinsi</th><th>Ball</th><th>Holat</th>
+          <th>Vaqt</th><th>Batafsil</th><th>O'chirish</th>
+         </tr>
+        </thead>
+        <tbody id="admin-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 <script>
-    // ============================================================
-    // FIREBASE KONFIGURATSIYA
-    // ============================================================
-    const firebaseConfig = {
-        apiKey: "AIzaSyDQ5QZsG04X9Pvs15iN5VMqLZ4XhW5bi1k",
-        authDomain: "itevent-6cf7f.firebaseapp.com",
-        projectId: "itevent-6cf7f",
-        storageBucket: "itevent-6cf7f.firebasestorage.app",
-        messagingSenderId: "123456789012",
-        appId: "1:123456789012:web:abc123def456"
+// ================================================================
+// FIREBASE REST API
+// ================================================================
+const FB_PROJECT = "itevent-6cf7f";
+const FB_DB      = "itevent";
+const FB_KEY     = "AIzaSyDQ5QZsG04X9Pvs15iN5VMqLZ4XhW5bi1k";
+const FB_BASE    = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/${FB_DB}/documents`;
+
+async function fbAdd(col, data) {
+  const fields = {};
+  for (const [k, v] of Object.entries(data)) {
+    if (typeof v === 'string')  fields[k] = { stringValue: v };
+    if (typeof v === 'number')  fields[k] = { integerValue: String(v) };
+    if (typeof v === 'boolean') fields[k] = { booleanValue: v };
+    if (typeof v === 'object')  fields[k] = { mapValue: { fields: v } };
+  }
+  fields.createdAt = { timestampValue: new Date().toISOString() };
+  const r = await fetch(`${FB_BASE}/${col}?key=${FB_KEY}`, {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ fields })
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
+  return r.json();
+}
+
+async function fbSet(col, docId, data) {
+  const fields = {};
+  for (const [k, v] of Object.entries(data)) {
+    if (typeof v === 'string')  fields[k] = { stringValue: v };
+    if (typeof v === 'number')  fields[k] = { integerValue: String(v) };
+    if (typeof v === 'boolean') fields[k] = { booleanValue: v };
+    if (typeof v === 'object' && !Array.isArray(v)) fields[k] = { mapValue: { fields: v } };
+  }
+  const r = await fetch(`${FB_BASE}/${col}/${docId}?key=${FB_KEY}`, {
+    method: 'PATCH', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ fields })
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
+  return r.json();
+}
+
+async function fbGet(col, docId) {
+  const r = await fetch(`${FB_BASE}/${col}/${docId}?key=${FB_KEY}`);
+  if (r.status === 404) return null;
+  if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
+  return r.json();
+}
+
+async function fbQuery(col) {
+  const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/${FB_DB}/documents:runQuery?key=${FB_KEY}`;
+  const r = await fetch(url, {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ structuredQuery: { from: [{ collectionId: col }], limit: 2000 } })
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
+  const d = await r.json();
+  return d.filter(i => i.document).map(i => i.document)
+    .sort((a,b)=>(b.fields?.createdAt?.timestampValue||'').localeCompare(a.fields?.createdAt?.timestampValue||''));
+}
+
+async function fbDelete(name) {
+  const r = await fetch(`https://firestore.googleapis.com/v1/${name}?key=${FB_KEY}`, { method:'DELETE' });
+  if (!r.ok) throw new Error("O'chirishda xato");
+}
+
+function fv(f) {
+  if (!f) return '';
+  if (f.stringValue  !== undefined) return f.stringValue;
+  if (f.integerValue !== undefined) return Number(f.integerValue);
+  if (f.booleanValue !== undefined) return f.booleanValue;
+  if (f.timestampValue !== undefined) return f.timestampValue;
+  if (f.mapValue !== undefined) return f.mapValue.fields;
+  return '';
+}
+
+// ================================================================
+// QUESTIONS - 100+ savol
+// ================================================================
+const ALL_QUESTIONS = [
+  {q:"Kompyuterda ma'lumotlarni vaqtinchalik saqlash uchun qaysi xotira ishlatiladi?",opts:["ROM","RAM","SSD","USB"],cor:1},
+  {q:"1 bayt necha bitdan iborat?",opts:["4","16","8","32"],cor:2},
+  {q:"Quyidagilardan qaysi biri operatsion tizim?",opts:["Microsoft Word","Ubuntu Linux","Google Chrome","VLC Player"],cor:1},
+  {q:"Internetdagi sahifalar qaysi til yordamida yaratiladi?",opts:["Python","Java","HTML","SQL"],cor:2},
+  {q:"Klaviaturada 'Ctrl+C' buyrug'i nima qiladi?",opts:["Yopish","Ko'chirish (nusxa olish)","Qo'yish","Saqlash"],cor:1},
+  {q:"Monitor ekrandagi tasvirni hosil qiluvchi qurilma nomi nima?",opts:["Protsessor","Grafik karta (GPU)","Klaviatura","Modem"],cor:1},
+  {q:"Wi-Fi nima?",opts:["Simsiz internet texnologiyasi","Kompyuter virusi","Dasturlash tili","USB turi"],cor:0},
+  {q:"Fayl kengaytmasi '.jpg' qaysi turdagi fayl?",opts:["Video fayl","Rasm (tasvir) fayl","Audio fayl","Matn fayli"],cor:1},
+  {q:"Kompyuterni yoqish jarayoni qanday ataladi?",opts:["Login","Yuklash (Boot)","Format","Skaner"],cor:1},
+  {q:"Quyidagilardan qaysi biri antivirus dasturi?",opts:["Kaspersky","Photoshop","Telegram","VLC"],cor:0},
+  {q:"Elektron pochta (email) yuborish uchun qaysi protokol ishlatiladi?",opts:["HTTP","FTP","SMTP","DNS"],cor:2},
+  {q:"Qaysi qurilma ma'lumotni qog'ozga chiqaradi?",opts:["Skaner","Monitor","Printer","Modem"],cor:2},
+  {q:"Internet brauzer misolini ko'rsating:",opts:["Microsoft Word","Google Chrome","Windows Media Player","Notepad"],cor:1},
+  {q:"URL nima?",opts:["Dasturlash tili","Veb-sahifa manzili","Kompyuter virusi","Xotira turi"],cor:1},
+  {q:"Kompyuterni zararlovchi dastur qanday ataladi?",opts:["Brauzer","Virus (zararli dastur)","Driver","Kodek"],cor:1},
+  {q:"PDF fayl kengaytmasi qaysi dastur bilan ochiladi?",opts:["Photoshop","Adobe Acrobat Reader","Winamp","VirtualBox"],cor:1},
+  {q:"'Copy' va 'Paste' amallarini klaviaturada bajarish uchun qaysi tugmalar ishlatiladi?",opts:["Ctrl+X va Ctrl+V","Ctrl+C va Ctrl+V","Ctrl+Z va Ctrl+Y","Alt+F4 va Enter"],cor:1},
+  {q:"Qaysi fayl kengaytmasi video fayl hisoblanadi?",opts:[".mp3",".docx",".mp4",".xlsx"],cor:2},
+  {q:"Google qanday xizmat?",opts:["Operatsion tizim","Qidiruv tizimi va texnologiya kompaniyasi","Antivirus dasturi","Dasturlash tili"],cor:1},
+  {q:"Papka (folder) nima uchun ishlatiladi?",opts:["Internetga kirish","Fayllarni tartibli saqlash","Kompyuterni tezlashtirish","Ekranni o'chirish"],cor:1},
+  {q:"Qaysi dastur matn tahrirlash uchun ishlatiladi?",opts:["VLC Media Player","Microsoft Word","Google Maps","Skype"],cor:1},
+  {q:"Bluetooth nima?",opts:["Simsiz yaqin masofali ma'lumot uzatish texnologiyasi","Qurilma driveri","Virus turi","Internet protokoli"],cor:0},
+  {q:"Qaysi fayl kengaytmasi audio fayl?",opts:[".png",".avi",".mp3",".exe"],cor:2},
+  {q:"Screenshot (ekran rasmi) olish uchun qaysi tugma bosiladi?",opts:["Caps Lock","Print Screen (PrtSc)","Num Lock","Scroll Lock"],cor:1},
+  {q:"Kompyuterda 'Recycle Bin' (Savatcha) nima?",opts:["Yangi papka","O'chirilgan fayllar vaqtinchalik saqlanadigan joy","Internet xavfsizligi","Tizim yangilanishi"],cor:1},
+  {q:"USB flesh-disk nima uchun ishlatiladi?",opts:["Ekranni kattalashtirish","Ma'lumot saqlash va ko'chirish","Internetga ulanish","Kompyuterni sovutish"],cor:1},
+  {q:"Qaysi sayt video ko'rish uchun mashhur?",opts:["Wikipedia","YouTube","Google Maps","GitHub"],cor:1},
+  {q:"Excel dasturi nima uchun ishlatiladi?",opts:["Rasm tahrirlash","Jadval va hisob-kitob qilish","Video tomosha qilish","Musiqa tinglash"],cor:1},
+  {q:"Zip fayl nima?",opts:["Video fayl","Siqilgan arxiv fayl","Audio fayl","Rasm fayli"],cor:1},
+  {q:"Kompyuterda 'Task Manager' (Vazifalar boshqaruvchisi) qanday ochiladi?",opts:["Ctrl+Alt+Delete","Ctrl+C","Win+D","Alt+Tab"],cor:0},
+  {q:"Qaysi xotira turi kompyuter o'chganda ma'lumotlarni saqlab qoladi?",opts:["RAM","Cache","ROM / SSD / HDD","Virtual xotira"],cor:2},
+  {q:"Touchpad nima?",opts:["Printer turi","Noutbukdagi sichqoncha o'rnini bosuvchi qurilma","Klaviatura turi","Modem"],cor:1},
+  {q:"Kompyuterda 'Ctrl+Z' nima qiladi?",opts:["Yopish","Oxirgi amalni bekor qilish (Undo)","Saqlash","Yangi fayl ochish"],cor:1},
+  {q:"Qaysi qurilma kompyuterga ovoz kiritadi?",opts:["Dinamik (Speaker)","Mikrofon","Headphone","Projetor"],cor:1},
+  {q:"Google Drive nima?",opts:["Qattiq disk turi","Bulutli (cloud) fayl saqlash xizmati","Antivirus dasturi","Operatsion tizim"],cor:1},
+  {q:"Qaysi belgi elektron pochta manzilida majburiy mavjud bo'ladi?",opts:["# (xesh)","@ (at belgisi)","* (yulduzcha)","& (ampersand)"],cor:1},
+  {q:"Powerpoint dasturi nima uchun ishlatiladi?",opts:["Kodlash","Taqdimot (slayd) yaratish","3D modellashtirish","Tarmoq sozlash"],cor:1},
+  {q:"HDMI kabeli nima uchun ishlatiladi?",opts:["Internet ulash","Ovoz va video signalini uzatish","USB orqali quvvat berish","Tarmoq kartasi ulash"],cor:1},
+  {q:"Qaysi kompaniya iPhone smartfonini ishlab chiqaradi?",opts:["Samsung","Apple","Huawei","Sony"],cor:1},
+  {q:"QR kod nima?",opts:["Tovush fayli","Optik o'qiladigan ikki o'lchamli shtrix-kod","Tarmoq protokoli","Dastur turi"],cor:1},
+  {q:"'Enter' tugmasi nima uchun ishlatiladi?",opts:["Satrni o'chirish","Amalni tasdiqlash yoki yangi qator boshlash","Kompyuterni o'chirish","Faylni saqlash"],cor:1},
+  {q:"RAM hajmi ko'proq bo'lsa kompyuter nima bo'ladi?",opts:["Ko'proq elektr sarflaydi","Bir vaqtda ko'proq dastur tez ishlaydi","Ekran yaxshiroq bo'ladi","Internet tezlashadi"],cor:1},
+  {q:"Qaysi dastur rasmlarni tahrirlash uchun ishlatiladi?",opts:["Notepad","Adobe Photoshop","Calculator","Command Prompt"],cor:1},
+  {q:"'Spam' nima?",opts:["Foydali elektron pochta","Kerakmas, so'ralmagan xabarlar","Kompyuter virusi","Tarmoq protokoli"],cor:1},
+  {q:"Qaysi qurilma kompyuterdan ovoz chiqaradi?",opts:["Mikrofon","Kamera","Dinamik (kolontitka)","Skaner"],cor:2},
+  {q:"Noutbuk va kompyuter (desktop) o'rtasidagi asosiy farq nima?",opts:["Noutbuk sekinroq","Noutbuk ko'chma va batareyali","Desktop arzonroq","Ular bir xil"],cor:1},
+  {q:"'Download' (yuklab olish) va 'Upload' (yuklash) farqi nima?",opts:["Ular bir xil","Download = internetdan olish, Upload = internetga jo'natish","Upload = internetdan olish, Download = internetga jo'natish","Ikkalasi ham o'chirishni anglatadi"],cor:1},
+  {q:"Ekran o'lchamini o'lchash uchun qaysi birlik ishlatiladi?",opts:["Santimetr","Dyuym (inch)","Metr","Piksel"],cor:1},
+  {q:"'Caps Lock' tugmasi nima qiladi?",opts:["Dasturni yopadi","Barcha harflarni katta qilib yozadi","Ekranni bloklaydi","Raqamlar yozishga o'tkazadi"],cor:1},
+  {q:"Kompyuter 'virus'dan himoya qilish uchun nima qilish kerak?",opts:["Kompyuterni o'chirish","Antivirus dasturi o'rnatish va yangilab turish","Internetni o'chirish","Fayllarni o'chirish"],cor:1},
+  {q:"HTML nima?",opts:["Dasturlash tili","Veb-sahifa yaratish tili","Operatsion tizim","Ma'lumotlar bazasi"],cor:1},
+  {q:"CSS nima uchun ishlatiladi?",opts:["Veb-sahifani bezash uchun","Ma'lumotlar bazasi uchun","Server dasturlash uchun","O'yin yaratish uchun"],cor:0},
+  {q:"JavaScript qayerda ishlaydi?",opts:["Faqat serverda","Brauzerda va serverda","Faqat kompilyatorda","Faqat bazada"],cor:1},
+  {q:"SQL nima?",opts:["Dasturlash tili","Ma'lumotlar bazasi tili","Operatsion tizim","Grafika dasturi"],cor:1},
+  {q:"Python dasturlash tili qaysi turkumga kiradi?",opts:["Past darajali","Yuqori darajali","Assembly","Mashina tili"],cor:1},
+  {q:"Cloud computing nima?",opts:["Bulutli hisoblash texnologiyasi","Kompyuter sovutish tizimi","Internet tezligi","Ekran o'lchami"],cor:0},
+  {q:"AI (Sun'iy Intellekt) nima?",opts:["Kompyuter o'yini","Mashinalarni aqlli qilish texnologiyasi","Yangi protsessor","Internet protokoli"],cor:1},
+  {q:"Machine Learning nima?",opts:["Mashinalarni o'rgatish","Mashina yasash","Kompyuter yig'ish","Ma'lumotlar bazasi"],cor:0},
+  {q:"Big Data nima?",opts:["Katta hajmdagi ma'lumotlar","Katta protsessor","Katta monitor","Katta qattiq disk"],cor:0},
+  {q:"Cybersecurity nima bilan shug'ullanadi?",opts:["Kompyuter o'yinlari","Ma'lumotlar xavfsizligi","Veb-sayt yaratish","Dastur yozish"],cor:1}
+];
+
+// ================================================================
+// APP STATE
+// ================================================================
+let currentPage = 'pg-welcome';
+let regData = {};
+let quizQuestions = [];
+let quizAnswers = [];      // user answers (index of selected)
+let quizDetails = [];      // { question, correct, userAnswer, isCorrect, timeSpent }
+let currentQIdx = 0;
+let timerInterval = null;
+let timeLeft = 60;
+let questionAnswered = false;
+let selectedOpt = null;
+let allDocs = [];
+let pollInterval = null;
+let quizMode = '1'; // '1' = registration quiz, '2' = phase2 quiz
+let quizStartTime = null;
+let quizTotalTime = 90 * 60; // 90 daqiqa = 5400 sekund
+
+// ================================================================
+// PAGE NAVIGATION
+// ================================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  currentPage = id;
+  const bar = document.getElementById('admin-bar');
+  if (id === 'pg-admin') bar.classList.add('visible');
+  else bar.classList.remove('visible');
+  if (id !== 'pg-wait' && pollInterval) {
+    clearInterval(pollInterval);
+    pollInterval = null;
+  }
+}
+
+// ================================================================
+// REGISTER
+// ================================================================
+async function submitReg() {
+  const fn  = document.getElementById('reg-fn').value.trim();
+  const ln  = document.getElementById('reg-ln').value.trim();
+  const gr  = document.getElementById('reg-gr').value.trim();
+  const age = document.getElementById('reg-age').value.trim();
+  const ph  = normalizePhone(document.getElementById('reg-ph').value.trim());
+  const gn  = document.getElementById('reg-gn').value;
+  const msg = document.getElementById('reg-msg');
+
+  if (!fn || !ln || !gr || !age || !ph || !gn) {
+    showMsg(msg, "Iltimos, barcha maydonlarni to'ldiring!", 'err'); return;
+  }
+  if (isNaN(Number(age)) || Number(age) < 5 || Number(age) > 99) {
+    showMsg(msg, "Yoshni to'g'ri kiriting (5-99)!", 'err'); return;
+  }
+  if (!isValidPhone(ph)) {
+    showMsg(msg, "Telefon raqami noto'g'ri! Masalan: +998901234567", 'err'); return;
+  }
+
+  regData = { firstName: fn, lastName: ln, grade: gr, age: Number(age), phone: ph, gender: gn };
+
+  setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', true, 'Tekshirilmoqda...');
+  msg.style.display = 'none';
+
+  try {
+    const exists = await checkPhoneExists(ph);
+    if (exists) {
+      setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
+      showMsg(msg, "Bu telefon raqam allaqachon ro'yxatdan o'tgan!", 'err');
+      return;
+    }
+    
+    await fbAdd('participants', {
+      firstName: fn, lastName: ln, grade: gr, age: Number(age),
+      phone: ph, gender: gn, score: 0, total: 20, status: 'pending'
+    });
+    
+    setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
+    quizMode = '1';
+    startQuiz();
+  } catch(e) {
+    setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
+    showMsg(msg, "Xatolik: " + e.message, 'err');
+  }
+}
+
+async function checkPhoneExists(phone) {
+  const docs = await fbQuery('participants');
+  return docs.some(d => fv(d.fields?.phone) === phone);
+}
+
+// ================================================================
+// LOGIN — 2-bosqich
+// ================================================================
+async function submitLogin() {
+  const ph = normalizePhone(document.getElementById('login-ph').value.trim());
+  const msg = document.getElementById('login-msg');
+  const ok  = document.getElementById('login-ok');
+  ok.style.display = 'none';
+
+  if (!ph || !isValidPhone(ph)) {
+    showMsg(msg, "Telefon raqamni to'g'ri kiriting!", 'err'); return;
+  }
+
+  setLoading('login-btn', 'login-spin', 'login-btn-txt', true, 'Tekshirilmoqda...');
+  msg.style.display = 'none';
+
+  try {
+    const cfg = await fbGet('config', 'phase2');
+    const phase2started = cfg && fv(cfg.fields?.started) === true;
+
+    const docs = await fbQuery('participants');
+    const found = docs.find(d => fv(d.fields?.phone) === ph);
+
+    if (!found) {
+      setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+      showMsg(msg, "Bu telefon raqam ro'yxatda yo'q. Avval 1-bosqichdan o'ting.", 'err');
+      return;
+    }
+
+    const status = fv(found.fields?.status);
+    const score  = Number(fv(found.fields?.score)) || 0;
+
+    if (status !== 'passed') {
+      setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+      if (status === 'pending') {
+        showMsg(msg, "Siz hali testni topshirmadingiz. Avval 1-bosqich testini bajaring.", 'err');
+      } else {
+        showMsg(msg, `Kechirasiz, siz ${score}/20 ball to'pladingiz. 2-bosqichga kirish uchun kamida 13 ball kerak.`, 'err');
+      }
+      return;
+    }
+
+    regData = {
+      firstName: fv(found.fields?.firstName),
+      lastName:  fv(found.fields?.lastName),
+      grade:     fv(found.fields?.grade),
+      age:       fv(found.fields?.age),
+      phone:     fv(found.fields?.phone),
+      gender:    fv(found.fields?.gender),
+      docName:   found.name,
+      phase1Score: score
     };
-    
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    
-    // ============================================================
-    // GLOBAL O'ZGARUVCHILAR
-    // ============================================================
-    let currentUser = null;           // Joriy foydalanuvchi ma'lumotlari
-    let quizQuestions = [];            // Test savollari
-    let userAnswers = [];              // Foydalanuvchi javoblari
-    let currentQuestionIndex = 0;      // Joriy savol indeksi
-    let timerInterval = null;          // Taymer intervali
-    let timeLeft = 60;                 // Qolgan vaqt (sekund)
-    let quizStarted = false;            // Test boshlanganmi?
-    let phase2Timer = null;             // 2-bosqich umumiy taymeri
-    let phase2TimeLeft = 5400;          // 90 daqiqa = 5400 sekund
-    
-    // ============================================================
-    // SAVOLLAR BAZASI (50+ SAVOL)
-    // ============================================================
-    const ALL_QUESTIONS = [
-        { q: "Kompyuterda ma'lumotlarni vaqtinchalik saqlash uchun qaysi xotira ishlatiladi?", opts: ["ROM", "RAM", "SSD", "USB"], correct: 1 },
-        { q: "1 bayt necha bitdan iborat?", opts: ["4", "16", "8", "32"], correct: 2 },
-        { q: "Quyidagilardan qaysi biri operatsion tizim?", opts: ["Microsoft Word", "Ubuntu Linux", "Google Chrome", "VLC Player"], correct: 1 },
-        { q: "Internetdagi sahifalar qaysi til yordamida yaratiladi?", opts: ["Python", "Java", "HTML", "SQL"], correct: 2 },
-        { q: "Klaviaturada 'Ctrl+C' buyrug'i nima qiladi?", opts: ["Yopish", "Ko'chirish (nusxa olish)", "Qo'yish", "Saqlash"], correct: 1 },
-        { q: "Monitor ekrandagi tasvirni hosil qiluvchi qurilma nomi nima?", opts: ["Protsessor", "Grafik karta (GPU)", "Klaviatura", "Modem"], correct: 1 },
-        { q: "Wi-Fi nima?", opts: ["Simsiz internet texnologiyasi", "Kompyuter virusi", "Dasturlash tili", "USB turi"], correct: 0 },
-        { q: "Fayl kengaytmasi '.jpg' qaysi turdagi fayl?", opts: ["Video fayl", "Rasm (tasvir) fayl", "Audio fayl", "Matn fayli"], correct: 1 },
-        { q: "Kompyuterni yoqish jarayoni qanday ataladi?", opts: ["Login", "Yuklash (Boot)", "Format", "Skaner"], correct: 1 },
-        { q: "Quyidagilardan qaysi biri antivirus dasturi?", opts: ["Kaspersky", "Photoshop", "Telegram", "VLC"], correct: 0 },
-        { q: "Elektron pochta (email) yuborish uchun qaysi protokol ishlatiladi?", opts: ["HTTP", "FTP", "SMTP", "DNS"], correct: 2 },
-        { q: "Qaysi qurilma ma'lumotni qog'ozga chiqaradi?", opts: ["Skaner", "Monitor", "Printer", "Modem"], correct: 2 },
-        { q: "Internet brauzer misolini ko'rsating:", opts: ["Microsoft Word", "Google Chrome", "Windows Media Player", "Notepad"], correct: 1 },
-        { q: "URL nima?", opts: ["Dasturlash tili", "Veb-sahifa manzili", "Kompyuter virusi", "Xotira turi"], correct: 1 },
-        { q: "Kompyuterni zararlovchi dastur qanday ataladi?", opts: ["Brauzer", "Virus (zararli dastur)", "Driver", "Kodek"], correct: 1 },
-        { q: "PDF fayl kengaytmasi qaysi dastur bilan ochiladi?", opts: ["Photoshop", "Adobe Acrobat Reader", "Winamp", "VirtualBox"], correct: 1 },
-        { q: "'Copy' va 'Paste' amallarini klaviaturada bajarish uchun qaysi tugmalar ishlatiladi?", opts: ["Ctrl+X va Ctrl+V", "Ctrl+C va Ctrl+V", "Ctrl+Z va Ctrl+Y", "Alt+F4 va Enter"], correct: 1 },
-        { q: "Qaysi fayl kengaytmasi video fayl hisoblanadi?", opts: [".mp3", ".docx", ".mp4", ".xlsx"], correct: 2 },
-        { q: "Google qanday xizmat?", opts: ["Operatsion tizim", "Qidiruv tizimi va texnologiya kompaniyasi", "Antivirus dasturi", "Dasturlash tili"], correct: 1 },
-        { q: "Papka (folder) nima uchun ishlatiladi?", opts: ["Internetga kirish", "Fayllarni tartibli saqlash", "Kompyuterni tezlashtirish", "Ekranni o'chirish"], correct: 1 },
-        { q: "Qaysi dastur matn tahrirlash uchun ishlatiladi?", opts: ["VLC Media Player", "Microsoft Word", "Google Maps", "Skype"], correct: 1 },
-        { q: "Bluetooth nima?", opts: ["Simsiz yaqin masofali ma'lumot uzatish texnologiyasi", "Qurilma driveri", "Virus turi", "Internet protokoli"], correct: 0 },
-        { q: "Qaysi fayl kengaytmasi audio fayl?", opts: [".png", ".avi", ".mp3", ".exe"], correct: 2 },
-        { q: "Screenshot (ekran rasmi) olish uchun qaysi tugma bosiladi?", opts: ["Caps Lock", "Print Screen (PrtSc)", "Num Lock", "Scroll Lock"], correct: 1 },
-        { q: "Kompyuterda 'Recycle Bin' (Savatcha) nima?", opts: ["Yangi papka", "O'chirilgan fayllar vaqtinchalik saqlanadigan joy", "Internet xavfsizligi", "Tizim yangilanishi"], correct: 1 },
-        { q: "USB flesh-disk nima uchun ishlatiladi?", opts: ["Ekranni kattalashtirish", "Ma'lumot saqlash va ko'chirish", "Internetga ulanish", "Kompyuterni sovutish"], correct: 1 },
-        { q: "Qaysi sayt video ko'rish uchun mashhur?", opts: ["Wikipedia", "YouTube", "Google Maps", "GitHub"], correct: 1 },
-        { q: "Excel dasturi nima uchun ishlatiladi?", opts: ["Rasm tahrirlash", "Jadval va hisob-kitob qilish", "Video tomosha qilish", "Musiqa tinglash"], correct: 1 },
-        { q: "Zip fayl nima?", opts: ["Video fayl", "Siqilgan arxiv fayl", "Audio fayl", "Rasm fayli"], correct: 1 },
-        { q: "Kompyuterda 'Task Manager' (Vazifalar boshqaruvchisi) qanday ochiladi?", opts: ["Ctrl+Alt+Delete", "Ctrl+C", "Win+D", "Alt+Tab"], correct: 0 },
-        { q: "Qaysi xotira turi kompyuter o'chganda ma'lumotlarni saqlab qoladi?", opts: ["RAM", "Cache", "ROM / SSD / HDD", "Virtual xotira"], correct: 2 },
-        { q: "Touchpad nima?", opts: ["Printer turi", "Noutbukdagi sichqoncha o'rnini bosuvchi qurilma", "Klaviatura turi", "Modem"], correct: 1 },
-        { q: "Kompyuterda 'Ctrl+Z' nima qiladi?", opts: ["Yopish", "Oxirgi amalni bekor qilish (Undo)", "Saqlash", "Yangi fayl ochish"], correct: 1 },
-        { q: "Qaysi qurilma kompyuterga ovoz kiritadi?", opts: ["Dinamik (Speaker)", "Mikrofon", "Headphone", "Projetor"], correct: 1 },
-        { q: "Google Drive nima?", opts: ["Qattiq disk turi", "Bulutli (cloud) fayl saqlash xizmati", "Antivirus dasturi", "Operatsion tizim"], correct: 1 },
-        { q: "Qaysi belgi elektron pochta manzilida majburiy mavjud bo'ladi?", opts: ["# (xesh)", "@ (at belgisi)", "* (yulduzcha)", "& (ampersand)"], correct: 1 },
-        { q: "Powerpoint dasturi nima uchun ishlatiladi?", opts: ["Kodlash", "Taqdimot (slayd) yaratish", "3D modellashtirish", "Tarmoq sozlash"], correct: 1 },
-        { q: "HDMI kabeli nima uchun ishlatiladi?", opts: ["Internet ulash", "Ovoz va video signalini uzatish", "USB orqali quvvat berish", "Tarmoq kartasi ulash"], correct: 1 },
-        { q: "Qaysi kompaniya iPhone smartfonini ishlab chiqaradi?", opts: ["Samsung", "Apple", "Huawei", "Sony"], correct: 1 },
-        { q: "QR kod nima?", opts: ["Tovush fayli", "Optik o'qiladigan ikki o'lchamli shtrix-kod", "Tarmoq protokoli", "Dastur turi"], correct: 1 },
-        { q: "'Enter' tugmasi nima uchun ishlatiladi?", opts: ["Satrni o'chirish", "Amalni tasdiqlash yoki yangi qator boshlash", "Kompyuterni o'chirish", "Faylni saqlash"], correct: 1 },
-        { q: "RAM hajmi ko'proq bo'lsa kompyuter nima bo'ladi?", opts: ["Ko'proq elektr sarflaydi", "Bir vaqtda ko'proq dastur tez ishlaydi", "Ekran yaxshiroq bo'ladi", "Internet tezlashadi"], correct: 1 },
-        { q: "Qaysi dastur rasmlarni tahrirlash uchun ishlatiladi?", opts: ["Notepad", "Adobe Photoshop", "Calculator", "Command Prompt"], correct: 1 },
-        { q: "'Spam' nima?", opts: ["Foydali elektron pochta", "Kerakmas, so'ralmagan xabarlar", "Kompyuter virusi", "Tarmoq protokoli"], correct: 1 },
-        { q: "Qaysi qurilma kompyuterdan ovoz chiqaradi?", opts: ["Mikrofon", "Kamera", "Dinamik (kolontitka)", "Skaner"], correct: 2 },
-        { q: "Noutbuk va kompyuter (desktop) o'rtasidagi asosiy farq nima?", opts: ["Noutbuk sekinroq", "Noutbuk ko'chma va batareyali", "Desktop arzonroq", "Ular bir xil"], correct: 1 },
-        { q: "'Download' (yuklab olish) va 'Upload' (yuklash) farqi nima?", opts: ["Ular bir xil", "Download = internetdan olish, Upload = internetga jo'natish", "Upload = internetdan olish, Download = internetga jo'natish", "Ikkalasi ham o'chirishni anglatadi"], correct: 1 },
-        { q: "Ekran o'lchamini o'lchash uchun qaysi birlik ishlatiladi?", opts: ["Santimetr", "Dyuym (inch)", "Metr", "Piksel"], correct: 1 },
-        { q: "'Caps Lock' tugmasi nima qiladi?", opts: ["Dasturni yopadi", "Barcha harflarni katta qilib yozadi", "Ekranni bloklaydi", "Raqamlar yozishga o'tkazadi"], correct: 1 },
-        { q: "Kompyuter 'virus'dan himoya qilish uchun nima qilish kerak?", opts: ["Kompyuterni o'chirish", "Antivirus dasturi o'rnatish va yangilab turish", "Internetni o'chirish", "Fayllarni o'chirish"], correct: 1 }
-    ];
-    
-    // ============================================================
-    // YORDAMCHI FUNKSIYALAR
-    // ============================================================
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
+
+    setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+
+    if (!phase2started) {
+      showWaitPage();
+      return;
     }
-    
-    function formatTime(seconds) {
-        const hours = Math.floor(seconds / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        if (hours > 0) {
-            return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-        return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-    
-    function showPage(pageId) {
-        document.getElementById('app').innerHTML = pageId;
-    }
-    
-    // ============================================================
-    // ASOSIY SAHIFALAR
-    // ============================================================
-    function renderWelcomePage() {
-        return `
-            <div class="page active" id="pg-welcome">
-                <div class="chip welcome-chip"><div class="dot"></div>IT TANLOV 2025</div>
-                <h1 class="hero">
-                    <span class="w1">Bilimingizni</span>
-                    <span class="w2">Sinab Ko'ring</span>
-                </h1>
-                <p class="hero-sub">Informatika bo'yicha 50 ta savolga javob bering va IT Tanlovga rasmiy ro'yxatdan o'ting.</p>
-                <div class="stats-row">
-                    <div class="stat"><div class="stat-n">50</div><div class="stat-l">Savol</div></div>
-                    <div class="stat"><div class="stat-n">30</div><div class="stat-l">Minimal ball</div></div>
-                    <div class="stat"><div class="stat-n">90min</div><div class="stat-l">Umumiy vaqt</div></div>
-                </div>
-                <div class="welcome-btns">
-                    <button class="btn btn-green" onclick="startRegistration()" style="width:260px;">
-                        Ro'yxatdan O'tish →
-                    </button>
-                    <div class="divider-line"><span>yoki</span></div>
-                    <button class="btn btn-outline-accent" onclick="showLoginPage()" style="width:260px;">
-                        Login — 2-Bosqichga Kirish
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-    
-    function renderRegistrationPage() {
-        return `
-            <div class="page active" id="pg-reg">
-                <div class="reg-wrap">
-                    <div class="reg-hdr">
-                        <div class="step-tag">1-Bosqich — Ro'yxat va Test</div>
-                        <h2 class="reg-title">Ro'yxatdan O'tish</h2>
-                        <p class="reg-desc">Ma'lumotlaringizni to'g'ri kiriting. 50 ta savoldan 30 tasiga to'g'ri javob bersangiz, 2-bosqichga o'tish huquqiga ega bo'lasiz.</p>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-row2">
-                            <div class="field"><label>Ism</label><input type="text" id="reg-fn" placeholder="Ismingiz"/></div>
-                            <div class="field"><label>Familiya</label><input type="text" id="reg-ln" placeholder="Familiyangiz"/></div>
-                        </div>
-                        <div class="form-row2">
-                            <div class="field"><label>Sinf</label><input type="text" id="reg-gr" placeholder="10-A"/></div>
-                            <div class="field"><label>Yosh</label><input type="number" id="reg-age" placeholder="16" min="5" max="99"/></div>
-                        </div>
-                        <div class="form-row2">
-                            <div class="field"><label>Telefon raqami</label><input type="tel" id="reg-ph" placeholder="+998901234567"/></div>
-                            <div class="field"><label>Jinsi</label>
-                                <select id="reg-gn"><option value="">Tanlang</option><option value="Erkak">Erkak</option><option value="Ayol">Ayol</option></select>
-                            </div>
-                        </div>
-                        <button class="btn btn-green" style="width:100%;" onclick="submitRegistration()">Testni Boshlash →</button>
-                        <div class="msg err" id="reg-msg"></div>
-                        <button class="btn btn-outline" onclick="renderApp()" style="width:100%;">← Orqaga</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    
-    function renderLoginPage() {
-        return `
-            <div class="page active" id="pg-login">
-                <div class="login-wrap">
-                    <div class="card">
-                        <div style="margin-bottom:28px;">
-                            <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>2-BOSQICH</div>
-                            <h2 style="font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;">2-Bosqichga Kirish</h2>
-                            <p class="muted" style="font-size:13px;line-height:1.6;">
-                                1-bosqichda kamida <strong style="color:var(--accent);">30/50</strong> ball to'plagan ishtirokchilar uchun.<br/>
-                                Telefon raqamingizni kiriting.
-                            </p>
-                        </div>
-                        <div class="form-grid" style="gap:14px;">
-                            <div class="field"><label>Telefon raqami</label><input type="tel" id="login-ph" placeholder="+998901234567" onkeydown="if(event.key==='Enter')submitLogin()"/></div>
-                            <button class="btn btn-green" style="width:100%;" onclick="submitLogin()">Kirish →</button>
-                            <div class="msg err" id="login-msg"></div>
-                            <button class="btn btn-outline" onclick="renderApp()" style="width:100%;">← Orqaga</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    
-    function renderWaitingPage() {
-        return `
-            <div class="page active" id="pg-wait">
-                <div class="wait-icon">⏳</div>
-                <h2 class="wait-title">Kutish Rejimi</h2>
-                <p class="wait-sub">Siz 1-bosqichni muvaffaqiyatli o'tdingiz! Admin 2-bosqichni boshlaguncha biroz kuting.</p>
-                <div class="wait-badge"><div class="poll-dot"></div>Tanlov hali boshlanmadi</div>
-                <div class="wait-user-card">
-                    <div class="wait-user-name">${currentUser?.firstName || ''} ${currentUser?.lastName || ''}</div>
-                    <div class="wait-user-info">${currentUser?.phone || ''}</div>
-                    <div class="wait-user-info">1-bosqich: ${currentUser?.score || 0}/50 ✓</div>
-                </div>
-                <button class="btn btn-outline" onclick="renderApp()" style="margin-top:8px;">← Bosh sahifa</button>
-            </div>
-        `;
-    }
-    
-    function renderQuizPage() {
-        const q = quizQuestions[currentQuestionIndex];
-        const letters = ['A', 'B', 'C', 'D'];
-        const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-        
-        let optionsHtml = '';
-        q.opts.forEach((opt, i) => {
-            const isSelected = userAnswers[currentQuestionIndex] === i;
-            optionsHtml += `
-                <button class="opt ${isSelected ? 'sel' : ''}" onclick="selectAnswer(${i})" ${quizStarted ? '' : 'disabled'}>
-                    <span class="opt-l">${letters[i]}</span>
-                    <span>${opt}</span>
-                </button>
-            `;
-        });
-        
-        return `
-            <div class="page active" id="pg-quiz">
-                <div class="quiz-wrap">
-                    <div class="quiz-top">
-                        <div class="quiz-meta">Savol <span>${currentQuestionIndex + 1}</span> / <span>${quizQuestions.length}</span></div>
-                        <div class="timer-badge ${timeLeft <= 10 ? 'hot' : ''}">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                            <span id="timer-txt">${timeLeft}</span>s
-                        </div>
-                    </div>
-                    <div class="prog-bar-wrap"><div class="prog-bar" style="width:${progress}%"></div></div>
-                    <div class="q-num">SAVOL ${String(currentQuestionIndex + 1).padStart(2, '0')}</div>
-                    <div class="q-text">${q.q}</div>
-                    <div class="opts" id="q-opts">${optionsHtml}</div>
-                    <div class="quiz-nav">
-                        <button class="btn-next" id="btn-next" onclick="nextQuestion()" style="${currentQuestionIndex === quizQuestions.length - 1 ? 'display:block;' : 'display:none;'}">
-                            ${currentQuestionIndex === quizQuestions.length - 1 ? 'Yakunlash →' : 'Keyingisi →'}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-    
-    function renderResultPage() {
-        const score = userAnswers.filter((ans, idx) => ans === quizQuestions[idx].correct).length;
-        const total = quizQuestions.length;
-        const minPass = total === 50 ? 30 : Math.ceil(total * 0.6);
-        const isPassed = score >= minPass;
-        const percentage = (score / total) * 100;
-        const circumference = 2 * Math.PI * 70;
-        const offset = circumference - (percentage / 100) * circumference;
-        
-        return `
-            <div class="page active" id="pg-result">
-                <div class="result-ring">
-                    <svg width="160" height="160" viewBox="0 0 160 160">
-                        <circle class="ring-bg" cx="80" cy="80" r="70" fill="none" stroke-width="8"/>
-                        <circle class="ring-fill" cx="80" cy="80" r="70" fill="none" stroke-width="8" stroke-linecap="round" style="stroke:${isPassed ? 'var(--accent)' : 'var(--danger)'}; stroke-dasharray:${circumference}; stroke-dashoffset:${offset}"/>
-                    </svg>
-                    <div class="ring-inner"><div class="ring-n">${score}</div><div class="ring-d">/ ${total}</div></div>
-                </div>
-                <div class="result-verdict ${isPassed ? 'pass' : 'fail'}">${isPassed ? '🎉 Tabriklaymiz!' : '❌ Muvaffaqiyatsiz'}</div>
-                <p class="result-desc">${currentUser?.firstName}, siz ${score}/${total} ball to'pladingiz. ${isPassed ? '2-bosqichga kirish huquqiga egasiz!' : `2-bosqichga kirish uchun kamida ${minPass} ta to'g'ri javob kerak edi.`}</p>
-                <div class="rbadges">
-                    <div class="rb ${isPassed ? 'pass' : 'fail'}">${score}/${total} ball</div>
-                    <div class="rb neu">${isPassed ? '✓ 1-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
-                </div>
-                ${isPassed ? `
-                    <div class="pass-hint">
-                        <div class="pass-hint-title">Keyingi qadam →</div>
-                        <div class="pass-hint-body">Admin 2-bosqichni boshlagach, "Login" tugmasi orqali telefon raqamingiz bilan kiring va testni davom ettiring.</div>
-                    </div>
-                ` : ''}
-                <div class="save-st" id="save-st"></div>
-                <button class="btn btn-outline" onclick="renderApp()">↩ Bosh sahifa</button>
-            </div>
-        `;
-    }
-    
-    // ============================================================
-    // REGISTRATSIYA VA TEST
-    // ============================================================
-    window.startRegistration = function() {
-        document.getElementById('app').innerHTML = renderRegistrationPage();
-    };
-    
-    window.showLoginPage = function() {
-        document.getElementById('app').innerHTML = renderLoginPage();
-    };
-    
-    window.submitRegistration = async function() {
-        const firstName = document.getElementById('reg-fn').value.trim();
-        const lastName = document.getElementById('reg-ln').value.trim();
-        const grade = document.getElementById('reg-gr').value.trim();
-        const age = parseInt(document.getElementById('reg-age').value);
-        const phone = document.getElementById('reg-ph').value.trim().replace(/[\s\-()]/g, '');
-        const gender = document.getElementById('reg-gn').value;
-        const msgDiv = document.getElementById('reg-msg');
-        
-        if (!firstName || !lastName || !grade || !age || !phone || !gender) {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = "Iltimos, barcha maydonlarni to'ldiring!";
-            return;
-        }
-        
-        if (age < 5 || age > 99) {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = "Yoshni to'g'ri kiriting (5-99)!";
-            return;
-        }
-        
-        if (!/^\+?[0-9]{9,13}$/.test(phone)) {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = "Telefon raqami noto'g'ri! Masalan: +998901234567";
-            return;
-        }
-        
-        // Check if phone exists
-        const existing = await db.collection('participants').where('phone', '==', phone).get();
-        if (!existing.empty) {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = "Bu telefon raqam allaqachon ro'yxatdan o'tgan!";
-            return;
-        }
-        
-        currentUser = {
-            firstName, lastName, grade, age, phone, gender,
-            score: 0, total: 50, status: 'pending', phase1Completed: false
-        };
-        
-        // Save to Firestore
-        await db.collection('participants').add(currentUser);
-        
-        // Start quiz
-        startPhase1Quiz();
-    };
-    
-    function startPhase1Quiz() {
-        quizQuestions = shuffleArray([...ALL_QUESTIONS]).slice(0, 50);
-        userAnswers = new Array(50).fill(null);
-        currentQuestionIndex = 0;
-        timeLeft = 60;
-        quizStarted = true;
-        
-        renderQuiz();
-        startTimer();
-    }
-    
-    function renderQuiz() {
-        document.getElementById('app').innerHTML = renderQuizPage();
-        if (timerInterval) clearInterval(timerInterval);
-        startTimer();
-    }
-    
-    function startTimer() {
-        if (timerInterval) clearInterval(timerInterval);
-        timerInterval = setInterval(() => {
-            if (!quizStarted) return;
-            timeLeft--;
-            const timerSpan = document.getElementById('timer-txt');
-            if (timerSpan) timerSpan.textContent = timeLeft;
-            
-            const badge = document.querySelector('.timer-badge');
-            if (badge && timeLeft <= 10) badge.classList.add('hot');
-            
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                autoNextQuestion();
-            }
-        }, 1000);
-    }
-    
-    window.selectAnswer = function(answerIndex) {
-        if (!quizStarted) return;
-        if (userAnswers[currentQuestionIndex] !== null) return;
-        
-        userAnswers[currentQuestionIndex] = answerIndex;
-        clearInterval(timerInterval);
-        
-        // Highlight selected
-        const opts = document.querySelectorAll('.opt');
-        opts.forEach((opt, idx) => {
-            if (idx === answerIndex) opt.classList.add('sel');
-        });
-        
-        // Show next button
-        const nextBtn = document.getElementById('btn-next');
-        if (nextBtn) nextBtn.style.display = 'block';
-    };
-    
-    function autoNextQuestion() {
-        if (userAnswers[currentQuestionIndex] === null) {
-            userAnswers[currentQuestionIndex] = -1; // No answer
-        }
-        
-        if (currentQuestionIndex + 1 < quizQuestions.length) {
-            currentQuestionIndex++;
-            timeLeft = 60;
-            renderQuiz();
-        } else {
-            finishQuiz();
-        }
-    }
-    
-    window.nextQuestion = function() {
-        if (currentQuestionIndex + 1 < quizQuestions.length) {
-            currentQuestionIndex++;
-            timeLeft = 60;
-            renderQuiz();
-        } else {
-            finishQuiz();
-        }
-    };
-    
-    async function finishQuiz() {
-        quizStarted = false;
-        if (timerInterval) clearInterval(timerInterval);
-        
-        const score = userAnswers.filter((ans, idx) => ans === quizQuestions[idx].correct).length;
-        const total = quizQuestions.length;
-        const minPass = 30;
-        const isPassed = score >= minPass;
-        
-        // Update user data
-        currentUser.score = score;
-        currentUser.total = total;
-        currentUser.status = isPassed ? 'passed' : 'failed';
-        currentUser.phase1Completed = true;
-        
-        // Update Firestore
-        const userQuery = await db.collection('participants').where('phone', '==', currentUser.phone).get();
-        if (!userQuery.empty) {
-            const doc = userQuery.docs[0];
-            await doc.ref.update({
-                score, total, status: isPassed ? 'passed' : 'failed',
-                phase1Completed: true
-            });
-        }
-        
-        renderResultPage();
-        const saveSpan = document.getElementById('save-st');
-        if (saveSpan) {
-            saveSpan.textContent = isPassed ? '✓ Natijangiz saqlandi' : '✗ Natijangiz qayd etildi';
-            saveSpan.style.color = isPassed ? 'var(--accent)' : 'var(--danger)';
-        }
-    }
-    
-    // ============================================================
-    // 2-BOSQICH LOGIN VA TEST
-    // ============================================================
-    window.submitLogin = async function() {
-        const phone = document.getElementById('login-ph').value.trim().replace(/[\s\-()]/g, '');
-        const msgDiv = document.getElementById('login-msg');
-        
-        if (!phone) {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = "Telefon raqamni kiriting!";
-            return;
-        }
-        
-        // Check phase2 status
-        const phase2Doc = await db.collection('config').doc('phase2').get();
-        const phase2Started = phase2Doc.exists ? phase2Doc.data().started : false;
-        
-        // Find user
-        const userQuery = await db.collection('participants').where('phone', '==', phone).get();
-        if (userQuery.empty) {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = "Bu telefon raqam ro'yxatda yo'q!";
-            return;
-        }
-        
-        const userDoc = userQuery.docs[0];
-        const userData = userDoc.data();
-        
-        if (userData.status !== 'passed') {
-            msgDiv.style.display = 'block';
-            msgDiv.textContent = `Siz 1-bosqichdan o'tmagansiz! (${userData.score || 0}/50)`;
-            return;
-        }
-        
-        currentUser = { ...userData, id: userDoc.id };
-        
-        if (!phase2Started) {
-            document.getElementById('app').innerHTML = renderWaitingPage();
-            // Start polling for phase2
-            startPollingPhase2();
-            return;
-        }
-        
-        // Start phase2 quiz
+
+    quizMode = '2';
+    startPhase2Quiz();
+
+  } catch(e) {
+    setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+    showMsg(msg, "Xatolik: " + e.message, 'err');
+  }
+}
+
+// ================================================================
+// WAITING PAGE
+// ================================================================
+function showWaitPage() {
+  document.getElementById('wait-name').textContent = `${regData.firstName} ${regData.lastName}`;
+  document.getElementById('wait-phone').textContent = regData.phone;
+  document.getElementById('wait-score-info').textContent = `1-bosqich: ${regData.phase1Score}/20 ✓`;
+  showPage('pg-wait');
+  startPolling();
+}
+
+function startPolling() {
+  if (pollInterval) clearInterval(pollInterval);
+  let count = 0;
+  async function poll() {
+    count++;
+    const st = document.getElementById('poll-status');
+    if (st) st.textContent = `Holat tekshirilmoqda... (${count})`;
+    try {
+      const cfg = await fbGet('config', 'phase2');
+      const started = cfg && fv(cfg.fields?.started) === true;
+      if (started) {
+        clearInterval(pollInterval);
+        pollInterval = null;
+        quizMode = '2';
         startPhase2Quiz();
-    };
-    
-    function startPollingPhase2() {
-        const interval = setInterval(async () => {
-            const phase2Doc = await db.collection('config').doc('phase2').get();
-            if (phase2Doc.exists && phase2Doc.data().started) {
-                clearInterval(interval);
-                startPhase2Quiz();
-            }
-        }, 5000);
+      }
+    } catch(e) { /* silent */ }
+  }
+  poll();
+  pollInterval = setInterval(poll, 5000);
+}
+
+// ================================================================
+// QUIZ START
+// ================================================================
+function startQuiz() {
+  quizQuestions = shuffleArr([...ALL_QUESTIONS]).slice(0, 20);
+  quizAnswers = new Array(20).fill(null);
+  quizDetails = [];
+  currentQIdx = 0;
+  quizStartTime = Date.now();
+  document.getElementById('q-tot').textContent = 20;
+  showPage('pg-quiz');
+  loadQuestion();
+}
+
+function startPhase2Quiz() {
+  quizQuestions = shuffleArr([...ALL_QUESTIONS]).slice(0, 50);
+  quizAnswers = new Array(50).fill(null);
+  quizDetails = [];
+  currentQIdx = 0;
+  quizStartTime = Date.now();
+  document.getElementById('q-tot').textContent = quizQuestions.length;
+  showPage('pg-quiz');
+  loadQuestion();
+}
+
+function shuffleArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ================================================================
+// QUIZ ENGINE
+// ================================================================
+function loadQuestion() {
+  // Check total time
+  if (quizStartTime) {
+    const elapsed = (Date.now() - quizStartTime) / 1000;
+    if (elapsed >= quizTotalTime) {
+      clearInterval(timerInterval);
+      finishQuiz();
+      return;
     }
-    
-    function startPhase2Quiz() {
-        quizQuestions = shuffleArray([...ALL_QUESTIONS]).slice(0, 50);
-        userAnswers = new Array(50).fill(null);
-        currentQuestionIndex = 0;
-        timeLeft = 60;
-        quizStarted = true;
-        
-        // Check if user already has saved progress
-        if (currentUser.phase2Answers) {
-            userAnswers = currentUser.phase2Answers;
-            currentQuestionIndex = userAnswers.findIndex(a => a === null);
-            if (currentQuestionIndex === -1) currentQuestionIndex = userAnswers.length;
-        }
-        
-        renderQuiz();
-        startTimer();
-        startPhase2GlobalTimer();
+  }
+  
+  questionAnswered = false;
+  selectedOpt = null;
+  clearInterval(timerInterval);
+
+  const total = quizQuestions.length;
+  const q = quizQuestions[currentQIdx];
+  const pct = ((currentQIdx) / total) * 100;
+
+  document.getElementById('q-cur').textContent = currentQIdx + 1;
+  document.getElementById('q-tot').textContent = total;
+  document.getElementById('q-label').textContent = `SAVOL ${String(currentQIdx+1).padStart(2,'0')}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('btn-next').style.display = 'none';
+
+  const letters = ['A','B','C','D'];
+  const og = document.getElementById('q-opts');
+  og.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-l">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick = () => selectOpt(i, btn);
+    og.appendChild(btn);
+  });
+
+  startTimer();
+}
+
+function startTimer() {
+  timeLeft = 60;
+  updateTimer();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) { 
+      clearInterval(timerInterval); 
+      autoTimeout(); 
     }
-    
-    function startPhase2GlobalTimer() {
-        if (phase2Timer) clearInterval(phase2Timer);
-        
-        // Load remaining time from user or set default
-        phase2TimeLeft = currentUser.phase2TimeLeft || 5400;
-        
-        phase2Timer = setInterval(async () => {
-            if (!quizStarted) return;
-            phase2TimeLeft--;
-            
-            // Update timer display if needed
-            const timerDisplay = document.querySelector('.quiz-meta');
-            if (timerDisplay && phase2TimeLeft <= 300) {
-                // Show warning
-                timerDisplay.style.color = 'var(--danger)';
-            }
-            
-            if (phase2TimeLeft <= 0) {
-                clearInterval(phase2Timer);
-                finishPhase2Quiz(true); // Time's up
-            }
-            
-            // Save progress every 10 seconds
-            if (phase2TimeLeft % 10 === 0) {
-                await savePhase2Progress();
-            }
-        }, 1000);
+  }, 1000);
+}
+
+function updateTimer() {
+  document.getElementById('timer-txt').textContent = timeLeft;
+  const badge = document.getElementById('timer-badge');
+  if (timeLeft <= 10) badge.classList.add('hot');
+  else badge.classList.remove('hot');
+}
+
+function autoTimeout() {
+  if (questionAnswered) return;
+  questionAnswered = true;
+  
+  // Save as wrong answer if not answered
+  const isCorrect = false;
+  const q = quizQuestions[currentQIdx];
+  quizAnswers[currentQIdx] = -1;
+  quizDetails.push({
+    question: q.q,
+    options: q.opts,
+    correctAnswer: q.opts[q.cor],
+    correctIndex: q.cor,
+    userAnswer: "Javob berilmagan",
+    userIndex: -1,
+    isCorrect: false,
+    timeSpent: 60 - timeLeft
+  });
+  
+  revealAnswer();
+  document.getElementById('btn-next').style.display = 'block';
+}
+
+function selectOpt(i, btn) {
+  if (questionAnswered) return;
+  questionAnswered = true;
+  selectedOpt = i;
+  const q = quizQuestions[currentQIdx];
+  const isCorrect = (i === q.cor);
+  quizAnswers[currentQIdx] = i;
+  
+  quizDetails.push({
+    question: q.q,
+    options: q.opts,
+    correctAnswer: q.opts[q.cor],
+    correctIndex: q.cor,
+    userAnswer: q.opts[i],
+    userIndex: i,
+    isCorrect: isCorrect,
+    timeSpent: 60 - timeLeft
+  });
+  
+  clearInterval(timerInterval);
+  revealAnswer(btn);
+  document.getElementById('btn-next').style.display = 'block';
+}
+
+function revealAnswer() {
+  const cor = quizQuestions[currentQIdx].cor;
+  document.querySelectorAll('.opt').forEach((b, i) => {
+    b.disabled = true;
+    if (i === cor) b.classList.add('cor');
+    else if (selectedOpt !== null && i === selectedOpt && selectedOpt !== cor) b.classList.add('wrg');
+  });
+}
+
+function nextQ() {
+  currentQIdx++;
+  if (currentQIdx >= quizQuestions.length) { 
+    finishQuiz(); 
+    return; 
+  }
+  loadQuestion();
+}
+
+// ================================================================
+// FINISH QUIZ
+// ================================================================
+function finishQuiz() {
+  clearInterval(timerInterval);
+  document.getElementById('prog-bar').style.width = '100%';
+
+  const score = quizDetails.filter(d => d.isCorrect).length;
+  const total = quizQuestions.length;
+  const minPass = total === 20 ? 13 : Math.ceil(total * 0.6);
+  const pass = score >= minPass;
+
+  showPage('pg-result');
+
+  const C = 2 * Math.PI * 70;
+  const ring = document.getElementById('ring-fill');
+  ring.style.stroke = pass ? 'var(--accent)' : 'var(--danger)';
+  ring.style.strokeDasharray = C;
+  setTimeout(() => { ring.style.strokeDashoffset = C - (score / total) * C; }, 100);
+
+  let n = 0;
+  const step = () => { if (n < score) { n++; document.getElementById('ring-n').textContent = n; setTimeout(step, 50); } };
+  setTimeout(step, 200);
+  document.getElementById('ring-d').textContent = `/ ${total}`;
+
+  document.getElementById('result-verdict').textContent = pass ? "🎉 Tabriklaymiz!" : "❌ Muvaffaqiyatsiz";
+  document.getElementById('result-verdict').className = 'result-verdict ' + (pass ? 'pass' : 'fail');
+
+  if (quizMode === '1') {
+    document.getElementById('result-desc').textContent = pass
+      ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. 2-bosqichga kirish huquqiga egasiz!`
+      : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. 2-bosqichga kirish uchun kamida ${minPass} ta to'g'ri javob kerak edi.`;
+
+    document.getElementById('rbadges').innerHTML = `
+      <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
+      <div class="rb neu">${pass ? '✓ 1-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
+    `;
+
+    const hint = document.getElementById('result-next-hint');
+    if (pass) {
+      hint.innerHTML = `
+        <div class="pass-hint">
+          <div class="pass-hint-title">Keyingi qadam →</div>
+          <div class="pass-hint-body">
+            Admin 2-bosqichni boshlagach, "Login" tugmasi orqali<br/>
+            telefon raqamingiz bilan kiring va testni davom ettiring.
+          </div>
+        </div>
+      `;
+    } else {
+      hint.innerHTML = '';
     }
+  } else {
+    document.getElementById('result-desc').textContent = pass
+      ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Natijangiz saqlandi!`
+      : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Kamida ${minPass} ta to'g'ri javob kerak edi.`;
+
+    document.getElementById('rbadges').innerHTML = `
+      <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
+      <div class="rb neu">${pass ? '✓ 2-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
+    `;
+    document.getElementById('result-next-hint').innerHTML = '';
+  }
+
+  saveResult(score, total, pass);
+}
+
+async function saveResult(score, total, pass) {
+  const el = document.getElementById('save-st');
+  el.textContent = '⟳ Saqlanmoqda...';
+  try {
+    const docs = await fbQuery('participants');
+    const doc = docs.find(d => fv(d.fields?.phone) === regData.phone);
+    if (doc) {
+      const nameParts = doc.name.split('/');
+      const docId = nameParts[nameParts.length - 1];
+      const statusVal = pass ? (quizMode === '1' ? 'passed' : 'passed_phase2') : 'failed';
+      
+      // Save quiz details to Firestore
+      await fbSet('participants', docId, {
+        firstName: regData.firstName,
+        lastName:  regData.lastName,
+        grade:     regData.grade,
+        age:       Number(regData.age) || 0,
+        phone:     regData.phone,
+        gender:    regData.gender,
+        score:     score,
+        total:     total,
+        status:    statusVal,
+        quizMode:  quizMode,
+        quizDetails: quizDetails,
+        completedAt: new Date().toISOString()
+      });
+    } else {
+      await fbAdd('participants', {
+        ...regData, score, total, status: pass ? 'passed' : 'failed',
+        quizMode: quizMode, quizDetails: quizDetails
+      });
+    }
+    el.textContent = pass ? '✓ Natijangiz saqlandi' : '✗ Natijangiz qayd etildi';
+    el.style.color = pass ? 'var(--accent)' : 'var(--danger)';
+  } catch(e) {
+    el.textContent = '⚠ ' + e.message;
+    el.style.color = 'var(--danger)';
+  }
+}
+
+function goHome() {
+  regData = {};
+  quizMode = '1';
+  showPage('pg-welcome');
+}
+
+// ================================================================
+// ADMIN PANEL
+// ================================================================
+const ADMIN_PASS = "itevent27";
+
+function openAdminModal() {
+  document.getElementById('admin-modal').classList.add('open');
+  document.getElementById('a-pass').focus();
+}
+
+function closeAdminModal() {
+  document.getElementById('admin-modal').classList.remove('open');
+  document.getElementById('a-pass').value = '';
+  document.getElementById('admin-msg').style.display = 'none';
+}
+
+function togglePassVis() {
+  const inp = document.getElementById('a-pass');
+  const eye = document.getElementById('pass-eye');
+  if (inp.type === 'password') { inp.type = 'text'; eye.textContent = '🙈'; }
+  else { inp.type = 'password'; eye.textContent = '👁'; }
+}
+
+function checkAdminPass() {
+  const v = document.getElementById('a-pass').value;
+  const msg = document.getElementById('admin-msg');
+  if (v === ADMIN_PASS) {
+    closeAdminModal();
+    showPage('pg-admin');
+    refreshTable();
+    checkPhase2Status();
+  } else {
+    showMsg(msg, "Parol noto'g'ri!", 'err');
+    document.getElementById('a-pass').value = '';
+    document.getElementById('a-pass').focus();
+  }
+}
+
+function adminLogout() {
+  showPage('pg-welcome');
+}
+
+// ================================================================
+// PHASE 2 CONTROL
+// ================================================================
+async function checkPhase2Status() {
+  try {
+    const cfg = await fbGet('config', 'phase2');
+    const started = cfg && fv(cfg.fields?.started) === true;
+    updateStartUI(started);
+  } catch(e) {
+    updateStartUI(false);
+  }
+}
+
+function updateStartUI(started) {
+  const infoTxt = document.getElementById('start-info-txt');
+  const btnWrap = document.getElementById('start-btn-wrap');
+  if (started) {
+    infoTxt.textContent = '2-bosqich FAOL — 1-bosqichdan o\'tgan foydalanuvchilar kirishi mumkin';
+    btnWrap.innerHTML = '<div class="started-badge"><div style="width:8px;height:8px;border-radius:50%;background:var(--accent);animation:dotPulse 1.4s ease infinite;"></div>2-bosqich boshlandi</div>';
+  } else {
+    infoTxt.textContent = '2-bosqich hali boshlanmagan — faqat 1-bosqichdan o\'tganlar ko\'rinadi';
+    btnWrap.innerHTML = '<button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>';
+  }
+}
+
+async function startPhase2() {
+  const btn = document.getElementById('start-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Boshlanmoqda...'; }
+  try {
+    await fbSet('config', 'phase2', { started: true });
+    updateStartUI(true);
+    alert("2-bosqich muvaffaqiyatli boshlandi!\nKutish sahifasidagi foydalanuvchilar avtomatik o'tkaziladi.");
+  } catch(e) {
+    alert("Xato: " + e.message);
+    if (btn) { btn.disabled = false; btn.textContent = '▶ 2-Bosqichni Boshlash'; }
+  }
+}
+
+// ================================================================
+// ADMIN TABLE
+// ================================================================
+async function refreshTable() {
+  const tbody = document.getElementById('admin-tbody');
+  tbody.innerHTML = `<tr class="empty-row"><td colspan="11">Yuklanmoqda...</td></tr>`;
+  try {
+    allDocs = await fbQuery('participants');
+    renderTable();
+  } catch(e) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="11" style="color:var(--danger);">${e.message}</td></tr>`;
+  }
+}
+
+function renderTable() {
+  const srch   = document.getElementById('srch').value.trim().toLowerCase();
+  const status = document.getElementById('flt-status').value;
+
+  let docs = allDocs.filter(d => {
+    const f = d.fields || {};
+    const name = (fv(f.firstName) + ' ' + fv(f.lastName)).toLowerCase();
+    const ph   = String(fv(f.phone)).toLowerCase();
+    const matchSrch = !srch || name.includes(srch) || ph.includes(srch);
+    const st = fv(f.status);
+    const matchStatus = !status || st === status;
+    return matchSrch && matchStatus;
+  });
+
+  const total = allDocs.length;
+  const passN = allDocs.filter(d => fv(d.fields?.status) === 'passed').length;
+  const failN = allDocs.filter(d => fv(d.fields?.status) === 'failed').length;
+  const pendN = allDocs.filter(d => fv(d.fields?.status) === 'pending').length;
+  document.getElementById('st-total').textContent = total;
+  document.getElementById('st-pass').textContent  = passN;
+  document.getElementById('st-fail').textContent  = failN;
+  document.getElementById('st-pend').textContent  = pendN;
+
+  const tbody = document.getElementById('admin-tbody');
+  tbody.innerHTML = '';
+
+  if (!docs.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="11">Natija topilmadi</td></tr>`;
+    return;
+  }
+
+  docs.forEach((doc, idx) => {
+    const f = doc.fields || {};
+    const score  = Number(fv(f.score));
+    const total2 = Number(fv(f.total)) || 20;
+    const st     = fv(f.status);
+    const pass   = st === 'passed' || st === 'passed_phase2';
+    const pending = st === 'pending';
+    const time   = fv(f.createdAt) ? new Date(fv(f.createdAt)).toLocaleString('uz-UZ') : '—';
+    const docName = doc.name;
     
-    async function savePhase2Progress() {
-        if (!currentUser || !quizStarted) return;
-        
-        const score = userAnswers.filter((ans, idx) => ans === quizQuestions[idx]?.correct).length;
-        const total = userAnswers.filter(a => a !== null).length;
-        
-        await db.collection('participants').doc(currentUser.id).update({
-            phase2Answers: userAnswers,
-            phase2CurrentIndex: currentQuestionIndex,
-            phase2TimeLeft: phase2TimeLeft,
-            phase2Score: score,
-            phase2TotalAnswered: total,
-            phase2LastUpdate: new Date()
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="mono muted" style="font-size:11px;">${idx+1}</td>
+      <td><strong>${fv(f.firstName)} ${fv(f.lastName)}</strong></td>
+      <td>${fv(f.age) || '—'}</td>
+      <td>${fv(f.grade)}</td>
+      <td class="mono" style="font-size:12px;">${fv(f.phone)}</td>
+      <td>${fv(f.gender)}</td>
+      <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pending?'—':score+'/'+total2}</span></td>
+      <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pass?"✓ O'tgan":pending?"⏳ Test kutilmoqda":"✗ O'tmagan"}</span></td>
+      <td class="mono muted" style="font-size:11px;white-space:nowrap;">${time}</td>
+      <td><button class="detail-btn" onclick="showUserDetails('${docName}')">📋 Batafsil</button></td>
+      <td><button class="btn btn-sm-red" onclick="handleDel('${docName}',this)">🗑 O'chirish</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function showUserDetails(docName) {
+  const doc = allDocs.find(d => d.name === docName);
+  if (!doc) return;
+  
+  const f = doc.fields || {};
+  const quizDetailsField = f.quizDetails;
+  let details = [];
+  
+  if (quizDetailsField && quizDetailsField.mapValue && quizDetailsField.mapValue.fields) {
+    // Parse if stored as array
+    const fields = quizDetailsField.mapValue.fields;
+    for (let key in fields) {
+      if (fields[key].arrayValue) {
+        details = fields[key].arrayValue.values.map(v => {
+          const val = v.mapValue.fields;
+          return {
+            question: val.question?.stringValue || '',
+            userAnswer: val.userAnswer?.stringValue || '',
+            correctAnswer: val.correctAnswer?.stringValue || '',
+            isCorrect: val.isCorrect?.booleanValue || false,
+            timeSpent: val.timeSpent?.integerValue || 0
+          };
         });
+        break;
+      }
     }
-    
-    async function finishPhase2Quiz(isTimeOut = false) {
-        quizStarted = false;
-        if (timerInterval) clearInterval(timerInterval);
-        if (phase2Timer) clearInterval(phase2Timer);
-        
-        const score = userAnswers.filter((ans, idx) => ans === quizQuestions[idx]?.correct).length;
-        const total = quizQuestions.length;
-        const minPass = 30;
-        const isPassed = score >= minPass;
-        
-        await db.collection('participants').doc(currentUser.id).update({
-            phase2Completed: true,
-            phase2Score: score,
-            phase2Passed: isPassed,
-            phase2CompletedAt: new Date(),
-            phase2TimeOut: isTimeOut
-        });
-        
-        currentUser.phase2Completed = true;
-        currentUser.phase2Score = score;
-        
-        renderPhase2ResultPage(score, total, isPassed, isTimeOut);
+  } else {
+    // Fallback - try to get from stored object
+    const storedDetails = f.quizDetails;
+    if (storedDetails && typeof storedDetails === 'object') {
+      details = storedDetails;
     }
-    
-    function renderPhase2ResultPage(score, total, isPassed, isTimeOut) {
-        const percentage = (score / total) * 100;
-        const circumference = 2 * Math.PI * 70;
-        const offset = circumference - (percentage / 100) * circumference;
-        
-        document.getElementById('app').innerHTML = `
-            <div class="page active" id="pg-result">
-                <div class="result-ring">
-                    <svg width="160" height="160" viewBox="0 0 160 160">
-                        <circle class="ring-bg" cx="80" cy="80" r="70" fill="none" stroke-width="8"/>
-                        <circle class="ring-fill" cx="80" cy="80" r="70" fill="none" stroke-width="8" stroke-linecap="round" style="stroke:${isPassed ? 'var(--accent)' : 'var(--danger)'}; stroke-dasharray:${circumference}; stroke-dashoffset:${offset}"/>
-                    </svg>
-                    <div class="ring-inner"><div class="ring-n">${score}</div><div class="ring-d">/ ${total}</div></div>
-                </div>
-                <div class="result-verdict ${isPassed ? 'pass' : 'fail'}">${isPassed ? '🎉 Tabriklaymiz!' : '❌ Muvaffaqiyatsiz'}</div>
-                <p class="result-desc">${isTimeOut ? 'Vaqt tugadi! ' : ''}Siz ${score}/${total} ball to'pladingiz. ${isPassed ? 'Tanlovda qatnashish huquqini qo\'lga kiritdingiz!' : 'Afsuski, bu safar yetarli ball to\'play olmadingiz.'}</p>
-                <div class="rbadges">
-                    <div class="rb ${isPassed ? 'pass' : 'fail'}">${score}/${total} ball</div>
-                    <div class="rb neu">${isPassed ? '✓ 2-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
-                </div>
-                <button class="btn btn-outline" onclick="renderApp()">↩ Bosh sahifa</button>
+  }
+  
+  const content = document.getElementById('detail-content');
+  if (!details || details.length === 0) {
+    content.innerHTML = '<div class="muted" style="text-align:center;">Ma\'lumotlar topilmadi</div>';
+  } else {
+    const correctCount = details.filter(d => d.isCorrect).length;
+    const wrongCount = details.filter(d => !d.isCorrect).length;
+    content.innerHTML = `
+      <div style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);">
+        <div><strong>${fv(f.firstName)} ${fv(f.lastName)}</strong></div>
+        <div class="muted mono" style="font-size:11px;">${fv(f.phone)}</div>
+        <div style="margin-top:8px;display:flex;gap:12px;">
+          <span class="score-b pass">✅ To'g'ri: ${correctCount}</span>
+          <span class="score-b fail">❌ Noto'g'ri: ${wrongCount}</span>
+          <span class="score-b ${fv(f.status)==='passed'?'pass':'fail'}">🎯 Ball: ${fv(f.score)}/${fv(f.total)}</span>
+        </div>
+      </div>
+      <div style="max-height:400px;overflow-y:auto;">
+        ${details.map((d, i) => `
+          <div style="padding:10px;border-bottom:1px solid var(--border);margin-bottom:8px;">
+            <div style="font-weight:700;font-size:12px;">${i+1}. ${d.question}</div>
+            <div style="font-size:11px;margin-top:6px;">
+              <span class="muted">Javobingiz:</span> 
+              <span style="color:${d.isCorrect?'var(--accent)':'var(--danger)'}">${d.userAnswer || 'Javob berilmagan'}</span>
             </div>
-        `;
+            <div style="font-size:11px;">
+              <span class="muted">To'g'ri javob:</span> 
+              <span style="color:var(--accent)">${d.correctAnswer}</span>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">
+              ⏱️ Vaqt: ${d.timeSpent || 0} soniya | 
+              ${d.isCorrect ? '✓ To\'g\'ri' : '✗ Xato'}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+  
+  document.getElementById('detail-modal').classList.add('open');
+}
+
+function closeDetailModal() {
+  document.getElementById('detail-modal').classList.remove('open');
+}
+
+async function handleDel(name, btn) {
+  if (!confirm("O'chirishga ishonchingiz komilmi?")) return;
+  btn.textContent = '...'; btn.disabled = true;
+  try {
+    await fbDelete(name);
+    allDocs = allDocs.filter(d => d.name !== name);
+    renderTable();
+  } catch(e) {
+    alert(e.message);
+    btn.textContent = "O'chirish"; btn.disabled = false;
+  }
+}
+
+// ================================================================
+// UTILS
+// ================================================================
+function showMsg(el, txt, cls) {
+  el.textContent = txt;
+  el.className = 'msg ' + cls;
+  el.style.display = 'block';
+}
+
+function setLoading(btnId, spinId, txtId, on, txt) {
+  const btn = document.getElementById(btnId);
+  const spin = document.getElementById(spinId);
+  const t = document.getElementById(txtId);
+  btn.disabled = on;
+  spin.style.display = on ? 'block' : 'none';
+  t.textContent = txt;
+}
+
+function normalizePhone(ph) {
+  return ph.replace(/[\s\-()]/g, '');
+}
+
+function isValidPhone(ph) {
+  return /^\+?[0-9]{9,13}$/.test(ph);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('admin-modal').classList.contains('open')) {
+      closeAdminModal();
+    } else if (document.getElementById('detail-modal').classList.contains('open')) {
+      closeDetailModal();
+    } else if (currentPage === 'pg-admin') {
+      adminLogout();
     }
-    
-    // ============================================================
-    // ASOSIY RENDER FUNKSIYASI
-    // ============================================================
-    function renderApp() {
-        currentUser = null;
-        quizStarted = false;
-        if (timerInterval) clearInterval(timerInterval);
-        if (phase2Timer) clearInterval(phase2Timer);
-        document.getElementById('app').innerHTML = renderWelcomePage();
-    }
-    
-    // Initialize app
-    renderApp();
+  }
+});
 </script>
 </body>
 </html>
