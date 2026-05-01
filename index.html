@@ -21,24 +21,15 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
-body{
-  font-family:'Syne',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .bg-grid{position:fixed;inset:0;z-index:0;
-  background-image:linear-gradient(rgba(0,245,160,.025) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(0,245,160,.025) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(0,245,160,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,.025) 1px,transparent 1px);
   background-size:44px 44px;pointer-events:none;}
 .bg-blob{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
 .bg-blob.a{width:700px;height:700px;top:-250px;left:-250px;
-  background:radial-gradient(circle,rgba(0,245,160,.055) 0%,transparent 70%);
-  animation:blobA 14s ease-in-out infinite alternate;}
+  background:radial-gradient(circle,rgba(0,245,160,.055) 0%,transparent 70%);animation:blobA 14s ease-in-out infinite alternate;}
 .bg-blob.b{width:500px;height:500px;bottom:-150px;right:-150px;
-  background:radial-gradient(circle,rgba(0,212,255,.045) 0%,transparent 70%);
-  animation:blobB 10s ease-in-out infinite alternate;}
+  background:radial-gradient(circle,rgba(0,212,255,.045) 0%,transparent 70%);animation:blobB 10s ease-in-out infinite alternate;}
 @keyframes blobA{to{transform:translate(100px,60px);}}
 @keyframes blobB{to{transform:translate(-70px,-50px);}}
 
@@ -50,8 +41,7 @@ body{
   background:rgba(0,245,160,.08);border:1px solid rgba(0,245,160,.22);
   border-radius:100px;padding:5px 14px;font-family:'Space Mono',monospace;
   font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;}
-.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
-  animation:dotPulse 1.4s ease infinite;}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dotPulse 1.4s ease infinite;}
 @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.75);}}
 .mono{font-family:'Space Mono',monospace;}
 .muted{color:var(--muted);}
@@ -65,30 +55,23 @@ body{
 .btn-green:hover{background:#00e090;transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,245,160,.3);}
 .btn-green:active{transform:translateY(0);}
 .btn-green:disabled{background:#1a3028;color:#2a5040;cursor:not-allowed;transform:none;box-shadow:none;}
-.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);
-  padding:10px 22px;font-size:13px;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);padding:10px 22px;font-size:13px;}
 .btn-outline:hover{border-color:var(--muted);color:var(--text);}
-.btn-outline-accent{background:transparent;border:1px solid rgba(0,245,160,.3);color:var(--accent);
-  padding:12px 28px;font-size:14px;}
+.btn-outline-accent{background:transparent;border:1px solid rgba(0,245,160,.3);color:var(--accent);padding:12px 28px;font-size:14px;}
 .btn-outline-accent:hover{background:rgba(0,245,160,.07);border-color:rgba(0,245,160,.6);}
-.btn-sm-red{background:rgba(255,69,69,.12);border:1px solid rgba(255,69,69,.3);
-  color:var(--danger);padding:5px 12px;font-size:11px;border-radius:4px;font-family:'Space Mono',monospace;}
+.btn-sm-red{background:rgba(255,69,69,.12);border:1px solid rgba(255,69,69,.3);color:var(--danger);padding:5px 12px;font-size:11px;border-radius:4px;font-family:'Space Mono',monospace;}
 .btn-sm-red:hover{background:rgba(255,69,69,.22);}
-.btn-sm-blue{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
-  color:var(--blue);padding:7px 16px;font-size:12px;border-radius:4px;}
+.btn-sm-blue{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:var(--blue);padding:7px 16px;font-size:12px;border-radius:4px;}
 .btn-sm-blue:hover{background:rgba(0,212,255,.2);}
-.btn-sm-gray{background:var(--s2);border:1px solid var(--border);
-  color:var(--muted);padding:7px 16px;font-size:12px;border-radius:4px;}
+.btn-sm-gray{background:var(--s2);border:1px solid var(--border);color:var(--muted);padding:7px 16px;font-size:12px;border-radius:4px;}
 .btn-sm-gray:hover{color:var(--text);}
 
 .field{display:flex;flex-direction:column;gap:5px;}
 .field label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;}
-.field input,.field select{
-  background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
+.field input,.field select{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
   padding:12px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;
   transition:border-color 140ms,box-shadow 140ms;width:100%;}
-.field input:focus,.field select:focus{
-  outline:none;border-color:rgba(0,245,160,.5);box-shadow:0 0 0 3px rgba(0,245,160,.07);}
+.field input:focus,.field select:focus{outline:none;border-color:rgba(0,245,160,.5);box-shadow:0 0 0 3px rgba(0,245,160,.07);}
 .field input::placeholder{color:var(--muted);}
 .field select option{background:#0c1525;}
 
@@ -96,26 +79,19 @@ body{
 .msg.err{background:rgba(255,69,69,.1);border:1px solid rgba(255,69,69,.28);color:#ff8080;}
 .msg.ok{background:rgba(0,245,160,.08);border:1px solid rgba(0,245,160,.25);color:var(--accent);}
 
-.card{background:rgba(8,14,26,.97);border:1px solid var(--border);border-radius:12px;
-  padding:36px 32px;backdrop-filter:blur(8px);}
+.card{background:rgba(8,14,26,.97);border:1px solid var(--border);border-radius:12px;padding:36px 32px;backdrop-filter:blur(8px);}
 
-.spin{width:15px;height:15px;border:2px solid rgba(4,8,15,.35);
-  border-top-color:#04080f;border-radius:50%;animation:rot .6s linear infinite;display:none;}
+.spin{width:15px;height:15px;border:2px solid rgba(4,8,15,.35);border-top-color:#04080f;border-radius:50%;animation:rot .6s linear infinite;display:none;}
 @keyframes rot{to{transform:rotate(360deg);}}
 
 /* WELCOME */
 #pg-welcome{gap:0;text-align:center;}
 .welcome-chip{margin-bottom:28px;animation:fadeDown .6s ease;}
-.hero{font-size:clamp(44px,9vw,90px);font-weight:800;line-height:.95;
-  letter-spacing:-3px;animation:fadeDown .7s .08s both ease;}
-.hero .w1{display:block;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,.55) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero .w2{display:block;background:linear-gradient(135deg,var(--accent),var(--blue));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{margin:18px auto 0;color:var(--muted);font-size:14px;line-height:1.7;
-  max-width:420px;animation:fadeDown .7s .16s both ease;}
-.stats-row{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;
-  margin:36px 0 40px;animation:fadeDown .7s .24s both ease;}
+.hero{font-size:clamp(44px,9vw,90px);font-weight:800;line-height:.95;letter-spacing:-3px;animation:fadeDown .7s .08s both ease;}
+.hero .w1{display:block;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,.55) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero .w2{display:block;background:linear-gradient(135deg,var(--accent),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{margin:18px auto 0;color:var(--muted);font-size:14px;line-height:1.7;max-width:420px;animation:fadeDown .7s .16s both ease;}
+.stats-row{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin:36px 0 40px;animation:fadeDown .7s .24s both ease;}
 .stat{text-align:center;}
 .stat-n{font-size:34px;font-weight:800;color:var(--accent);font-family:'Space Mono',monospace;line-height:1;}
 .stat-l{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
@@ -128,9 +104,7 @@ body{
 #pg-reg{gap:0;}
 .reg-wrap{width:100%;max-width:500px;animation:slideUp .45s ease;}
 .reg-hdr{margin-bottom:32px;}
-.step-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
-  color:var(--accent);text-transform:uppercase;margin-bottom:10px;
-  display:flex;align-items:center;gap:8px;}
+.step-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .step-tag::before{content:'';width:20px;height:1px;background:var(--accent);}
 .reg-title{font-size:26px;font-weight:800;letter-spacing:-1px;}
 .reg-desc{color:var(--muted);font-size:13px;margin-top:5px;line-height:1.6;}
@@ -147,50 +121,41 @@ body{
 @keyframes waitBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 .wait-title{font-size:28px;font-weight:800;}
 .wait-sub{color:var(--muted);font-size:14px;max-width:380px;line-height:1.65;}
-.wait-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);
-  border-radius:100px;padding:8px 18px;
-  font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);}
-.wait-user-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;
-  padding:16px 24px;display:flex;flex-direction:column;gap:4px;min-width:280px;}
+.wait-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);border-radius:100px;padding:8px 18px;font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);}
+.wait-user-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:16px 24px;display:flex;flex-direction:column;gap:4px;min-width:280px;}
 .wait-user-name{font-size:18px;font-weight:800;}
 .wait-user-info{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
-.poll-indicator{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;
-  font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px;}
+.poll-indicator{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
 .poll-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:dotPulse 1.4s ease infinite;}
 
 /* QUIZ */
 #pg-quiz{gap:0;padding:28px 20px;}
 .quiz-wrap{width:100%;max-width:680px;}
-.quiz-top{display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:22px;flex-wrap:wrap;gap:10px;}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
 .quiz-meta{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);}
 .quiz-meta span{color:var(--accent);}
 .prog-bar-wrap{height:3px;background:var(--border);border-radius:2px;margin-bottom:32px;overflow:hidden;}
-.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));
-  transition:width 350ms ease;border-radius:2px;}
-.timer-badge{display:flex;align-items:center;gap:5px;
-  background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);
-  border-radius:var(--radius);padding:6px 12px;font-family:'Space Mono',monospace;
-  font-size:13px;color:var(--orange);}
-.timer-badge.hot{background:rgba(255,69,69,.15);border-color:rgba(255,69,69,.4);
-  color:var(--danger);animation:hotFlash .5s ease infinite alternate;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));transition:width 350ms ease;border-radius:2px;}
+
+/* Phase2 global timer bar */
+.phase2-timer-bar{width:100%;background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.2);border-radius:var(--radius);padding:10px 16px;margin-bottom:16px;display:none;align-items:center;justify-content:space-between;}
+.phase2-timer-bar.show{display:flex;}
+.p2-timer-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;}
+.p2-timer-val{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--orange);}
+.p2-timer-val.hot{color:var(--danger);animation:hotFlash .5s ease infinite alternate;}
+.p2-prog-bar-wrap{height:3px;background:rgba(255,107,53,.15);border-radius:2px;margin-bottom:8px;overflow:hidden;display:none;}
+.p2-prog-bar-wrap.show{display:block;}
+.p2-prog-bar{height:100%;background:linear-gradient(90deg,var(--orange),var(--danger));transition:width 1s linear;border-radius:2px;}
+
+.timer-badge{display:flex;align-items:center;gap:5px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.25);border-radius:var(--radius);padding:6px 12px;font-family:'Space Mono',monospace;font-size:13px;color:var(--orange);}
+.timer-badge.hot{background:rgba(255,69,69,.15);border-color:rgba(255,69,69,.4);color:var(--danger);animation:hotFlash .5s ease infinite alternate;}
 @keyframes hotFlash{from{opacity:1;}to{opacity:.4;}}
-.q-num{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;
-  color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
-.q-text{font-size:clamp(16px,2.8vw,21px);font-weight:700;line-height:1.45;
-  margin-bottom:26px;letter-spacing:-.2px;}
+.q-num{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.q-text{font-size:clamp(16px,2.8vw,21px);font-weight:700;line-height:1.45;margin-bottom:26px;letter-spacing:-.2px;}
 .opts{display:grid;gap:9px;}
-.opt{display:flex;align-items:flex-start;gap:13px;
-  background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
-  padding:13px 16px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;
-  cursor:pointer;width:100%;text-align:left;transition:all 130ms;line-height:1.4;}
+.opt{display:flex;align-items:flex-start;gap:13px;background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;cursor:pointer;width:100%;text-align:left;transition:all 130ms;line-height:1.4;}
 .opt:hover:not(:disabled){border-color:rgba(0,245,160,.38);background:rgba(0,245,160,.04);}
-.opt-l{flex-shrink:0;width:25px;height:25px;border-radius:4px;background:var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
-  color:var(--muted);transition:all 130ms;margin-top:1px;}
+.opt-l{flex-shrink:0;width:25px;height:25px;border-radius:4px;background:var(--border);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--muted);transition:all 130ms;margin-top:1px;}
 .opt.sel{border-color:var(--accent);background:rgba(0,245,160,.07);}
 .opt.sel .opt-l{background:var(--accent);color:#04080f;}
 .opt.cor{border-color:var(--accent);background:rgba(0,245,160,.1);}
@@ -199,9 +164,7 @@ body{
 .opt.wrg .opt-l{background:var(--danger);color:#fff;}
 .opt:disabled{cursor:default;}
 .quiz-nav{display:flex;justify-content:flex-end;margin-top:20px;}
-.btn-next{padding:11px 26px;background:var(--accent);color:#04080f;
-  border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;
-  font-size:14px;font-weight:700;cursor:pointer;transition:all 180ms;display:none;}
+.btn-next{padding:11px 26px;background:var(--accent);color:#04080f;border:none;border-radius:var(--radius);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 180ms;display:none;}
 .btn-next:hover{background:#00e090;transform:translateY(-1px);}
 
 /* RESULT */
@@ -209,10 +172,8 @@ body{
 .result-ring{position:relative;width:160px;height:160px;margin:0 auto;}
 .result-ring svg{transform:rotate(-90deg);}
 .ring-bg{stroke:var(--border);}
-.ring-fill{stroke-dasharray:440;stroke-dashoffset:440;
-  transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1);}
-.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;}
+.ring-fill{stroke-dasharray:440;stroke-dashoffset:440;transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1);}
+.ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .ring-n{font-size:40px;font-weight:800;font-family:'Space Mono',monospace;line-height:1;}
 .ring-d{font-size:12px;color:var(--muted);margin-top:2px;}
 .result-verdict{font-size:clamp(22px,5vw,34px);font-weight:800;letter-spacing:-1px;}
@@ -225,52 +186,49 @@ body{
 .rb.fail{background:rgba(255,69,69,.1);border:1px solid rgba(255,69,69,.28);color:var(--danger);}
 .rb.neu{background:var(--s2);border:1px solid var(--border);color:var(--muted);}
 .save-st{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);}
-
-/* Pass result hint */
-.pass-hint{background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);
-  border-radius:10px;padding:16px 20px;max-width:400px;text-align:left;}
+.pass-hint{background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);border-radius:10px;padding:16px 20px;max-width:400px;text-align:left;}
 .pass-hint-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:6px;}
 .pass-hint-body{font-size:12px;color:var(--muted);line-height:1.6;font-family:'Space Mono',monospace;}
 
+/* TIME UP */
+#pg-timeup{gap:20px;text-align:center;}
+.timeup-icon{font-size:72px;animation:shake 0.5s ease 3;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+.timeup-title{font-size:clamp(26px,5vw,40px);font-weight:800;color:var(--orange);}
+.timeup-desc{color:var(--muted);font-size:14px;max-width:400px;line-height:1.65;}
+
 /* ADMIN */
-#pg-admin{display:none;flex-direction:column;
-  padding:28px 20px;align-items:flex-start;justify-content:flex-start;
-  min-height:100vh;padding-top:60px;}
+#pg-admin{display:none;flex-direction:column;padding:28px 20px;align-items:flex-start;justify-content:flex-start;min-height:100vh;padding-top:70px;}
 #pg-admin.active{display:flex;}
 
-.admin-bar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(4,8,15,.96);border-bottom:1px solid var(--border);
-  display:none;align-items:center;justify-content:space-between;
-  padding:12px 24px;backdrop-filter:blur(10px);}
+.admin-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(4,8,15,.96);border-bottom:1px solid var(--border);display:none;align-items:center;justify-content:space-between;padding:12px 24px;backdrop-filter:blur(10px);}
 .admin-bar.visible{display:flex;}
-.admin-bar-logo{font-family:'Space Mono',monospace;font-size:12px;
-  color:var(--accent);letter-spacing:2px;text-transform:uppercase;
-  display:flex;align-items:center;gap:8px;}
+.admin-bar-logo{font-family:'Space Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
 .admin-bar-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
 .admin-bar-right{display:flex;align-items:center;gap:10px;}
 
-.modal-overlay{position:fixed;inset:0;z-index:200;
-  background:rgba(4,8,15,.85);backdrop-filter:blur(8px);
-  display:none;align-items:center;justify-content:center;padding:20px;}
+/* Admin tabs */
+.admin-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:24px;}
+.admin-tab{padding:10px 22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;background:var(--s2);color:var(--muted);transition:all 180ms;}
+.admin-tab.active{background:rgba(0,245,160,.1);color:var(--accent);border-bottom:2px solid var(--accent);}
+.admin-tab:hover:not(.active){color:var(--text);}
+.admin-section{display:none;}
+.admin-section.active{display:block;}
+
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,8,15,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{display:flex;}
 .modal-card{width:100%;max-width:380px;animation:slideUp .35s ease;}
 
 .pass-wrap{position:relative;}
 .pass-wrap input{padding-right:42px;}
-.pass-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:var(--muted);cursor:pointer;
-  font-size:16px;transition:color 150ms;}
+.pass-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;transition:color 150ms;}
 .pass-toggle:hover{color:var(--text);}
 
 .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
-.filter-input{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
-  padding:9px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;
-  flex:1;min-width:180px;}
+.filter-input{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);padding:9px 14px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;flex:1;min-width:180px;}
 .filter-input:focus{outline:none;border-color:rgba(0,245,160,.4);}
 .filter-input::placeholder{color:var(--muted);}
-.filter-sel{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);
-  padding:9px 12px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;}
+.filter-sel{background:var(--s2);border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px;color:var(--text);font-family:'Syne',sans-serif;font-size:13px;}
 .filter-sel:focus{outline:none;border-color:rgba(0,245,160,.4);}
 .filter-sel option{background:#0c1525;}
 
@@ -279,49 +237,59 @@ body{
 .a-stat-n{font-size:28px;font-weight:800;font-family:'Space Mono',monospace;}
 .a-stat-l{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 
-.start-section{
-  background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);
-  border-radius:10px;padding:20px 24px;margin-bottom:24px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:14px;}
+.start-section{background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
 .start-info h3{font-size:16px;font-weight:700;margin-bottom:4px;}
 .start-info p{font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;}
-.btn-start{background:var(--accent);color:#04080f;border:none;border-radius:var(--radius);
-  padding:12px 28px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
-  cursor:pointer;transition:all 180ms;}
+.btn-start{background:var(--accent);color:#04080f;border:none;border-radius:var(--radius);padding:12px 28px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 180ms;}
 .btn-start:hover{background:#00e090;box-shadow:0 8px 28px rgba(0,245,160,.3);}
 .btn-start:disabled{background:#1a3028;color:#2a5040;cursor:not-allowed;box-shadow:none;}
-.started-badge{display:inline-flex;align-items:center;gap:6px;
-  background:rgba(0,245,160,.12);border:1px solid rgba(0,245,160,.3);
-  border-radius:100px;padding:8px 16px;font-family:'Space Mono',monospace;
-  font-size:11px;color:var(--accent);}
+.started-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,245,160,.12);border:1px solid rgba(0,245,160,.3);border-radius:100px;padding:8px 16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);}
 
+/* Phase2 countdown for admin */
+.phase2-countdown{background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.25);border-radius:10px;padding:16px 22px;margin-bottom:20px;display:none;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;}
+.phase2-countdown.show{display:flex;}
+.p2c-time{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:var(--orange);}
+.p2c-label{font-size:12px;color:var(--muted);}
+.p2c-progress{width:100%;height:4px;background:rgba(255,107,53,.15);border-radius:2px;overflow:hidden;margin-top:4px;}
+.p2c-bar{height:100%;background:linear-gradient(90deg,var(--orange),var(--danger));transition:width 1s linear;}
+
+/* Table */
 .tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:720px;}
-th{padding:11px 13px;background:var(--s2);font-family:'Space Mono',monospace;
-  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
-  border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
+th{padding:11px 13px;background:var(--s2);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
 td{padding:10px 13px;border-bottom:1px solid rgba(26,37,64,.45);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(255,255,255,.015);}
-.score-b{display:inline-flex;align-items:center;padding:3px 10px;
-  border-radius:100px;font-size:10px;font-family:'Space Mono',monospace;font-weight:700;}
+.score-b{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:10px;font-family:'Space Mono',monospace;font-weight:700;}
 .score-b.pass{background:rgba(0,245,160,.12);color:var(--accent);}
 .score-b.fail{background:rgba(255,69,69,.12);color:var(--danger);}
 .score-b.pend{background:rgba(255,107,53,.12);color:var(--orange);}
-.empty-row td{text-align:center;padding:32px;color:var(--muted);
-  font-family:'Space Mono',monospace;font-size:12px;}
+.empty-row td{text-align:center;padding:32px;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;}
 
-.detail-btn{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);
-  color:var(--blue);padding:4px 10px;font-size:10px;border-radius:4px;
-  cursor:pointer;font-family:'Space Mono',monospace;}
-.detail-btn:hover{background:rgba(0,212,255,.2);}
-
-.modal-detail{position:fixed;inset:0;z-index:300;
-  background:rgba(4,8,15,.95);backdrop-filter:blur(12px);
-  display:none;align-items:center;justify-content:center;padding:20px;}
-.modal-detail.open{display:flex;}
-.detail-card{width:100%;max-width:500px;max-height:80vh;overflow-y:auto;}
+/* LEADERBOARD */
+.leaderboard-wrap{width:100%;}
+.lb-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.lb-title{font-size:22px;font-weight:800;}
+.lb-badges{display:flex;gap:10px;flex-wrap:wrap;}
+.lb-badge{padding:5px 14px;border-radius:100px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;}
+.lb-badge.gold{background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.3);color:#ffd700;}
+.lb-badge.info{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:var(--blue);}
+.lb-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);}
+.lb-table{width:100%;border-collapse:collapse;min-width:500px;}
+.lb-table th{padding:12px 16px;background:var(--s2);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);text-align:left;}
+.lb-table td{padding:12px 16px;border-bottom:1px solid rgba(26,37,64,.45);}
+.lb-table tr:last-child td{border-bottom:none;}
+.lb-table tr:hover td{background:rgba(255,255,255,.015);}
+.rank-badge{width:28px;height:28px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;}
+.rank-1{background:rgba(255,215,0,.2);color:#ffd700;border:1px solid rgba(255,215,0,.4);}
+.rank-2{background:rgba(192,192,192,.15);color:#c0c0c0;border:1px solid rgba(192,192,192,.3);}
+.rank-3{background:rgba(205,127,50,.15);color:#cd7f32;border:1px solid rgba(205,127,50,.3);}
+.rank-n{background:var(--s2);color:var(--muted);border:1px solid var(--border);}
+.lb-name{font-weight:700;font-size:14px;}
+.lb-info{font-size:11px;color:var(--muted);margin-top:2px;font-family:'Space Mono',monospace;}
+.lb-score{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--accent);}
+.lb-score-sub{font-size:10px;color:var(--muted);}
+.lb-pct{font-family:'Space Mono',monospace;font-size:12px;}
 
 @keyframes fadeDown{from{opacity:0;transform:translateY(-14px);}to{opacity:1;transform:translateY(0);}}
 @keyframes slideUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
@@ -345,7 +313,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <div class="admin-bar" id="admin-bar">
   <div class="admin-bar-logo"><div class="dot"></div>ADMIN PANEL</div>
   <div class="admin-bar-right">
-    <button class="btn btn-sm-blue" onclick="refreshTable()">↻ Yangilash</button>
+    <button class="btn btn-sm-blue" onclick="refreshAdminData()">↻ Yangilash</button>
     <button class="btn btn-sm-red" onclick="adminLogout()">Chiqish</button>
   </div>
 </div>
@@ -356,7 +324,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
     <div class="card">
       <div style="margin-bottom:24px;">
         <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>ADMIN KIRISH</div>
-        <div style="font-size:20px;font-weight:800;margin-bottom:4px;">Admin Panel</div>
+        <div style="font-size:20px;font-weight:800;margin-bottom:4px;">Roziiboyev Fazliddin</div>
         <div class="muted mono" style="font-size:12px;">Parolingizni kiriting</div>
       </div>
       <div class="form-grid" style="gap:14px;">
@@ -374,17 +342,6 @@ tr:hover td{background:rgba(255,255,255,.015);}
   </div>
 </div>
 
-<!-- BATAfsil KO'RISH MODAL -->
-<div class="modal-detail" id="detail-modal" onclick="if(event.target===this)closeDetailModal()">
-  <div class="detail-card card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div class="chip"><div class="dot"></div>JAVOBLAR TARIXI</div>
-      <button onclick="closeDetailModal()" style="background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;">&times;</button>
-    </div>
-    <div id="detail-content"></div>
-  </div>
-</div>
-
 <!-- ===== WELCOME ===== -->
 <div id="pg-welcome" class="page active">
   <div class="chip welcome-chip"><div class="dot"></div>IT TANLOV 2025</div>
@@ -392,29 +349,20 @@ tr:hover td{background:rgba(255,255,255,.015);}
     <span class="w1">Bilimingizni</span>
     <span class="w2">Sinab Ko'ring</span>
   </h1>
-  <p class="hero-sub">Informatika bo'yicha test topshiring va IT Tanlovga rasmiy ro'yxatdan o'ting.</p>
+  <p class="hero-sub">Informatika bo'yicha 20 ta savolga javob bering va IT Tanlovga rasmiy ro'yxatdan o'ting.</p>
   <div class="stats-row">
-    <div class="stat"><div class="stat-n">20</div><div class="stat-l">Savol (1-bosqich)</div></div>
+    <div class="stat"><div class="stat-n">20</div><div class="stat-l">Savol</div></div>
     <div class="stat"><div class="stat-n">13</div><div class="stat-l">Minimal ball</div></div>
     <div class="stat"><div class="stat-n">60s</div><div class="stat-l">Har bir savol</div></div>
   </div>
   <div class="welcome-btns">
-    <button class="btn btn-green" onclick="showPage('pg-reg')" style="width:260px;">
-      Ro'yxatdan O'tish →
-    </button>
+    <button class="btn btn-green" onclick="showPage('pg-reg')" style="width:260px;">Ro'yxatdan O'tish →</button>
     <div class="divider-line"><span>yoki</span></div>
-    <button class="btn btn-outline-accent" onclick="showPage('pg-login')" style="width:260px;">
-      Login — 2-Bosqichga Kirish
-    </button>
+    <button class="btn btn-outline-accent" onclick="showPage('pg-login')" style="width:260px;">Login — 2-Bosqichga Kirish</button>
   </div>
-  <div onclick="openAdminModal()" style="position:fixed;top:16px;right:20px;z-index:50;
-    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);
-    cursor:pointer;text-transform:uppercase;padding:6px 10px;
-    border:1px solid transparent;border-radius:4px;transition:all 180ms;"
+  <div onclick="openAdminModal()" style="position:fixed;top:16px;right:20px;z-index:50;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);cursor:pointer;text-transform:uppercase;padding:6px 10px;border:1px solid transparent;border-radius:4px;transition:all 180ms;"
     onmouseenter="this.style.borderColor='rgba(0,245,160,.3)';this.style.color='var(--accent)'"
-    onmouseleave="this.style.borderColor='transparent';this.style.color='var(--muted)'">
-    ADMIN
-  </div>
+    onmouseleave="this.style.borderColor='transparent';this.style.color='var(--muted)'">ADMIN</div>
 </div>
 
 <!-- ===== REGISTER ===== -->
@@ -427,32 +375,16 @@ tr:hover td{background:rgba(255,255,255,.015);}
     </div>
     <div class="form-grid">
       <div class="form-row2">
-        <div class="field">
-          <label>Ism</label>
-          <input type="text" id="reg-fn" placeholder="Ismingiz"/>
-        </div>
-        <div class="field">
-          <label>Familiya</label>
-          <input type="text" id="reg-ln" placeholder="Familiyangiz"/>
-        </div>
+        <div class="field"><label>Ism</label><input type="text" id="reg-fn" placeholder="Ismingiz"/></div>
+        <div class="field"><label>Familiya</label><input type="text" id="reg-ln" placeholder="Familiyangiz"/></div>
       </div>
       <div class="form-row2">
-        <div class="field">
-          <label>Sinf</label>
-          <input type="text" id="reg-gr" placeholder="10-A"/>
-        </div>
-        <div class="field">
-          <label>Yosh</label>
-          <input type="number" id="reg-age" placeholder="16" min="5" max="99"/>
-        </div>
+        <div class="field"><label>Sinf</label><input type="text" id="reg-gr" placeholder="10-A"/></div>
+        <div class="field"><label>Yosh</label><input type="number" id="reg-age" placeholder="16" min="5" max="99"/></div>
       </div>
       <div class="form-row2">
-        <div class="field">
-          <label>Telefon raqami</label>
-          <input type="tel" id="reg-ph" placeholder="+998901234567"/>
-        </div>
-        <div class="field">
-          <label>Jinsi</label>
+        <div class="field"><label>Telefon raqami</label><input type="tel" id="reg-ph" placeholder="+998901234567"/></div>
+        <div class="field"><label>Jinsi</label>
           <select id="reg-gn">
             <option value="">Tanlang</option>
             <option value="Erkak">Erkak</option>
@@ -477,14 +409,10 @@ tr:hover td{background:rgba(255,255,255,.015);}
       <div style="margin-bottom:28px;">
         <div class="chip" style="margin-bottom:14px;"><div class="dot"></div>2-BOSQICH</div>
         <h2 style="font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;">2-Bosqichga Kirish</h2>
-        <p class="muted" style="font-size:13px;line-height:1.6;">
-          1-bosqichda kamida <strong style="color:var(--accent);">13/20</strong> ball to'plagan ishtirokchilar uchun.<br/>
-          Telefon raqamingizni kiriting.
-        </p>
+        <p class="muted" style="font-size:13px;line-height:1.6;">1-bosqichda kamida <strong style="color:var(--accent);">13/20</strong> ball to'plagan ishtirokchilar uchun.<br/>Telefon raqamingizni kiriting.</p>
       </div>
       <div class="form-grid" style="gap:14px;">
-        <div class="field">
-          <label>Telefon raqami</label>
+        <div class="field"><label>Telefon raqami</label>
           <input type="tel" id="login-ph" placeholder="+998901234567" onkeydown="if(event.key==='Enter')submitLogin()"/>
         </div>
         <button class="btn btn-green" style="width:100%;" id="login-btn" onclick="submitLogin()">
@@ -504,10 +432,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
   <div class="wait-icon">⏳</div>
   <h2 class="wait-title">Kutish Rejimi</h2>
   <p class="wait-sub">Siz 1-bosqichni muvaffaqiyatli o'tdingiz! Admin 2-bosqichni boshlaguncha biroz kuting.</p>
-  <div class="wait-badge">
-    <div class="poll-dot"></div>
-    Tanlov hali boshlanmadi
-  </div>
+  <div class="wait-badge"><div class="poll-dot"></div>Tanlov hali boshlanmadi</div>
   <div class="wait-user-card" id="wait-user-card">
     <div class="wait-user-name" id="wait-name">—</div>
     <div class="wait-user-info" id="wait-phone">—</div>
@@ -523,6 +448,18 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <!-- ===== QUIZ ===== -->
 <div id="pg-quiz" class="page">
   <div class="quiz-wrap">
+    <!-- Phase2 global countdown bar -->
+    <div class="phase2-timer-bar" id="p2-timer-bar">
+      <div>
+        <div class="p2-timer-label">2-BOSQICH VAQTI</div>
+        <div class="p2-timer-val" id="p2-timer-val">90:00</div>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">Vaqt tugasa test avtomatik yakunlanadi</div>
+    </div>
+    <div class="p2-prog-bar-wrap" id="p2-prog-wrap">
+      <div class="p2-prog-bar" id="p2-prog-bar" style="width:100%;"></div>
+    </div>
+
     <div class="quiz-top">
       <div class="quiz-meta">Savol <span id="q-cur">1</span> / <span id="q-tot">20</span></div>
       <div class="timer-badge" id="timer-badge">
@@ -538,6 +475,15 @@ tr:hover td{background:rgba(255,255,255,.015);}
       <button class="btn-next" id="btn-next" onclick="nextQ()">Keyingisi →</button>
     </div>
   </div>
+</div>
+
+<!-- ===== TIME UP ===== -->
+<div id="pg-timeup" class="page">
+  <div class="timeup-icon">⏱</div>
+  <h2 class="timeup-title">Vaqt Tugadi!</h2>
+  <p class="timeup-desc">1 soat 30 daqiqalik 2-bosqich test vaqti yakunlandi. Natijangiz avtomatik saqlanmoqda...</p>
+  <div class="save-st" id="timeup-save-st" style="font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);"></div>
+  <button class="btn btn-outline" onclick="goHome()" style="margin-top:12px;">↩ Bosh sahifa</button>
 </div>
 
 <!-- ===== RESULT ===== -->
@@ -563,53 +509,115 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <!-- ===== ADMIN ===== -->
 <div id="pg-admin" class="page">
   <div style="width:100%;max-width:1100px;">
-    <div class="start-section" id="start-section">
-      <div class="start-info">
-        <h3>2-Bosqich Boshqaruvi</h3>
-        <p id="start-info-txt">2-bosqich hali boshlanmagan</p>
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('phase1')" id="tab-phase1">1-Bosqich</button>
+      <button class="admin-tab" onclick="switchAdminTab('phase2')" id="tab-phase2">2-Bosqich</button>
+      <button class="admin-tab" onclick="switchAdminTab('leaderboard')" id="tab-leaderboard">Leaderboard</button>
+    </div>
+
+    <!-- PHASE1 TAB -->
+    <div class="admin-section active" id="sec-phase1">
+      <div class="start-section">
+        <div class="start-info">
+          <h3>1-Bosqich Natijalari</h3>
+          <p>Ro'yxatdan o'tgan ishtirokchilar va ularning 1-bosqich ballari</p>
+        </div>
       </div>
-      <div id="start-btn-wrap">
-        <button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>
+      <div class="a-stats">
+        <div class="a-stat"><div class="a-stat-n accent" id="st-total">0</div><div class="a-stat-l">Jami</div></div>
+        <div class="a-stat"><div class="a-stat-n" id="st-pass" style="color:var(--accent)">0</div><div class="a-stat-l">1-bosqich o'tganlar</div></div>
+        <div class="a-stat"><div class="a-stat-n" id="st-fail" style="color:var(--danger)">0</div><div class="a-stat-l">O'tmaganlar</div></div>
+        <div class="a-stat"><div class="a-stat-n" id="st-pend" style="color:var(--orange)">0</div><div class="a-stat-l">Kutilmoqda</div></div>
+      </div>
+      <div class="filter-bar">
+        <input class="filter-input" id="srch" placeholder="Ism, familiya yoki telefon..." oninput="renderPhase1Table()"/>
+        <select class="filter-sel" id="flt-status" onchange="renderPhase1Table()">
+          <option value="">Barchasi</option>
+          <option value="passed">O'tganlar</option>
+          <option value="failed">O'tmaganlar</option>
+          <option value="pending">Kutilmoqda</option>
+        </select>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Sinf</th>
+            <th>Telefon</th><th>Jinsi</th><th>Ball</th><th>Holat</th>
+            <th>Vaqt</th><th>O'chirish</th>
+          </tr></thead>
+          <tbody id="admin-tbody"></tbody>
+        </table>
       </div>
     </div>
-    <div class="filter-bar">
-      <input class="filter-input" id="srch" placeholder="Ism, familiya yoki telefon bo'yicha qidiring..." oninput="renderTable()"/>
-      <select class="filter-sel" id="flt-status" onchange="renderTable()">
-        <option value="">Barchasi</option>
-        <option value="passed">O'tganlar (1-bosqich)</option>
-        <option value="failed">O'tmaganlar</option>
-        <option value="pending">Kutilmoqda</option>
-      </select>
+
+    <!-- PHASE2 TAB -->
+    <div class="admin-section" id="sec-phase2">
+      <div class="start-section" id="start-section">
+        <div class="start-info">
+          <h3>2-Bosqich Boshqaruvi</h3>
+          <p id="start-info-txt">2-bosqich hali boshlanmagan</p>
+        </div>
+        <div id="start-btn-wrap">
+          <button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash (90 daqiqa)</button>
+        </div>
+      </div>
+
+      <!-- Admin phase2 countdown -->
+      <div class="phase2-countdown" id="admin-p2-countdown">
+        <div>
+          <div class="p2c-label">QOLGAN VAQT</div>
+          <div class="p2c-time" id="admin-p2-time">90:00</div>
+        </div>
+        <div style="flex:1;padding-left:20px;">
+          <div class="p2c-label" style="margin-bottom:6px;">PROGRESS</div>
+          <div class="p2c-progress"><div class="p2c-bar" id="admin-p2-bar" style="width:100%;"></div></div>
+        </div>
+      </div>
+
+      <div class="a-stats">
+        <div class="a-stat"><div class="a-stat-n" id="p2-total" style="color:var(--blue)">0</div><div class="a-stat-l">Kirdi</div></div>
+        <div class="a-stat"><div class="a-stat-n" id="p2-done" style="color:var(--accent)">0</div><div class="a-stat-l">Yakunladi</div></div>
+        <div class="a-stat"><div class="a-stat-n" id="p2-inprog" style="color:var(--orange)">0</div><div class="a-stat-l">Jarayonda</div></div>
+      </div>
+      <div class="filter-bar">
+        <input class="filter-input" id="srch2" placeholder="Ism yoki telefon..." oninput="renderPhase2Table()"/>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Ism Familiya</th><th>Sinf</th><th>Telefon</th>
+            <th>2-Bosqich Ball</th><th>Holat</th><th>Vaqt</th>
+          </tr></thead>
+          <tbody id="admin-tbody2"></tbody>
+        </table>
+      </div>
     </div>
-    <div class="a-stats">
-      <div class="a-stat">
-        <div class="a-stat-n accent" id="st-total">0</div>
-        <div class="a-stat-l">Jami</div>
-      </div>
-      <div class="a-stat">
-        <div class="a-stat-n" id="st-pass" style="color:var(--accent)">0</div>
-        <div class="a-stat-l">1-bosqich o'tganlar</div>
-      </div>
-      <div class="a-stat">
-        <div class="a-stat-n" id="st-fail" style="color:var(--danger)">0</div>
-        <div class="a-stat-l">O'tmaganlar</div>
-      </div>
-      <div class="a-stat">
-        <div class="a-stat-n" id="st-pend" style="color:var(--orange)">0</div>
-        <div class="a-stat-l">Kutilmoqda</div>
+
+    <!-- LEADERBOARD TAB -->
+    <div class="admin-section" id="sec-leaderboard">
+      <div class="leaderboard-wrap">
+        <div class="lb-header">
+          <div>
+            <div class="lb-title">🏆 Leaderboard</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'Space Mono',monospace;">2-bosqich yakuniy natijalar</div>
+          </div>
+          <div class="lb-badges">
+            <div class="lb-badge gold" id="lb-total-badge">— ishtirokchi</div>
+            <div class="lb-badge info" id="lb-avg-badge">O'rtacha: —</div>
+          </div>
+        </div>
+        <div class="lb-table-wrap">
+          <table class="lb-table">
+            <thead><tr>
+              <th>O'rin</th><th>Ishtirokchi</th><th>Sinf</th><th>2-Bosqich Ball</th><th>%</th>
+            </tr></thead>
+            <tbody id="lb-tbody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>#</th><th>Ism Familiya</th><th>Yosh</th><th>Sinf</th>
-          <th>Telefon</th><th>Jinsi</th><th>Ball</th><th>Holat</th>
-          <th>Vaqt</th><th>Batafsil</th><th>O'chirish</th>
-         </tr>
-        </thead>
-        <tbody id="admin-tbody"></tbody>
-      </table>
-    </div>
+
   </div>
 </div>
 
@@ -623,33 +631,21 @@ const FB_KEY     = "AIzaSyDQ5QZsG04X9Pvs15iN5VMqLZ4XhW5bi1k";
 const FB_BASE    = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/${FB_DB}/documents`;
 
 async function fbAdd(col, data) {
-  const fields = {};
-  for (const [k, v] of Object.entries(data)) {
-    if (typeof v === 'string')  fields[k] = { stringValue: v };
-    if (typeof v === 'number')  fields[k] = { integerValue: String(v) };
-    if (typeof v === 'boolean') fields[k] = { booleanValue: v };
-    if (typeof v === 'object')  fields[k] = { mapValue: { fields: v } };
-  }
+  const fields = objToFields(data);
   fields.createdAt = { timestampValue: new Date().toISOString() };
   const r = await fetch(`${FB_BASE}/${col}?key=${FB_KEY}`, {
-    method: 'POST', headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ fields })
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({fields})
   });
   if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
   return r.json();
 }
 
 async function fbSet(col, docId, data) {
-  const fields = {};
-  for (const [k, v] of Object.entries(data)) {
-    if (typeof v === 'string')  fields[k] = { stringValue: v };
-    if (typeof v === 'number')  fields[k] = { integerValue: String(v) };
-    if (typeof v === 'boolean') fields[k] = { booleanValue: v };
-    if (typeof v === 'object' && !Array.isArray(v)) fields[k] = { mapValue: { fields: v } };
-  }
+  const fields = objToFields(data);
   const r = await fetch(`${FB_BASE}/${col}/${docId}?key=${FB_KEY}`, {
-    method: 'PATCH', headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ fields })
+    method:'PATCH', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({fields})
   });
   if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
   return r.json();
@@ -665,18 +661,28 @@ async function fbGet(col, docId) {
 async function fbQuery(col) {
   const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/${FB_DB}/documents:runQuery?key=${FB_KEY}`;
   const r = await fetch(url, {
-    method: 'POST', headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ structuredQuery: { from: [{ collectionId: col }], limit: 2000 } })
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ structuredQuery: { from:[{collectionId:col}], limit:1000 } })
   });
   if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Xato'); }
   const d = await r.json();
-  return d.filter(i => i.document).map(i => i.document)
+  return d.filter(i=>i.document).map(i=>i.document)
     .sort((a,b)=>(b.fields?.createdAt?.timestampValue||'').localeCompare(a.fields?.createdAt?.timestampValue||''));
 }
 
 async function fbDelete(name) {
-  const r = await fetch(`https://firestore.googleapis.com/v1/${name}?key=${FB_KEY}`, { method:'DELETE' });
+  const r = await fetch(`https://firestore.googleapis.com/v1/${name}?key=${FB_KEY}`, {method:'DELETE'});
   if (!r.ok) throw new Error("O'chirishda xato");
+}
+
+function objToFields(data) {
+  const fields = {};
+  for (const [k,v] of Object.entries(data)) {
+    if (typeof v === 'string')  fields[k] = {stringValue: v};
+    if (typeof v === 'number')  fields[k] = {integerValue: String(v)};
+    if (typeof v === 'boolean') fields[k] = {booleanValue: v};
+  }
+  return fields;
 }
 
 function fv(f) {
@@ -685,12 +691,11 @@ function fv(f) {
   if (f.integerValue !== undefined) return Number(f.integerValue);
   if (f.booleanValue !== undefined) return f.booleanValue;
   if (f.timestampValue !== undefined) return f.timestampValue;
-  if (f.mapValue !== undefined) return f.mapValue.fields;
   return '';
 }
 
 // ================================================================
-// QUESTIONS - 100+ savol
+// QUESTIONS
 // ================================================================
 const ALL_QUESTIONS = [
   {q:"Kompyuterda ma'lumotlarni vaqtinchalik saqlash uchun qaysi xotira ishlatiladi?",opts:["ROM","RAM","SSD","USB"],cor:1},
@@ -742,37 +747,35 @@ const ALL_QUESTIONS = [
   {q:"'Download' (yuklab olish) va 'Upload' (yuklash) farqi nima?",opts:["Ular bir xil","Download = internetdan olish, Upload = internetga jo'natish","Upload = internetdan olish, Download = internetga jo'natish","Ikkalasi ham o'chirishni anglatadi"],cor:1},
   {q:"Ekran o'lchamini o'lchash uchun qaysi birlik ishlatiladi?",opts:["Santimetr","Dyuym (inch)","Metr","Piksel"],cor:1},
   {q:"'Caps Lock' tugmasi nima qiladi?",opts:["Dasturni yopadi","Barcha harflarni katta qilib yozadi","Ekranni bloklaydi","Raqamlar yozishga o'tkazadi"],cor:1},
-  {q:"Kompyuter 'virus'dan himoya qilish uchun nima qilish kerak?",opts:["Kompyuterni o'chirish","Antivirus dasturi o'rnatish va yangilab turish","Internetni o'chirish","Fayllarni o'chirish"],cor:1},
-  {q:"HTML nima?",opts:["Dasturlash tili","Veb-sahifa yaratish tili","Operatsion tizim","Ma'lumotlar bazasi"],cor:1},
-  {q:"CSS nima uchun ishlatiladi?",opts:["Veb-sahifani bezash uchun","Ma'lumotlar bazasi uchun","Server dasturlash uchun","O'yin yaratish uchun"],cor:0},
-  {q:"JavaScript qayerda ishlaydi?",opts:["Faqat serverda","Brauzerda va serverda","Faqat kompilyatorda","Faqat bazada"],cor:1},
-  {q:"SQL nima?",opts:["Dasturlash tili","Ma'lumotlar bazasi tili","Operatsion tizim","Grafika dasturi"],cor:1},
-  {q:"Python dasturlash tili qaysi turkumga kiradi?",opts:["Past darajali","Yuqori darajali","Assembly","Mashina tili"],cor:1},
-  {q:"Cloud computing nima?",opts:["Bulutli hisoblash texnologiyasi","Kompyuter sovutish tizimi","Internet tezligi","Ekran o'lchami"],cor:0},
-  {q:"AI (Sun'iy Intellekt) nima?",opts:["Kompyuter o'yini","Mashinalarni aqlli qilish texnologiyasi","Yangi protsessor","Internet protokoli"],cor:1},
-  {q:"Machine Learning nima?",opts:["Mashinalarni o'rgatish","Mashina yasash","Kompyuter yig'ish","Ma'lumotlar bazasi"],cor:0},
-  {q:"Big Data nima?",opts:["Katta hajmdagi ma'lumotlar","Katta protsessor","Katta monitor","Katta qattiq disk"],cor:0},
-  {q:"Cybersecurity nima bilan shug'ullanadi?",opts:["Kompyuter o'yinlari","Ma'lumotlar xavfsizligi","Veb-sayt yaratish","Dastur yozish"],cor:1}
+  {q:"Kompyuter 'virus'dan himoya qilish uchun nima qilish kerak?",opts:["Kompyuterni o'chirish","Antivirus dasturi o'rnatish va yangilab turish","Internetni o'chirish","Fayllarni o'chirish"],cor:1}
 ];
 
 // ================================================================
 // APP STATE
 // ================================================================
+const PHASE2_DURATION = 90 * 60; // 90 minutes in seconds
+
 let currentPage = 'pg-welcome';
 let regData = {};
 let quizQuestions = [];
-let quizAnswers = [];      // user answers (index of selected)
-let quizDetails = [];      // { question, correct, userAnswer, isCorrect, timeSpent }
+let quizAnswers = [];
 let currentQIdx = 0;
 let timerInterval = null;
 let timeLeft = 60;
 let questionAnswered = false;
 let selectedOpt = null;
 let allDocs = [];
+let phase2Docs = [];
 let pollInterval = null;
-let quizMode = '1'; // '1' = registration quiz, '2' = phase2 quiz
-let quizStartTime = null;
-let quizTotalTime = 90 * 60; // 90 daqiqa = 5400 sekund
+let quizMode = '1';
+
+// Phase2 global timer state
+let p2GlobalInterval = null;
+let p2SecondsLeft = PHASE2_DURATION;
+let p2StartTimestamp = null; // unix ms when phase2 started
+
+// Admin phase2 sync
+let adminP2Interval = null;
 
 // ================================================================
 // PAGE NAVIGATION
@@ -803,44 +806,45 @@ async function submitReg() {
   const msg = document.getElementById('reg-msg');
 
   if (!fn || !ln || !gr || !age || !ph || !gn) {
-    showMsg(msg, "Iltimos, barcha maydonlarni to'ldiring!", 'err'); return;
+    showMsg(msg,"Iltimos, barcha maydonlarni to'ldiring!",'err'); return;
   }
   if (isNaN(Number(age)) || Number(age) < 5 || Number(age) > 99) {
-    showMsg(msg, "Yoshni to'g'ri kiriting (5-99)!", 'err'); return;
+    showMsg(msg,"Yoshni to'g'ri kiriting (5-99)!",'err'); return;
   }
   if (!isValidPhone(ph)) {
-    showMsg(msg, "Telefon raqami noto'g'ri! Masalan: +998901234567", 'err'); return;
+    showMsg(msg,"Telefon raqami noto'g'ri! Masalan: +998901234567",'err'); return;
   }
 
-  regData = { firstName: fn, lastName: ln, grade: gr, age: Number(age), phone: ph, gender: gn };
-
-  setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', true, 'Tekshirilmoqda...');
-  msg.style.display = 'none';
+  regData = { firstName:fn, lastName:ln, grade:gr, age:Number(age), phone:ph, gender:gn };
+  setLoading('reg-btn','reg-spin','reg-btn-txt',true,'Tekshirilmoqda...');
+  msg.style.display='none';
 
   try {
-    const exists = await checkPhoneExists(ph);
+    const exists = await checkPhoneExists(ph, 'participants');
     if (exists) {
-      setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
-      showMsg(msg, "Bu telefon raqam allaqachon ro'yxatdan o'tgan!", 'err');
+      setLoading('reg-btn','reg-spin','reg-btn-txt',false,'Testni Boshlash →');
+      showMsg(msg,"Bu telefon raqam allaqachon ro'yxatdan o'tgan!",'err');
       return;
     }
-    
-    await fbAdd('participants', {
-      firstName: fn, lastName: ln, grade: gr, age: Number(age),
-      phone: ph, gender: gn, score: 0, total: 20, status: 'pending'
+    // Save participant with pending status
+    const doc = await fbAdd('participants', {
+      firstName:fn, lastName:ln, grade:gr, age:Number(age),
+      phone:ph, gender:gn, score:0, total:20, status:'pending'
     });
-    
-    setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
+    // Extract docId from returned document name
+    const docId = doc.name.split('/').pop();
+    regData.docId = docId;
+    setLoading('reg-btn','reg-spin','reg-btn-txt',false,'Testni Boshlash →');
     quizMode = '1';
     startQuiz();
   } catch(e) {
-    setLoading('reg-btn', 'reg-spin', 'reg-btn-txt', false, 'Testni Boshlash →');
-    showMsg(msg, "Xatolik: " + e.message, 'err');
+    setLoading('reg-btn','reg-spin','reg-btn-txt',false,'Testni Boshlash →');
+    showMsg(msg,"Xatolik: " + e.message,'err');
   }
 }
 
-async function checkPhoneExists(phone) {
-  const docs = await fbQuery('participants');
+async function checkPhoneExists(phone, col) {
+  const docs = await fbQuery(col);
   return docs.some(d => fv(d.fields?.phone) === phone);
 }
 
@@ -851,25 +855,28 @@ async function submitLogin() {
   const ph = normalizePhone(document.getElementById('login-ph').value.trim());
   const msg = document.getElementById('login-msg');
   const ok  = document.getElementById('login-ok');
-  ok.style.display = 'none';
+  ok.style.display='none';
 
   if (!ph || !isValidPhone(ph)) {
-    showMsg(msg, "Telefon raqamni to'g'ri kiriting!", 'err'); return;
+    showMsg(msg,"Telefon raqamni to'g'ri kiriting!",'err'); return;
   }
 
-  setLoading('login-btn', 'login-spin', 'login-btn-txt', true, 'Tekshirilmoqda...');
-  msg.style.display = 'none';
+  setLoading('login-btn','login-spin','login-btn-txt',true,'Tekshirilmoqda...');
+  msg.style.display='none';
 
   try {
-    const cfg = await fbGet('config', 'phase2');
+    // 1. Check phase2 started
+    const cfg = await fbGet('config','phase2');
     const phase2started = cfg && fv(cfg.fields?.started) === true;
+    const phase2StartTs = cfg ? Number(fv(cfg.fields?.startTimestamp)) || 0 : 0;
 
+    // 2. Find participant by phone
     const docs = await fbQuery('participants');
     const found = docs.find(d => fv(d.fields?.phone) === ph);
 
     if (!found) {
-      setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
-      showMsg(msg, "Bu telefon raqam ro'yxatda yo'q. Avval 1-bosqichdan o'ting.", 'err');
+      setLoading('login-btn','login-spin','login-btn-txt',false,'Kirish →');
+      showMsg(msg,"Bu telefon raqam ro'yxatda yo'q. Avval 1-bosqichdan o'ting.",'err');
       return;
     }
 
@@ -877,15 +884,27 @@ async function submitLogin() {
     const score  = Number(fv(found.fields?.score)) || 0;
 
     if (status !== 'passed') {
-      setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+      setLoading('login-btn','login-spin','login-btn-txt',false,'Kirish →');
       if (status === 'pending') {
-        showMsg(msg, "Siz hali testni topshirmadingiz. Avval 1-bosqich testini bajaring.", 'err');
+        showMsg(msg,"Siz hali testni topshirmadingiz. Avval 1-bosqich testini bajaring.",'err');
       } else {
-        showMsg(msg, `Kechirasiz, siz ${score}/20 ball to'pladingiz. 2-bosqichga kirish uchun kamida 13 ball kerak.`, 'err');
+        showMsg(msg,`Kechirasiz, siz ${score}/20 ball to'pladingiz. Kamida 13 ball kerak.`,'err');
       }
       return;
     }
 
+    // Check if already completed phase2
+    const phase2Entry = await fbGet('phase2results', fv(found.fields?.phone).replace(/\+/g,'_'));
+    if (phase2Entry && fv(phase2Entry.fields?.completed) === true) {
+      setLoading('login-btn','login-spin','login-btn-txt',false,'Kirish →');
+      const sc2 = Number(fv(phase2Entry.fields?.score)) || 0;
+      showMsg(msg,`Siz 2-bosqichni allaqachon topshirdingiz. Natija: ${sc2}/50`,'err');
+      return;
+    }
+
+    // Build regData from existing participant doc
+    const nameParts = found.name.split('/');
+    const docId = nameParts[nameParts.length - 1];
     regData = {
       firstName: fv(found.fields?.firstName),
       lastName:  fv(found.fields?.lastName),
@@ -893,23 +912,32 @@ async function submitLogin() {
       age:       fv(found.fields?.age),
       phone:     fv(found.fields?.phone),
       gender:    fv(found.fields?.gender),
-      docName:   found.name,
+      docId:     docId,
       phase1Score: score
     };
 
-    setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
+    setLoading('login-btn','login-spin','login-btn-txt',false,'Kirish →');
 
     if (!phase2started) {
       showWaitPage();
       return;
     }
 
+    // Check if phase2 time still remaining
+    const now = Date.now();
+    const elapsed = Math.floor((now - phase2StartTs) / 1000);
+    if (elapsed >= PHASE2_DURATION) {
+      showMsg(msg,"2-bosqich vaqti tugagan. Qatnasha olmaysiz.",'err');
+      return;
+    }
+
+    p2StartTimestamp = phase2StartTs;
     quizMode = '2';
     startPhase2Quiz();
 
   } catch(e) {
-    setLoading('login-btn', 'login-spin', 'login-btn-txt', false, 'Kirish →');
-    showMsg(msg, "Xatolik: " + e.message, 'err');
+    setLoading('login-btn','login-spin','login-btn-txt',false,'Kirish →');
+    showMsg(msg,"Xatolik: " + e.message,'err');
   }
 }
 
@@ -932,11 +960,12 @@ function startPolling() {
     const st = document.getElementById('poll-status');
     if (st) st.textContent = `Holat tekshirilmoqda... (${count})`;
     try {
-      const cfg = await fbGet('config', 'phase2');
+      const cfg = await fbGet('config','phase2');
       const started = cfg && fv(cfg.fields?.started) === true;
       if (started) {
         clearInterval(pollInterval);
         pollInterval = null;
+        p2StartTimestamp = Number(fv(cfg.fields?.startTimestamp)) || Date.now();
         quizMode = '2';
         startPhase2Quiz();
       }
@@ -947,28 +976,94 @@ function startPolling() {
 }
 
 // ================================================================
-// QUIZ START
+// QUIZ (1-bosqich — 20 savol)
 // ================================================================
 function startQuiz() {
-  quizQuestions = shuffleArr([...ALL_QUESTIONS]).slice(0, 20);
+  quizQuestions = ALL_QUESTIONS.slice(0, 20);
   quizAnswers = new Array(20).fill(null);
-  quizDetails = [];
   currentQIdx = 0;
-  quizStartTime = Date.now();
   document.getElementById('q-tot').textContent = 20;
+  // Hide phase2 timer elements
+  document.getElementById('p2-timer-bar').classList.remove('show');
+  document.getElementById('p2-prog-wrap').classList.remove('show');
   showPage('pg-quiz');
   loadQuestion();
 }
 
+// ================================================================
+// QUIZ (2-bosqich — 50 savol shuffled)
+// ================================================================
 function startPhase2Quiz() {
   quizQuestions = shuffleArr([...ALL_QUESTIONS]).slice(0, 50);
   quizAnswers = new Array(50).fill(null);
-  quizDetails = [];
   currentQIdx = 0;
-  quizStartTime = Date.now();
   document.getElementById('q-tot').textContent = quizQuestions.length;
+
+  // Show phase2 global timer
+  document.getElementById('p2-timer-bar').classList.add('show');
+  document.getElementById('p2-prog-wrap').classList.add('show');
+
   showPage('pg-quiz');
   loadQuestion();
+  startPhase2GlobalTimer();
+}
+
+// ================================================================
+// PHASE2 GLOBAL 90-MINUTE TIMER (for quiz taker)
+// ================================================================
+function startPhase2GlobalTimer() {
+  if (p2GlobalInterval) clearInterval(p2GlobalInterval);
+
+  function tick() {
+    const now = Date.now();
+    const elapsed = Math.floor((now - p2StartTimestamp) / 1000);
+    const remaining = PHASE2_DURATION - elapsed;
+
+    if (remaining <= 0) {
+      clearInterval(p2GlobalInterval);
+      clearInterval(timerInterval);
+      // Force finish quiz with current answers
+      forceFinishQuiz();
+      return;
+    }
+
+    p2SecondsLeft = remaining;
+    const mins = Math.floor(remaining / 60);
+    const secs = remaining % 60;
+    const formatted = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    const el = document.getElementById('p2-timer-val');
+    if (el) {
+      el.textContent = formatted;
+      if (remaining <= 300) el.classList.add('hot');
+      else el.classList.remove('hot');
+    }
+    // Progress bar
+    const pct = (remaining / PHASE2_DURATION) * 100;
+    const pb = document.getElementById('p2-prog-bar');
+    if (pb) pb.style.width = pct + '%';
+  }
+
+  tick();
+  p2GlobalInterval = setInterval(tick, 1000);
+}
+
+function forceFinishQuiz() {
+  clearInterval(p2GlobalInterval);
+  clearInterval(timerInterval);
+  // Answer current unanswered question as null (already null)
+  // Save what we have, then show timeup page
+  const score = quizAnswers.filter((a,i) => a === quizQuestions[i]?.cor).length;
+  const total = quizQuestions.length;
+  showPage('pg-timeup');
+  const el = document.getElementById('timeup-save-st');
+  el.textContent = '⟳ Natija saqlanmoqda...';
+  savePhase2Result(score, total, true).then(() => {
+    el.textContent = `✓ Natijangiz saqlandi: ${score}/${total}`;
+    el.style.color = 'var(--accent)';
+  }).catch(e => {
+    el.textContent = '⚠ ' + e.message;
+    el.style.color = 'var(--danger)';
+  });
 }
 
 function shuffleArr(arr) {
@@ -983,26 +1078,15 @@ function shuffleArr(arr) {
 // QUIZ ENGINE
 // ================================================================
 function loadQuestion() {
-  // Check total time
-  if (quizStartTime) {
-    const elapsed = (Date.now() - quizStartTime) / 1000;
-    if (elapsed >= quizTotalTime) {
-      clearInterval(timerInterval);
-      finishQuiz();
-      return;
-    }
-  }
-  
   questionAnswered = false;
   selectedOpt = null;
   clearInterval(timerInterval);
 
   const total = quizQuestions.length;
   const q = quizQuestions[currentQIdx];
-  const pct = ((currentQIdx) / total) * 100;
+  const pct = (currentQIdx / total) * 100;
 
   document.getElementById('q-cur').textContent = currentQIdx + 1;
-  document.getElementById('q-tot').textContent = total;
   document.getElementById('q-label').textContent = `SAVOL ${String(currentQIdx+1).padStart(2,'0')}`;
   document.getElementById('q-text').textContent = q.q;
   document.getElementById('prog-bar').style.width = pct + '%';
@@ -1011,7 +1095,7 @@ function loadQuestion() {
   const letters = ['A','B','C','D'];
   const og = document.getElementById('q-opts');
   og.innerHTML = '';
-  q.opts.forEach((opt, i) => {
+  q.opts.forEach((opt,i) => {
     const btn = document.createElement('button');
     btn.className = 'opt';
     btn.innerHTML = `<span class="opt-l">${letters[i]}</span><span>${opt}</span>`;
@@ -1028,10 +1112,7 @@ function startTimer() {
   timerInterval = setInterval(() => {
     timeLeft--;
     updateTimer();
-    if (timeLeft <= 0) { 
-      clearInterval(timerInterval); 
-      autoTimeout(); 
-    }
+    if (timeLeft <= 0) { clearInterval(timerInterval); autoTimeout(); }
   }, 1000);
 }
 
@@ -1045,22 +1126,6 @@ function updateTimer() {
 function autoTimeout() {
   if (questionAnswered) return;
   questionAnswered = true;
-  
-  // Save as wrong answer if not answered
-  const isCorrect = false;
-  const q = quizQuestions[currentQIdx];
-  quizAnswers[currentQIdx] = -1;
-  quizDetails.push({
-    question: q.q,
-    options: q.opts,
-    correctAnswer: q.opts[q.cor],
-    correctIndex: q.cor,
-    userAnswer: "Javob berilmagan",
-    userIndex: -1,
-    isCorrect: false,
-    timeSpent: 60 - timeLeft
-  });
-  
   revealAnswer();
   document.getElementById('btn-next').style.display = 'block';
 }
@@ -1069,21 +1134,7 @@ function selectOpt(i, btn) {
   if (questionAnswered) return;
   questionAnswered = true;
   selectedOpt = i;
-  const q = quizQuestions[currentQIdx];
-  const isCorrect = (i === q.cor);
   quizAnswers[currentQIdx] = i;
-  
-  quizDetails.push({
-    question: q.q,
-    options: q.opts,
-    correctAnswer: q.opts[q.cor],
-    correctIndex: q.cor,
-    userAnswer: q.opts[i],
-    userIndex: i,
-    isCorrect: isCorrect,
-    timeSpent: 60 - timeLeft
-  });
-  
   clearInterval(timerInterval);
   revealAnswer(btn);
   document.getElementById('btn-next').style.display = 'block';
@@ -1091,7 +1142,7 @@ function selectOpt(i, btn) {
 
 function revealAnswer() {
   const cor = quizQuestions[currentQIdx].cor;
-  document.querySelectorAll('.opt').forEach((b, i) => {
+  document.querySelectorAll('.opt').forEach((b,i) => {
     b.disabled = true;
     if (i === cor) b.classList.add('cor');
     else if (selectedOpt !== null && i === selectedOpt && selectedOpt !== cor) b.classList.add('wrg');
@@ -1100,21 +1151,19 @@ function revealAnswer() {
 
 function nextQ() {
   currentQIdx++;
-  if (currentQIdx >= quizQuestions.length) { 
-    finishQuiz(); 
-    return; 
-  }
+  if (currentQIdx >= quizQuestions.length) { finishQuiz(); return; }
   loadQuestion();
 }
 
 // ================================================================
-// FINISH QUIZ
+// FINISH QUIZ (normal completion)
 // ================================================================
 function finishQuiz() {
   clearInterval(timerInterval);
+  if (quizMode === '2') clearInterval(p2GlobalInterval);
   document.getElementById('prog-bar').style.width = '100%';
 
-  const score = quizDetails.filter(d => d.isCorrect).length;
+  const score = quizAnswers.filter((a,i) => a === quizQuestions[i].cor).length;
   const total = quizQuestions.length;
   const minPass = total === 20 ? 13 : Math.ceil(total * 0.6);
   const pass = score >= minPass;
@@ -1125,12 +1174,12 @@ function finishQuiz() {
   const ring = document.getElementById('ring-fill');
   ring.style.stroke = pass ? 'var(--accent)' : 'var(--danger)';
   ring.style.strokeDasharray = C;
-  setTimeout(() => { ring.style.strokeDashoffset = C - (score / total) * C; }, 100);
+  setTimeout(() => { ring.style.strokeDashoffset = C - (score/total)*C; }, 100);
 
-  let n = 0;
-  const step = () => { if (n < score) { n++; document.getElementById('ring-n').textContent = n; setTimeout(step, 50); } };
-  setTimeout(step, 200);
   document.getElementById('ring-d').textContent = `/ ${total}`;
+  let n = 0;
+  const step = () => { if (n < score) { n++; document.getElementById('ring-n').textContent = n; setTimeout(step,50); } };
+  setTimeout(step, 200);
 
   document.getElementById('result-verdict').textContent = pass ? "🎉 Tabriklaymiz!" : "❌ Muvaffaqiyatsiz";
   document.getElementById('result-verdict').className = 'result-verdict ' + (pass ? 'pass' : 'fail');
@@ -1139,71 +1188,48 @@ function finishQuiz() {
     document.getElementById('result-desc').textContent = pass
       ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. 2-bosqichga kirish huquqiga egasiz!`
       : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. 2-bosqichga kirish uchun kamida ${minPass} ta to'g'ri javob kerak edi.`;
-
     document.getElementById('rbadges').innerHTML = `
       <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
-      <div class="rb neu">${pass ? '✓ 1-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
-    `;
-
+      <div class="rb neu">${pass ? "✓ 1-bosqich o'tdi" : "✗ Yetarli emas"}</div>`;
     const hint = document.getElementById('result-next-hint');
-    if (pass) {
-      hint.innerHTML = `
-        <div class="pass-hint">
-          <div class="pass-hint-title">Keyingi qadam →</div>
-          <div class="pass-hint-body">
-            Admin 2-bosqichni boshlagach, "Login" tugmasi orqali<br/>
-            telefon raqamingiz bilan kiring va testni davom ettiring.
-          </div>
-        </div>
-      `;
-    } else {
-      hint.innerHTML = '';
-    }
+    hint.innerHTML = pass ? `<div class="pass-hint"><div class="pass-hint-title">Keyingi qadam →</div><div class="pass-hint-body">Admin 2-bosqichni boshlagach, "Login" tugmasi orqali<br/>telefon raqamingiz bilan kiring va testni davom ettiring.</div></div>` : '';
+    savePhase1Result(score, total, pass);
   } else {
     document.getElementById('result-desc').textContent = pass
-      ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Natijangiz saqlandi!`
-      : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Kamida ${minPass} ta to'g'ri javob kerak edi.`;
-
+      ? `${regData.firstName}, siz ${score}/${total} ball to'pladingiz. Ajoyib natija!`
+      : `${regData.firstName}, siz ${score}/${total} ball to'pladingiz.`;
     document.getElementById('rbadges').innerHTML = `
       <div class="rb ${pass?'pass':'fail'}">${score}/${total} ball</div>
-      <div class="rb neu">${pass ? '✓ 2-bosqich o\'tdi' : '✗ Yetarli emas'}</div>
-    `;
+      <div class="rb neu">${pass ? "✓ 2-bosqich o'tdi" : "✗ Yetarli emas"}</div>`;
     document.getElementById('result-next-hint').innerHTML = '';
+    savePhase2Result(score, total, false);
   }
-
-  saveResult(score, total, pass);
 }
 
-async function saveResult(score, total, pass) {
+// ================================================================
+// SAVE RESULTS
+// ================================================================
+async function savePhase1Result(score, total, pass) {
   const el = document.getElementById('save-st');
   el.textContent = '⟳ Saqlanmoqda...';
   try {
-    const docs = await fbQuery('participants');
-    const doc = docs.find(d => fv(d.fields?.phone) === regData.phone);
-    if (doc) {
-      const nameParts = doc.name.split('/');
-      const docId = nameParts[nameParts.length - 1];
-      const statusVal = pass ? (quizMode === '1' ? 'passed' : 'passed_phase2') : 'failed';
-      
-      // Save quiz details to Firestore
-      await fbSet('participants', docId, {
+    if (!regData.docId) {
+      // Fallback: find by phone
+      const docs = await fbQuery('participants');
+      const doc = docs.find(d => fv(d.fields?.phone) === regData.phone);
+      if (doc) regData.docId = doc.name.split('/').pop();
+    }
+    if (regData.docId) {
+      await fbSet('participants', regData.docId, {
         firstName: regData.firstName,
         lastName:  regData.lastName,
-        grade:     regData.grade,
+        grade:     regData.grade || '',
         age:       Number(regData.age) || 0,
         phone:     regData.phone,
-        gender:    regData.gender,
-        score:     score,
-        total:     total,
-        status:    statusVal,
-        quizMode:  quizMode,
-        quizDetails: quizDetails,
-        completedAt: new Date().toISOString()
-      });
-    } else {
-      await fbAdd('participants', {
-        ...regData, score, total, status: pass ? 'passed' : 'failed',
-        quizMode: quizMode, quizDetails: quizDetails
+        gender:    regData.gender || '',
+        score,
+        total,
+        status: pass ? 'passed' : 'failed'
       });
     }
     el.textContent = pass ? '✓ Natijangiz saqlandi' : '✗ Natijangiz qayd etildi';
@@ -1214,9 +1240,37 @@ async function saveResult(score, total, pass) {
   }
 }
 
+async function savePhase2Result(score, total, forced) {
+  const el = document.getElementById(forced ? 'timeup-save-st' : 'save-st');
+  if (el) { el.textContent = '⟳ Saqlanmoqda...'; }
+  try {
+    // Use phone as document ID (replace + with _ for Firestore)
+    const docId = regData.phone.replace(/\+/g,'_');
+    await fbSet('phase2results', docId, {
+      firstName:  regData.firstName,
+      lastName:   regData.lastName,
+      grade:      regData.grade || '',
+      phone:      regData.phone,
+      score,
+      total,
+      completed:  true,
+      forcedEnd:  forced ? true : false
+    });
+    if (el) {
+      el.textContent = forced ? `✓ Natijangiz saqlandi: ${score}/${total}` : '✓ Natijangiz saqlandi';
+      el.style.color = 'var(--accent)';
+    }
+  } catch(e) {
+    if (el) { el.textContent = '⚠ ' + e.message; el.style.color = 'var(--danger)'; }
+    throw e;
+  }
+}
+
 function goHome() {
   regData = {};
   quizMode = '1';
+  clearInterval(p2GlobalInterval);
+  clearInterval(timerInterval);
   showPage('pg-welcome');
 }
 
@@ -1224,42 +1278,51 @@ function goHome() {
 // ADMIN PANEL
 // ================================================================
 const ADMIN_PASS = "itevent27";
+let currentAdminTab = 'phase1';
 
 function openAdminModal() {
   document.getElementById('admin-modal').classList.add('open');
   document.getElementById('a-pass').focus();
 }
-
 function closeAdminModal() {
   document.getElementById('admin-modal').classList.remove('open');
   document.getElementById('a-pass').value = '';
   document.getElementById('admin-msg').style.display = 'none';
 }
-
 function togglePassVis() {
   const inp = document.getElementById('a-pass');
   const eye = document.getElementById('pass-eye');
-  if (inp.type === 'password') { inp.type = 'text'; eye.textContent = '🙈'; }
-  else { inp.type = 'password'; eye.textContent = '👁'; }
+  if (inp.type === 'password') { inp.type='text'; eye.textContent='🙈'; }
+  else { inp.type='password'; eye.textContent='👁'; }
 }
-
 function checkAdminPass() {
   const v = document.getElementById('a-pass').value;
   const msg = document.getElementById('admin-msg');
   if (v === ADMIN_PASS) {
     closeAdminModal();
     showPage('pg-admin');
-    refreshTable();
+    refreshAdminData();
     checkPhase2Status();
+    startAdminPhase2Sync();
   } else {
-    showMsg(msg, "Parol noto'g'ri!", 'err');
+    showMsg(msg,"Parol noto'g'ri!",'err');
     document.getElementById('a-pass').value = '';
     document.getElementById('a-pass').focus();
   }
 }
-
 function adminLogout() {
+  if (adminP2Interval) clearInterval(adminP2Interval);
   showPage('pg-welcome');
+}
+
+function switchAdminTab(tab) {
+  currentAdminTab = tab;
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('sec-' + tab).classList.add('active');
+  if (tab === 'leaderboard') renderLeaderboard();
+  if (tab === 'phase2') renderPhase2Table();
 }
 
 // ================================================================
@@ -1267,60 +1330,93 @@ function adminLogout() {
 // ================================================================
 async function checkPhase2Status() {
   try {
-    const cfg = await fbGet('config', 'phase2');
+    const cfg = await fbGet('config','phase2');
     const started = cfg && fv(cfg.fields?.started) === true;
-    updateStartUI(started);
+    const ts = Number(fv(cfg?.fields?.startTimestamp)) || 0;
+    updateStartUI(started, ts);
   } catch(e) {
-    updateStartUI(false);
+    updateStartUI(false, 0);
   }
 }
 
-function updateStartUI(started) {
+function updateStartUI(started, startTs) {
   const infoTxt = document.getElementById('start-info-txt');
   const btnWrap = document.getElementById('start-btn-wrap');
+  const countdown = document.getElementById('admin-p2-countdown');
   if (started) {
-    infoTxt.textContent = '2-bosqich FAOL — 1-bosqichdan o\'tgan foydalanuvchilar kirishi mumkin';
+    infoTxt.textContent = '2-bosqich FAOL — ishtirokchilar kirishi mumkin';
     btnWrap.innerHTML = '<div class="started-badge"><div style="width:8px;height:8px;border-radius:50%;background:var(--accent);animation:dotPulse 1.4s ease infinite;"></div>2-bosqich boshlandi</div>';
+    countdown.classList.add('show');
+    // Start admin countdown
+    p2StartTimestamp = startTs;
+    startAdminPhase2Sync();
   } else {
-    infoTxt.textContent = '2-bosqich hali boshlanmagan — faqat 1-bosqichdan o\'tganlar ko\'rinadi';
-    btnWrap.innerHTML = '<button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash</button>';
+    infoTxt.textContent = '2-bosqich hali boshlanmagan';
+    btnWrap.innerHTML = '<button class="btn-start" id="start-btn" onclick="startPhase2()">▶ 2-Bosqichni Boshlash (90 daqiqa)</button>';
+    countdown.classList.remove('show');
   }
+}
+
+function startAdminPhase2Sync() {
+  if (adminP2Interval) clearInterval(adminP2Interval);
+  if (!p2StartTimestamp) return;
+  function tick() {
+    const now = Date.now();
+    const elapsed = Math.floor((now - p2StartTimestamp) / 1000);
+    const remaining = Math.max(0, PHASE2_DURATION - elapsed);
+    const mins = Math.floor(remaining / 60);
+    const secs = remaining % 60;
+    const el = document.getElementById('admin-p2-time');
+    if (el) el.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    const pct = (remaining / PHASE2_DURATION) * 100;
+    const pb = document.getElementById('admin-p2-bar');
+    if (pb) pb.style.width = pct + '%';
+    if (remaining === 0 && adminP2Interval) clearInterval(adminP2Interval);
+  }
+  tick();
+  adminP2Interval = setInterval(tick, 1000);
 }
 
 async function startPhase2() {
   const btn = document.getElementById('start-btn');
   if (btn) { btn.disabled = true; btn.textContent = 'Boshlanmoqda...'; }
   try {
-    await fbSet('config', 'phase2', { started: true });
-    updateStartUI(true);
-    alert("2-bosqich muvaffaqiyatli boshlandi!\nKutish sahifasidagi foydalanuvchilar avtomatik o'tkaziladi.");
+    const now = Date.now();
+    p2StartTimestamp = now;
+    await fbSet('config','phase2', { started: true, startTimestamp: now });
+    updateStartUI(true, now);
+    alert("2-bosqich muvaffaqiyatli boshlandi!\nVaqt: 90 daqiqa\nKutish sahifasidagi foydalanuvchilar avtomatik o'tkaziladi.");
   } catch(e) {
     alert("Xato: " + e.message);
-    if (btn) { btn.disabled = false; btn.textContent = '▶ 2-Bosqichni Boshlash'; }
+    if (btn) { btn.disabled = false; btn.textContent = '▶ 2-Bosqichni Boshlash (90 daqiqa)'; }
   }
 }
 
 // ================================================================
-// ADMIN TABLE
+// ADMIN DATA REFRESH
 // ================================================================
-async function refreshTable() {
-  const tbody = document.getElementById('admin-tbody');
-  tbody.innerHTML = `<tr class="empty-row"><td colspan="11">Yuklanmoqda...</td></tr>`;
+async function refreshAdminData() {
   try {
     allDocs = await fbQuery('participants');
-    renderTable();
+    phase2Docs = await fbQuery('phase2results');
+    renderPhase1Table();
+    if (currentAdminTab === 'phase2') renderPhase2Table();
+    if (currentAdminTab === 'leaderboard') renderLeaderboard();
   } catch(e) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="11" style="color:var(--danger);">${e.message}</td></tr>`;
+    console.error(e);
   }
 }
 
-function renderTable() {
+// ================================================================
+// PHASE1 TABLE
+// ================================================================
+function renderPhase1Table() {
   const srch   = document.getElementById('srch').value.trim().toLowerCase();
   const status = document.getElementById('flt-status').value;
 
   let docs = allDocs.filter(d => {
     const f = d.fields || {};
-    const name = (fv(f.firstName) + ' ' + fv(f.lastName)).toLowerCase();
+    const name = (fv(f.firstName)+' '+fv(f.lastName)).toLowerCase();
     const ph   = String(fv(f.phone)).toLowerCase();
     const matchSrch = !srch || name.includes(srch) || ph.includes(srch);
     const st = fv(f.status);
@@ -1329,9 +1425,9 @@ function renderTable() {
   });
 
   const total = allDocs.length;
-  const passN = allDocs.filter(d => fv(d.fields?.status) === 'passed').length;
-  const failN = allDocs.filter(d => fv(d.fields?.status) === 'failed').length;
-  const pendN = allDocs.filter(d => fv(d.fields?.status) === 'pending').length;
+  const passN = allDocs.filter(d => fv(d.fields?.status)==='passed').length;
+  const failN = allDocs.filter(d => fv(d.fields?.status)==='failed').length;
+  const pendN = allDocs.filter(d => fv(d.fields?.status)==='pending').length;
   document.getElementById('st-total').textContent = total;
   document.getElementById('st-pass').textContent  = passN;
   document.getElementById('st-fail').textContent  = failN;
@@ -1339,128 +1435,155 @@ function renderTable() {
 
   const tbody = document.getElementById('admin-tbody');
   tbody.innerHTML = '';
-
   if (!docs.length) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="11">Natija topilmadi</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="10">Natija topilmadi</td></tr>`;
     return;
   }
 
-  docs.forEach((doc, idx) => {
+  docs.forEach((doc,idx) => {
     const f = doc.fields || {};
     const score  = Number(fv(f.score));
     const total2 = Number(fv(f.total)) || 20;
     const st     = fv(f.status);
-    const pass   = st === 'passed' || st === 'passed_phase2';
-    const pending = st === 'pending';
+    const pass   = st==='passed';
+    const pending= st==='pending';
     const time   = fv(f.createdAt) ? new Date(fv(f.createdAt)).toLocaleString('uz-UZ') : '—';
-    const docName = doc.name;
-    
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td class="mono muted" style="font-size:11px;">${idx+1}</td>
       <td><strong>${fv(f.firstName)} ${fv(f.lastName)}</strong></td>
-      <td>${fv(f.age) || '—'}</td>
+      <td>${fv(f.age)||'—'}</td>
       <td>${fv(f.grade)}</td>
       <td class="mono" style="font-size:12px;">${fv(f.phone)}</td>
       <td>${fv(f.gender)}</td>
       <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pending?'—':score+'/'+total2}</span></td>
-      <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pass?"✓ O'tgan":pending?"⏳ Test kutilmoqda":"✗ O'tmagan"}</span></td>
+      <td><span class="score-b ${pass?'pass':pending?'pend':'fail'}">${pass?"✓ O'tgan":pending?"⏳ Kutilmoqda":"✗ O'tmagan"}</span></td>
       <td class="mono muted" style="font-size:11px;white-space:nowrap;">${time}</td>
-      <td><button class="detail-btn" onclick="showUserDetails('${docName}')">📋 Batafsil</button></td>
-      <td><button class="btn btn-sm-red" onclick="handleDel('${docName}',this)">🗑 O'chirish</button></td>`;
+      <td><button class="btn btn-sm-red" onclick="handleDel('${doc.name}',this,'phase1')">O'chirish</button></td>`;
     tbody.appendChild(tr);
   });
 }
 
-function showUserDetails(docName) {
-  const doc = allDocs.find(d => d.name === docName);
-  if (!doc) return;
-  
-  const f = doc.fields || {};
-  const quizDetailsField = f.quizDetails;
-  let details = [];
-  
-  if (quizDetailsField && quizDetailsField.mapValue && quizDetailsField.mapValue.fields) {
-    // Parse if stored as array
-    const fields = quizDetailsField.mapValue.fields;
-    for (let key in fields) {
-      if (fields[key].arrayValue) {
-        details = fields[key].arrayValue.values.map(v => {
-          const val = v.mapValue.fields;
-          return {
-            question: val.question?.stringValue || '',
-            userAnswer: val.userAnswer?.stringValue || '',
-            correctAnswer: val.correctAnswer?.stringValue || '',
-            isCorrect: val.isCorrect?.booleanValue || false,
-            timeSpent: val.timeSpent?.integerValue || 0
-          };
-        });
-        break;
-      }
-    }
-  } else {
-    // Fallback - try to get from stored object
-    const storedDetails = f.quizDetails;
-    if (storedDetails && typeof storedDetails === 'object') {
-      details = storedDetails;
-    }
+// ================================================================
+// PHASE2 TABLE
+// ================================================================
+function renderPhase2Table() {
+  const srch = (document.getElementById('srch2')?.value || '').trim().toLowerCase();
+
+  let docs = phase2Docs.filter(d => {
+    const f = d.fields || {};
+    const name = (fv(f.firstName)+' '+fv(f.lastName)).toLowerCase();
+    const ph   = String(fv(f.phone)).toLowerCase();
+    return !srch || name.includes(srch) || ph.includes(srch);
+  });
+
+  const totalIn = docs.length;
+  const done = docs.filter(d => fv(d.fields?.completed) === true).length;
+  document.getElementById('p2-total').textContent  = totalIn;
+  document.getElementById('p2-done').textContent   = done;
+  document.getElementById('p2-inprog').textContent = totalIn - done;
+
+  const tbody = document.getElementById('admin-tbody2');
+  tbody.innerHTML = '';
+  if (!docs.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="7">Hali hech kim 2-bosqichni topshirmagan</td></tr>`;
+    return;
   }
-  
-  const content = document.getElementById('detail-content');
-  if (!details || details.length === 0) {
-    content.innerHTML = '<div class="muted" style="text-align:center;">Ma\'lumotlar topilmadi</div>';
-  } else {
-    const correctCount = details.filter(d => d.isCorrect).length;
-    const wrongCount = details.filter(d => !d.isCorrect).length;
-    content.innerHTML = `
-      <div style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);">
-        <div><strong>${fv(f.firstName)} ${fv(f.lastName)}</strong></div>
-        <div class="muted mono" style="font-size:11px;">${fv(f.phone)}</div>
-        <div style="margin-top:8px;display:flex;gap:12px;">
-          <span class="score-b pass">✅ To'g'ri: ${correctCount}</span>
-          <span class="score-b fail">❌ Noto'g'ri: ${wrongCount}</span>
-          <span class="score-b ${fv(f.status)==='passed'?'pass':'fail'}">🎯 Ball: ${fv(f.score)}/${fv(f.total)}</span>
-        </div>
-      </div>
-      <div style="max-height:400px;overflow-y:auto;">
-        ${details.map((d, i) => `
-          <div style="padding:10px;border-bottom:1px solid var(--border);margin-bottom:8px;">
-            <div style="font-weight:700;font-size:12px;">${i+1}. ${d.question}</div>
-            <div style="font-size:11px;margin-top:6px;">
-              <span class="muted">Javobingiz:</span> 
-              <span style="color:${d.isCorrect?'var(--accent)':'var(--danger)'}">${d.userAnswer || 'Javob berilmagan'}</span>
-            </div>
-            <div style="font-size:11px;">
-              <span class="muted">To'g'ri javob:</span> 
-              <span style="color:var(--accent)">${d.correctAnswer}</span>
-            </div>
-            <div style="font-size:10px;color:var(--muted);margin-top:4px;">
-              ⏱️ Vaqt: ${d.timeSpent || 0} soniya | 
-              ${d.isCorrect ? '✓ To\'g\'ri' : '✗ Xato'}
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
-  }
-  
-  document.getElementById('detail-modal').classList.add('open');
+
+  // Sort by score desc
+  docs.sort((a,b) => Number(fv(b.fields?.score)) - Number(fv(a.fields?.score)));
+
+  docs.forEach((doc,idx) => {
+    const f = doc.fields || {};
+    const score  = Number(fv(f.score)) || 0;
+    const total2 = Number(fv(f.total)) || 50;
+    const completed = fv(f.completed) === true;
+    const forced = fv(f.forcedEnd) === true;
+    const time   = fv(f.createdAt) ? new Date(fv(f.createdAt)).toLocaleString('uz-UZ') : '—';
+    const pct    = total2 > 0 ? Math.round((score/total2)*100) : 0;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="mono muted" style="font-size:11px;">${idx+1}</td>
+      <td><strong>${fv(f.firstName)} ${fv(f.lastName)}</strong></td>
+      <td>${fv(f.grade)||'—'}</td>
+      <td class="mono" style="font-size:12px;">${fv(f.phone)}</td>
+      <td><span class="score-b ${pct>=60?'pass':'fail'}">${score}/${total2} (${pct}%)</span></td>
+      <td><span class="score-b ${completed?'pass':'pend'}">${completed?(forced?'⏱ Vaqt tugdi':'✓ Yakunladi'):'⏳ Jarayonda'}</span></td>
+      <td class="mono muted" style="font-size:11px;white-space:nowrap;">${time}</td>`;
+    tbody.appendChild(tr);
+  });
 }
 
-function closeDetailModal() {
-  document.getElementById('detail-modal').classList.remove('open');
+// ================================================================
+// LEADERBOARD
+// ================================================================
+function renderLeaderboard() {
+  const docs = [...phase2Docs].filter(d => fv(d.fields?.completed) === true);
+  docs.sort((a,b) => Number(fv(b.fields?.score)) - Number(fv(a.fields?.score)));
+
+  const total = docs.length;
+  const avgScore = total > 0 ? (docs.reduce((s,d) => s + Number(fv(d.fields?.score)||0), 0) / total).toFixed(1) : '—';
+  const maxPossible = Number(fv(docs[0]?.fields?.total)) || 50;
+
+  document.getElementById('lb-total-badge').textContent = `${total} ishtirokchi`;
+  document.getElementById('lb-avg-badge').textContent = `O'rtacha: ${avgScore}/${maxPossible}`;
+
+  const tbody = document.getElementById('lb-tbody');
+  tbody.innerHTML = '';
+
+  if (!docs.length) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;">Hali natija yo'q</td></tr>`;
+    return;
+  }
+
+  docs.forEach((doc,idx) => {
+    const f = doc.fields || {};
+    const score  = Number(fv(f.score)) || 0;
+    const total2 = Number(fv(f.total)) || 50;
+    const pct    = total2 > 0 ? Math.round((score/total2)*100) : 0;
+    const rank   = idx + 1;
+    let rankClass = 'rank-n';
+    if (rank === 1) rankClass = 'rank-1';
+    else if (rank === 2) rankClass = 'rank-2';
+    else if (rank === 3) rankClass = 'rank-3';
+
+    const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '';
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><div class="rank-badge ${rankClass}">${medal || rank}</div></td>
+      <td>
+        <div class="lb-name">${fv(f.firstName)} ${fv(f.lastName)}</div>
+        <div class="lb-info">${fv(f.phone)}</div>
+      </td>
+      <td class="mono muted" style="font-size:12px;">${fv(f.grade)||'—'}</td>
+      <td>
+        <div class="lb-score">${score}</div>
+        <div class="lb-score-sub">/ ${total2}</div>
+      </td>
+      <td><span class="lb-pct" style="color:${pct>=80?'var(--accent)':pct>=60?'var(--blue)':'var(--danger)'}">${pct}%</span></td>`;
+    tbody.appendChild(tr);
+  });
 }
 
-async function handleDel(name, btn) {
+// ================================================================
+// DELETE
+// ================================================================
+async function handleDel(name, btn, type) {
   if (!confirm("O'chirishga ishonchingiz komilmi?")) return;
-  btn.textContent = '...'; btn.disabled = true;
+  btn.textContent='...'; btn.disabled=true;
   try {
     await fbDelete(name);
-    allDocs = allDocs.filter(d => d.name !== name);
-    renderTable();
+    if (type === 'phase1') {
+      allDocs = allDocs.filter(d => d.name !== name);
+      renderPhase1Table();
+    } else {
+      phase2Docs = phase2Docs.filter(d => d.name !== name);
+      renderPhase2Table();
+    }
   } catch(e) {
     alert(e.message);
-    btn.textContent = "O'chirish"; btn.disabled = false;
+    btn.textContent="O'chirish"; btn.disabled=false;
   }
 }
 
@@ -1472,34 +1595,18 @@ function showMsg(el, txt, cls) {
   el.className = 'msg ' + cls;
   el.style.display = 'block';
 }
-
 function setLoading(btnId, spinId, txtId, on, txt) {
-  const btn = document.getElementById(btnId);
-  const spin = document.getElementById(spinId);
-  const t = document.getElementById(txtId);
-  btn.disabled = on;
-  spin.style.display = on ? 'block' : 'none';
-  t.textContent = txt;
+  document.getElementById(btnId).disabled = on;
+  document.getElementById(spinId).style.display = on ? 'block' : 'none';
+  document.getElementById(txtId).textContent = txt;
 }
+function normalizePhone(ph) { return ph.replace(/[\s\-()]/g,''); }
+function isValidPhone(ph) { return /^\+?[0-9]{9,13}$/.test(ph); }
 
-function normalizePhone(ph) {
-  return ph.replace(/[\s\-()]/g, '');
-}
-
-function isValidPhone(ph) {
-  return /^\+?[0-9]{9,13}$/.test(ph);
-}
-
-// Keyboard shortcuts
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (document.getElementById('admin-modal').classList.contains('open')) {
-      closeAdminModal();
-    } else if (document.getElementById('detail-modal').classList.contains('open')) {
-      closeDetailModal();
-    } else if (currentPage === 'pg-admin') {
-      adminLogout();
-    }
+    if (document.getElementById('admin-modal').classList.contains('open')) closeAdminModal();
+    else if (currentPage === 'pg-admin') adminLogout();
   }
 });
 </script>
