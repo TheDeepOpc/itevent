@@ -18,7 +18,9 @@
   --muted:#5a7090;
   --danger:#ff4545;
   --success:#00f5a0;
-  --glow: 0 0 40px rgba(0,245,160,0.15);
+  --gold:#ffd700;
+  --silver:#c0c0c0;
+  --bronze:#cd7f32;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -62,13 +64,32 @@ body{
 @keyframes driftGlow{0%{transform:translate(0,0)}100%{transform:translate(120px,80px)}}
 @keyframes driftGlow2{0%{transform:translate(0,0)}100%{transform:translate(-80px,-60px)}}
 
+/* ============ ADMIN CORNER BTN ============ */
+.admin-corner-btn{
+  position:fixed;top:16px;right:16px;z-index:200;
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;
+  background:rgba(8,14,26,0.85);
+  border:1px solid var(--border);
+  border-radius:6px;
+  color:var(--muted);
+  font-family:'Space Mono',monospace;
+  font-size:11px;letter-spacing:1px;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:all 200ms;
+}
+.admin-corner-btn:hover{border-color:rgba(0,245,160,0.4);color:var(--accent);}
+.admin-corner-btn svg{opacity:0.7;}
+.admin-corner-btn:hover svg{opacity:1;}
+
 .page{
   position:relative;z-index:1;
   display:none;
   min-height:100vh;
   align-items:center;
   justify-content:center;
-  padding:24px;
+  padding:24px 24px 90px;
   flex-direction:column;
 }
 .page.active{display:flex;}
@@ -153,9 +174,169 @@ body{
 .btn-primary svg{transition:transform 200ms;}
 .btn-primary:hover svg{transform:translateX(4px);}
 
+.btn-info{
+  margin-top:12px;
+  padding:12px 26px;
+  background:transparent;
+  color:var(--muted);
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-family:'Syne',sans-serif;
+  font-size:13px;font-weight:600;
+  cursor:pointer;
+  transition:all 200ms;
+  animation:fadeSlideDown 0.7s 0.45s both ease;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-info:hover{border-color:var(--accent2);color:var(--accent2);}
+
 @keyframes fadeSlideDown{
   from{opacity:0;transform:translateY(-16px)}
   to{opacity:1;transform:translateY(0)}
+}
+
+/* ==================== INFO PAGE ==================== */
+#page-info{
+  gap:0;
+  justify-content:flex-start;
+  padding-top:80px;
+}
+
+.info-wrap{width:100%;max-width:720px;animation:slideUp 0.5s ease;}
+
+.info-section-title{
+  font-family:'Space Mono',monospace;
+  font-size:11px;letter-spacing:2px;color:var(--accent);
+  text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.info-section-title::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+
+.info-main-title{
+  font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-1.5px;
+  margin-bottom:8px;line-height:1.1;
+}
+.info-main-title span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.info-intro{
+  color:var(--muted);font-size:14px;line-height:1.7;max-width:560px;
+  margin-bottom:40px;
+}
+
+/* Purpose card */
+.purpose-card{
+  background:rgba(0,245,160,0.04);
+  border:1px solid rgba(0,245,160,0.15);
+  border-left:3px solid var(--accent);
+  border-radius:6px;
+  padding:20px 24px;
+  margin-bottom:32px;
+}
+.purpose-card h3{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--accent);}
+.purpose-card p{color:var(--muted);font-size:13px;line-height:1.7;}
+
+/* Stages */
+.stages-grid{
+  display:grid;gap:12px;
+  margin-bottom:40px;
+}
+.stage-card{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:18px 20px;
+  transition:border-color 200ms;
+}
+.stage-card:hover{border-color:rgba(0,212,255,0.3);}
+.stage-num{
+  flex-shrink:0;
+  width:36px;height:36px;border-radius:6px;
+  background:linear-gradient(135deg,var(--accent2),rgba(0,212,255,0.5));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:14px;font-weight:700;
+  color:#04080f;margin-top:2px;
+}
+.stage-body h4{font-size:15px;font-weight:700;margin-bottom:4px;}
+.stage-body p{color:var(--muted);font-size:13px;line-height:1.6;}
+.stage-tag{
+  display:inline-block;margin-top:8px;
+  padding:3px 10px;border-radius:4px;
+  background:rgba(0,212,255,0.08);
+  border:1px solid rgba(0,212,255,0.2);
+  color:var(--accent2);font-size:10px;letter-spacing:1px;
+  font-family:'Space Mono',monospace;text-transform:uppercase;
+}
+
+/* Prizes */
+.prizes-title{
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;
+  margin-bottom:16px;display:flex;align-items:center;gap:8px;
+}
+.prizes-title::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+
+.prizes-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;
+  margin-bottom:40px;
+}
+.prize-card{
+  border-radius:10px;padding:22px 16px;text-align:center;
+  border:1px solid;
+  transition:transform 200ms;
+}
+.prize-card:hover{transform:translateY(-3px);}
+.prize-card.gold{
+  background:rgba(255,215,0,0.06);
+  border-color:rgba(255,215,0,0.35);
+}
+.prize-card.silver{
+  background:rgba(192,192,192,0.05);
+  border-color:rgba(192,192,192,0.25);
+}
+.prize-card.bronze{
+  background:rgba(205,127,50,0.06);
+  border-color:rgba(205,127,50,0.3);
+}
+.prize-medal{font-size:32px;margin-bottom:8px;}
+.prize-place{
+  font-family:'Space Mono',monospace;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:10px;opacity:0.7;
+}
+.prize-card.gold .prize-place{color:var(--gold);}
+.prize-card.silver .prize-place{color:var(--silver);}
+.prize-card.bronze .prize-place{color:var(--bronze);}
+.prize-amount{
+  font-size:20px;font-weight:800;
+  font-family:'Space Mono',monospace;
+  line-height:1.2;
+}
+.prize-card.gold .prize-amount{color:var(--gold);}
+.prize-card.silver .prize-amount{color:var(--silver);}
+.prize-card.bronze .prize-amount{color:var(--bronze);}
+.prize-desc{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;}
+
+.info-back{
+  padding:12px 28px;
+  background:transparent;
+  color:var(--muted);
+  border:1px solid var(--border);
+  border-radius:4px;
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all 200ms;
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:8px;
+}
+.info-back:hover{border-color:var(--muted);color:var(--text);}
+
+.info-cta{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-top:32px;padding-top:32px;
+  border-top:1px solid var(--border);
 }
 
 /* ==================== FORM PAGE ==================== */
@@ -368,7 +549,7 @@ body{
 
 /* ==================== ADMIN MODAL ==================== */
 .modal-overlay{
-  position:fixed;inset:0;z-index:100;
+  position:fixed;inset:0;z-index:300;
   background:rgba(4,8,15,0.85);
   backdrop-filter:blur(8px);
   display:none;
@@ -417,13 +598,14 @@ body{
 .modal-desc{color:var(--muted);font-size:13px;margin-bottom:24px;}
 
 /* ==================== ADMIN PAGE ==================== */
-#page-admin{display:none;flex-direction:column;padding:32px 24px;gap:0;align-items:flex-start;min-height:100vh;}
+#page-admin{display:none;flex-direction:column;padding:32px 24px 90px;gap:0;align-items:flex-start;min-height:100vh;}
 #page-admin.active{display:flex;}
 
 .admin-panel{width:100%;}
 .admin-panel-header{
   display:flex;justify-content:space-between;align-items:center;
   margin-bottom:24px;flex-wrap:wrap;gap:12px;
+  padding-top:48px;
 }
 .admin-panel-header h2{font-size:24px;font-weight:800;}
 
@@ -481,22 +663,32 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .admin-btn-sm.red{background:rgba(255,69,69,0.15);color:var(--danger);border:1px solid rgba(255,69,69,0.3);}
 .admin-btn-sm.red:hover{background:rgba(255,69,69,0.25);}
 
-.rank-medal{font-size:18px;}
-
 .spin{width:16px;height:16px;border:2px solid rgba(4,8,15,0.3);border-top-color:#04080f;border-radius:50%;animation:spinIt 0.6s linear infinite;display:none;}
 @keyframes spinIt{to{transform:rotate(360deg)}}
 
-/* Admin trigger - hidden corner */
-.admin-trigger{
-  position:fixed;bottom:16px;right:16px;z-index:50;
-  width:32px;height:32px;
-  background:transparent;border:none;cursor:pointer;
-  opacity:0;
+.site-footer{
+  position:fixed;left:0;right:0;bottom:0;z-index:2;
+  background:rgba(4,8,15,0.9);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(6px);
 }
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+  padding:12px 20px;
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:11px;color:var(--muted);
+}
+.site-footer a{color:var(--accent2);text-decoration:none;}
+.site-footer a:hover{text-decoration:underline;}
 
-@media(max-width:540px){
+@media(max-width:600px){
   .form-row{grid-template-columns:1fr;}
   .stats-row{gap:20px;}
+  .prizes-grid{grid-template-columns:1fr;}
+  .footer-inner{padding:10px 14px;font-size:10px;}
+  .admin-corner-btn span{display:none;}
 }
 </style>
 </head>
@@ -505,14 +697,20 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 <div class="bg-glow"></div>
 <div class="bg-glow2"></div>
 
+<!-- Admin corner button (always visible) -->
+<button class="admin-corner-btn" onclick="openAdminModal()">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  <span>Admin</span>
+</button>
+
 <!-- ==================== WELCOME ==================== -->
 <div id="page-welcome" class="page active">
-  <div class="logo-badge"><span></span> IT TANLOV 2025</div>
+  <div class="logo-badge"><span></span> IT EVENT 2025</div>
   <h1 class="hero-title">
     <span class="line1">Bilimingizni</span>
     <span class="line2">Sinab Ko'ring</span>
   </h1>
-  <p class="hero-sub">Kompyuter fanlari bo'yicha 20 ta test savoliga javob bering va IT tanlovga ro'yxatdan o'ting.</p>
+  <p class="hero-sub">Kompyuter fanlari bo'yicha 20 ta test savoliga javob bering va IT TANLOVga ro'yxatdan o'ting. Eng aqllilarga sovg'alar kutmoqda!</p>
   <div class="stats-row">
     <div class="stat-item"><div class="stat-num">20</div><div class="stat-label">Savol</div></div>
     <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">Minimal ball</div></div>
@@ -522,6 +720,81 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     Ro'yxatdan O'tish
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
   </button>
+  <button class="btn-info" onclick="showPage('page-info')">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+    Tanlov haqida
+  </button>
+</div>
+
+<!-- ==================== INFO PAGE ==================== -->
+<div id="page-info" class="page">
+  <div class="info-wrap">
+
+    <div class="info-section-title">IT TANLOV 2025</div>
+    <h2 class="info-main-title">Tanlov haqida <span>to'liq ma'lumot</span></h2>
+    <p class="info-intro">Ushbu tanlov o'quvchilarni IT sohasiga qiziqtirish, texnologiyalar dunyosini yaqindan tanishish va bilimlarini oshirish maqsadida tashkil etilgan.</p>
+
+    <!-- Purpose -->
+    <div class="purpose-card">
+      <h3>🎯 Tanlov maqsadi</h3>
+      <p>O'quvchilarni axborot texnologiyalari (IT) sohasiga qiziqtirish, dasturlash, tarmoq va kompyuter fanlari bo'yicha bilimlarini sinash, hamda kelajakda IT mutaxassisi bo'lib yetishishlariga ilhom berish.</p>
+    </div>
+
+    <!-- Stages -->
+    <div class="info-section-title" style="margin-bottom:16px;">Tanlov bosqichlari</div>
+    <div class="stages-grid">
+      <div class="stage-card">
+        <div class="stage-num">1</div>
+        <div class="stage-body">
+          <h4>Ro'yxatdan o'tish bosqichi</h4>
+          <p>Ishtirokchilar ushbu platforma orqali ma'lumotlarini kiritib, 20 ta test savoliga javob beradilar. Kamida 13 ta to'g'ri javob berganlar keyingi bosqichga o'tish huquqiga ega bo'ladilar.</p>
+          <span class="stage-tag">Online · Hozir</span>
+        </div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-num">2</div>
+        <div class="stage-body">
+          <h4>Asosiy tanlov bosqichi</h4>
+          <p>Asosiy tanlov <strong style="color:var(--text)">15-maktabda</strong> jonli ravishda o'tkaziladi. Ishtirokchilar murakkabroq topshiriqlarni bajaradilar. Vaqt va sana alohida e'lon qilinadi.</p>
+          <span class="stage-tag">Oflayn · 15-Maktab</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prizes -->
+    <div class="prizes-title">Sovg'alar va mukofotlar</div>
+    <div class="prizes-grid">
+      <div class="prize-card gold">
+        <div class="prize-medal">🥇</div>
+        <div class="prize-place">1-O'rin</div>
+        <div class="prize-amount">1 000 000<br><span style="font-size:12px;opacity:0.7;">so'm</span></div>
+        <div class="prize-desc">Pul mukofoti</div>
+      </div>
+      <div class="prize-card silver">
+        <div class="prize-medal">🥈</div>
+        <div class="prize-place">2-O'rin</div>
+        <div class="prize-amount" style="font-size:16px;">Kitoblar</div>
+        <div class="prize-desc">IT sohasiga oid qimmatli kitoblar to'plami</div>
+      </div>
+      <div class="prize-card bronze">
+        <div class="prize-medal">🥉</div>
+        <div class="prize-place">3-O'rin</div>
+        <div class="prize-amount" style="font-size:16px;">Kitoblar</div>
+        <div class="prize-desc">IT sohasiga oid qimmatli kitoblar to'plami</div>
+      </div>
+    </div>
+
+    <div class="info-cta">
+      <button class="btn-primary" onclick="showPage('page-welcome');goToForm()">
+        Ro'yxatdan O'tish
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="info-back" onclick="showPage('page-welcome')">
+        ← Orqaga
+      </button>
+    </div>
+
+  </div>
 </div>
 
 <!-- ==================== FORM ==================== -->
@@ -663,8 +936,12 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   </div>
 </div>
 
-<!-- Hidden admin trigger (bottom-right corner, 5 clicks) -->
-<button class="admin-trigger" id="admin-trigger" onclick="adminTriggerClick()"></button>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>Tanlov tashkilotchilari: Sardor Shoakbarov va Ro'ziboyev Fazliddin.</div>
+    <div>Murojaat uchun: <a href="https://instagram.com/callmethedeep" target="_blank" rel="noopener">@callmethedeep</a> va <a href="https://instagram.com/callmethedeep1" target="_blank" rel="noopener">@callmethedeep1</a></div>
+  </div>
+</footer>
 
 <script>
 // ======================================================
@@ -772,21 +1049,8 @@ let timeLeft=60;
 let answered=false;
 
 // ======================================================
-// ADMIN TRIGGER (hidden corner, 5 clicks)
+// ADMIN MODAL
 // ======================================================
-let adminClickCount=0;
-let adminClickTimer=null;
-
-function adminTriggerClick(){
-  adminClickCount++;
-  clearTimeout(adminClickTimer);
-  adminClickTimer=setTimeout(()=>{adminClickCount=0;},2000);
-  if(adminClickCount>=5){
-    adminClickCount=0;
-    openAdminModal();
-  }
-}
-
 function openAdminModal(){
   document.getElementById('admin-modal-overlay').classList.add('active');
   document.getElementById('admin-pass-input').value='';
@@ -960,20 +1224,14 @@ function showResult(){
     <div class="rbadge neutral">${pass?'✓ Muvaffaqiyatli':'✗ Yetarli emas'}</div>
   `;
 
-  if(pass){
-    saveToFirebase(score);
-  }
+  if(pass){ saveToFirebase(score); }
 }
 
 async function saveToFirebase(score){
   const el=document.getElementById('save-status');
   el.textContent='⟳ Ma\'lumotlar saqlanmoqda...';
   try{
-    await fbAdd('participants',{
-      ...userData,
-      score:score,
-      status:'passed'
-    });
+    await fbAdd('participants',{...userData,score:score,status:'passed'});
     el.textContent='✓ Ma\'lumotlar muvaffaqiyatli saqlandi';
     el.style.color='var(--accent)';
   }catch(e){
@@ -1042,13 +1300,9 @@ async function handleDel(name,btn){
   }
 }
 
-// F2 = Admin modal | Escape = close modal
 document.addEventListener('keydown',e=>{
-  if(e.key==='F2'){openAdminModal();}
   if(e.key==='Escape'){closeAdminModal();}
 });
-
-// Close modal on overlay click
 document.getElementById('admin-modal-overlay').addEventListener('click',function(e){
   if(e.target===this)closeAdminModal();
 });
