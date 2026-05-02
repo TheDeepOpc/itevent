@@ -154,6 +154,10 @@ body{
 .stat-num{font-size:32px;font-weight:800;color:var(--accent);font-family:'Space Mono',monospace;}
 .stat-label{font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 
+.welcome-cta{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+
 .btn-primary{
   display:inline-flex;align-items:center;gap:10px;
   padding:16px 36px;
@@ -178,7 +182,8 @@ body{
   margin-top:12px;
   padding:12px 26px;
   background:transparent;
-  color:var(--muted);
+  
+  background-color: #00e090;
   border:1px solid var(--border);
   border-radius:4px;
   font-family:'Syne',sans-serif;
@@ -597,7 +602,7 @@ body{
 .modal-title{font-size:22px;font-weight:800;margin-bottom:4px;}
 .modal-desc{color:var(--muted);font-size:13px;margin-bottom:24px;}
 
-/* ==================== ADMIN PAGE ==================== */
+
 #page-admin{display:none;flex-direction:column;padding:32px 24px 90px;gap:0;align-items:flex-start;min-height:100vh;}
 #page-admin.active{display:flex;}
 
@@ -716,14 +721,16 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">Minimal ball</div></div>
     <div class="stat-item"><div class="stat-num">60s</div><div class="stat-label">Har bir savol</div></div>
   </div>
-  <button class="btn-primary" onclick="goToForm()">
-    Ro'yxatdan O'tish
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </button>
-  <button class="btn-info" onclick="showPage('page-info')">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-    Tanlov haqida
-  </button>
+  <div class="welcome-cta">
+    <button class="btn-info" onclick="showPage('page-info')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      Tanlov haqida
+    </button>
+    <button class="btn-primary" onclick="goToForm()">
+      Ro'yxatdan O'tish
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
 </div>
 
 <!-- ==================== INFO PAGE ==================== -->
